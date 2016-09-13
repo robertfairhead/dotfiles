@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $OS == "linux" ]]; then
+    sudo apt-get update -y -qq
+    sudo apt-get upgrade -y -qq
+    sudo apt-get autoremove -y -qq
+    sudo apt-get autoclean -y -qq
+else
+    sudo softwareupdate -ia
+fi
+
+conda update --all -y
+conda clean -t -y
+
+apm upgrade --color -confirm false
+apm dedupe --color
+apm clean --color
+
+exit 0
