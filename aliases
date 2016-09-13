@@ -1,0 +1,39 @@
+if [[ $OSTYPE == 'linux-gnu' ]]; then
+	export OS="linux"
+
+  alias ls='ls -F --color=auto'
+  alias l="less"
+
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+else
+	export OS="osx"
+
+  alias ls="ls -GF"
+  alias l="more"
+
+  #For use after editing /etc/hosts
+  alias dnsreset="dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+fi
+
+alias lsl="ls -al"
+alias rmd="rm -rf"
+alias edit="atom"
+
+alias hex="hexdump -Cv"
+alias hexstruct="xxd -i"
+
+alias tcpconnections="netstat -lntp TCP"
+
+# Get a sum of the total size of a file/folder in human readable units:
+alias space="du -sh"
+
+#List file sizes of a directory and any subdirectories in KB:
+alias lsspace="du -k"
+
+alias ps="ps aux"
+
+if [[ -f $HOME/Dropbox/config/aliases.local ]]; then
+  source $HOME/Dropbox/config/aliases.local
+fi
