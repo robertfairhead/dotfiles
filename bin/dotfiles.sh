@@ -19,6 +19,10 @@ ln -sf $HOME/dotfiles/inputrc .inputrc
 ln -sf $HOME/dotfiles/gitconfig .gitconfig
 ln -sf $HOME/dotfiles/gitignore_global .gitignore_global
 
+if [[ ! -d bin ]]; then
+  mkdir bin
+fi
+
 ln -sf $HOME/dotfiles/bin bin/setup
 
 if [[ -f $HOME/Dropbox/config/aws-credentials ]]; then
