@@ -1,4 +1,17 @@
 export GOPATH=$HOME/go
-CONDAPATH="$HOME/anaconda3/bin"
+
+if [[ -d $HOME/anaconda3 ]]; then
+  CONDAPATH="$HOME/anaconda3/bin:"
+else
+  CONDAPATH=""
+fi
+
+if [[ -d $HOME/homebrew ]]; then
+  BREWPATH="$HOME/homebrew/bin:"
+else
+  BREWPATH=""
+fi
+
 COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
-export PATH="$CONDAPATH:$PATH:$COMPILERS:$HOME/bin:$GOPATH/bin"
+
+export PATH="${CONDAPATH}${BREWPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
