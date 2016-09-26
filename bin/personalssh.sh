@@ -4,6 +4,7 @@
 ### Based on    https://stribika.github.io/2015/01/04/secure-secure-shell.html
 ###             https://wiki.mozilla.org/Security/Guidelines/OpenSSH
 ###             https://blog.0xbadc0de.be/archives/300
+###             https://blog.g3rt.nl/upgrade-your-ssh-keys.html
 ############################################################
 
 ############################################################
@@ -46,8 +47,8 @@ echo "Creating Git SSH keys"
 GIT_EMAIL=$( git config --get user.email )
 
 for SERVICE in {"github","gitlab"}; do
-    ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_ed25519
-    ssh-keygen -t rsa -b 4096 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_rsa
+    ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_ed25519 -o -a 64
+    ssh-keygen -t rsa -b 4096 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_rsa -o -a 64
 
     if [[ $OS == 'osx' ]]; then
         SSHADD="ssh-add -K"
