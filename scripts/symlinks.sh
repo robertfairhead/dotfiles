@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "###############################"
-echo "Linking Dotfiles from Dropbox"
+echo "Symlinking dotfiles"
 echo "###############################"
 
 cd $HOME
@@ -21,11 +21,15 @@ ln -sf $HOME/dotfiles/gitignore_global .gitignore_global
 
 if [[ ! -d bin ]]; then
   mkdir bin
+  chmod 700 bin
 fi
 
-ln -sf $HOME/dotfiles/bin bin/setup
+for program in $HOME/dotfiles/bin/*; do
+  ln -sf $program $HOME/bin/$(basename $program)
+done
 
 if [[ -f $HOME/Dropbox/config/aws-credentials ]]; then
   mkdir $HOME/.aws
+  chmod 700 $HOME/.aws
   ln -sf $HOME/Dropbox/config/credentials $HOME/.aws/credentials
 fi
