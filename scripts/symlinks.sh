@@ -33,3 +33,10 @@ if [[ -f $HOME/Dropbox/config/aws-credentials ]]; then
   chmod 700 $HOME/.aws
   ln -sf $HOME/Dropbox/config/credentials $HOME/.aws/credentials
 fi
+
+if [[ ! -d .gnupg ]]; then
+  mkdir .gnupg
+fi
+
+chmod 700 .gnupg
+ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf

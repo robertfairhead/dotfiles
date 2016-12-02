@@ -1,5 +1,6 @@
 [include]
   path = ~/Dropbox/config/gitconfig.local
+  path = ~/gitconfig.local
 
 [alias]
   history =  log --all --graph --decorate --oneline --simplify-by-decoration
