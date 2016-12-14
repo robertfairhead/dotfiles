@@ -19,6 +19,8 @@ ln -sf $HOME/dotfiles/inputrc .inputrc
 ln -sf $HOME/dotfiles/gitconfig .gitconfig
 ln -sf $HOME/dotfiles/gitignore_global .gitignore_global
 
+ln -sf $HOME/dotfiles/dir_colors .dir_colors
+
 if [[ ! -d bin ]]; then
   mkdir bin
   chmod 700 bin

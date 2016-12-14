@@ -14,27 +14,26 @@
 echo "Creating ~/.ssh/config"
 if [[ ! -d "$HOME/.ssh" ]]; then
     mkdir "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
 elif [[ -e "$HOME/.ssh/config" ]]; then
     mv "${HOME}/.ssh/config" "${HOME}/.ssh/config.bak"
 fi
+
+chmod 700 $HOME/.ssh
 
 cat <<EOF > "$HOME/.ssh/config"
 
 Host github.com
     User git
     IdentityFile ~/.ssh/github_id_ed25519
-    IdentityFile ~/.ssh/github_id_rsa
 
 Host gitlab.com
     User git
     IdentityFile ~/.ssh/gitlab_id_ed25519
-    IdentityFile ~/.ssh/gitlab_id_rsa
 
 EOF
 
-echo "Setting Known Hosts to shared Dropbox file"
-ln -sf $HOME/Dropbox/config/known_hosts $HOME/.ssh/known_hosts
+chmod 600 $HOME/.ssh/config*
+
 
 ############################################################
 ### GENERATE KEYS
@@ -48,7 +47,7 @@ GIT_EMAIL=$( git config --get user.email )
 
 for SERVICE in {"github","gitlab"}; do
     ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_ed25519 -o -a 64
-    ssh-keygen -t rsa -b 4096 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_rsa -o -a 64
+#    ssh-keygen -t rsa -b 4096 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_rsa -o -a 64
 
     if [[ $OS == 'osx' ]]; then
         SSHADD="ssh-add -K"
@@ -56,11 +55,9 @@ for SERVICE in {"github","gitlab"}; do
         SSHADD="ssh-add"
     fi
 
-    for KEY in {"rsa","ed25519"}; do
-        $SSHADD "$HOME/.ssh/${SERVICE}_id_$KEY"
+    $SSHADD "$HOME/.ssh/${SERVICE}_id_ed25519"
 
-        $HOME/bin/add_git_ssh_key $SERVICE $KEY
+    $HOME/dotfiles/scripts/add_git_ssh_key $SERVICE ed25519
 
-        ssh -T ${SERVICE}.com -i $HOME/.ssh/${SERVICE}_id_$KEY
-    done
+    ssh -T ${SERVICE}.com
 done

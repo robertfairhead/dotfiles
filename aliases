@@ -19,7 +19,12 @@ fi
 
 alias lsl="ls -al"
 alias rmd="rm -rf"
-alias edit="atom"
+
+if [[ $(which atom) ]]; then
+  alias edit="atom"
+else
+  alias edit="/mnt/c/Program\ Files\ \(x86\)/Microsoft\ VS\ Code/Code.exe"
+fi
 
 alias hex="hexdump -Cv"
 alias hexstruct="xxd -i"

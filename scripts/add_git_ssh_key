@@ -1,4 +1,4 @@
-#!/usr/env bash
+#!/usr/bin/env bash
 
 ## called like add_git_ssh_key github rsa
 
