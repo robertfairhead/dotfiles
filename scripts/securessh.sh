@@ -45,7 +45,7 @@ Host *
     # Ensure KnownHosts are unreadable if leaked - it is otherwise easier to know which hosts your keys have access to.
     HashKnownHosts yes
 
-    HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-rsa-cert-v00@openssh.com,ssh-ed25519,ssh-rsa
+    HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa
 
     # Github needs diffie-hellman-group-exchange-sha1 some of the time but not always.
     KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
@@ -72,7 +72,7 @@ else
 
   echo "Create strong Moduli"
 
-  ssh-keygen -G "${HOME}/moduli" -b 4096
+  ssh-keygen -G "${HOME}/q" -b 4096
   ssh-keygen -T /etc/ssh/moduli -f "${HOME}/moduli"
   rm "${HOME}/moduli"
 fi
