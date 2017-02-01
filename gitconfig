@@ -11,6 +11,10 @@
 
   ghbranch = push -u origin HEAD
 
+  br = branch -vva
+
+  br-clean = !~/dotfiles/bin/git-clean-br.sh
+
 [user]
 	name = Robert Fairhead
   email = bob@adhocteam.us
@@ -43,6 +47,9 @@
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	editor = atom --wait
+
+[fetch]
+  prune = true
 
 [github]
 	username = robertfairhead
