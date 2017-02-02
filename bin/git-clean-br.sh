@@ -12,7 +12,7 @@ git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads/ \
   | while read branch remote; do
       if [[ ! " ${REMOTES[@]} " =~ " ${remote} " ]]; then
         if [[ "${branch}" != "master" ]]; then
-          echo $branch
+          git branch -D $branch
         fi
       fi
     done
