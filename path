@@ -14,4 +14,10 @@ fi
 
 COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
 
-export PATH="${CONDAPATH}${BREWPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
+if [[ -d $HOME/texlive/2016/bin/x86_64-darwin ]]; then
+  LATEXPATH="$HOME/texlive/2016/bin/x86_64-darwin:"
+else
+  LATEXPATH=""
+fi
+
+export PATH="${CONDAPATH}${BREWPATH}${LATEXPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
