@@ -46,7 +46,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
-	editor = atom --wait
+	editor = micro
 
 [fetch]
   prune = true
