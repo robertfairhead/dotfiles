@@ -4,7 +4,6 @@
 
 [alias]
   history =  log --all --graph --decorate --oneline --simplify-by-decoration
-
   # reset
   unadd = reset HEAD              # remove files from index (tracking)
   uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
@@ -12,11 +11,15 @@
   ghbranch = push -u origin HEAD
 
   br = branch -vva
-
   br-clean = !~/dotfiles/bin/git-clean-br.sh
+  
+  changes=diff --stat -r HEAD
+
+  resolve-ours = "!grep -lr '<<<<<<<' . | xargs git checkout --ours"
+  resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"  
 
 [user]
-	name = Robert Fairhead
+  name = Robert Fairhead
   email = bob@adhocteam.us
 
 # so much color
