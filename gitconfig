@@ -4,6 +4,7 @@
 
 [alias]
   history =  log --all --graph --decorate --oneline --simplify-by-decoration
+  commit-history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   # reset
   unadd = reset HEAD              # remove files from index (tracking)
   uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
