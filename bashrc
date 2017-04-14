@@ -59,3 +59,5 @@ fi
 if [[ -f $HOME/dotfiles/go-completion.bash ]]; then
   source $HOME/dotfiles/go-completion.bash
 fi
+
+export MICRO_TRUECOLOR=1

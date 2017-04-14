@@ -42,3 +42,10 @@ fi
 
 chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf
+
+if [[ ! -d .config/micro ]]; then
+  mkdir .config/micro
+fi
+
+ln -sf $HOME/dotfiles/micro/settings.json .config/micro/setting.json
+ln -sf $HOME/dotfiles/micro/colorschemes .config/micro/colorschemes

@@ -13,11 +13,11 @@
 
   br = branch -vva
   br-clean = !~/dotfiles/bin/git-clean-br.sh
-  
+
   changes=diff --stat -r HEAD
 
   resolve-ours = "!grep -lr '<<<<<<<' . | xargs git checkout --ours"
-  resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"  
+  resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"
 
 [user]
   name = Robert Fairhead
@@ -62,7 +62,11 @@
   insteadOf = "gh:"
   insteadOf = "git://github.com"
 
+[status]
+showUntrackedFiles = all
+
 [help]
   autocorrect = 1
+
 [push]
 	default = simple
