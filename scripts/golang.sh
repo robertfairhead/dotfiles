@@ -1,10 +1,10 @@
 #!/bin/bash
 
-GOVERSION="1.6"
+GOVERSION="1.8.1"
 
 if [ $OS == "linux" ]; then
   GOOS="linux"
-  GOSHA="5470eac05d273c74ff8bac7bef5bad0b5abbd1c4052efbdbc8db45332e836b0b"
+  GOSHA="a579ab19d5237e263254f1eac5352efcf1d70b9dacadb6d6bb12b0911ede8994"
   SHA="sha256sum"
 else
   GOOS="darwin"
@@ -16,18 +16,13 @@ echo "###############################"
 echo "Installing Go $GOVERSION"
 echo "###############################"
 
-if [ ! $(which http) ]; then
-  echo "HTTPie must be installed first!"
-  exit 1
-fi
-
 sudo rm -rf /usr/local/go
 
 rm -rf /tmp/golang
 mkdir /tmp/golang
 cd /tmp/golang
 
-http --print b --download https://storage.googleapis.com/golang/go$GOVERSION.$GOOS-amd64.tar.gz
+curl -O https://storage.googleapis.com/golang/go$GOVERSION.$GOOS-amd64.tar.gz
 
 echo "$GOSHA go$GOVERSION.$GOOS-amd64.tar.gz" > go$GOVERSION.$GOOS-amd64.sha
 $SHA --check go$GOVERSION.$GOOS-amd64.sha
@@ -46,8 +41,8 @@ fi
 ln -s $HOME/go/src/github.com/robertfairhead/ $HOME/gosrc
 
 # Golang
-go get -u golang.org/x/tools/cmd/...
-go get -u github.com/golang/lint/golint
-go get -u github.com/nsf/gocode
-go get -u github.com/rogpeppe/godef
-go get -u github.com/kisielk/errcheck
+#go get -u golang.org/x/tools/cmd/...
+#go get -u github.com/golang/lint/golint
+#go get -u github.com/nsf/gocode
+#go get -u github.com/rogpeppe/godef
+#go get -u github.com/kisielk/errcheck
