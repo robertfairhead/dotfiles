@@ -11,6 +11,8 @@ color-link constant "#ffee99"
 
 #syntax.constant (light purple)
 color-link constant.string "#d4bfff"
+color-link constant.string.url "underline #d4bfff"
+color-link underlined "underline #d4bfff"
 
 #syntax.regexp (teal)
 color-link constant.number "#95e6cb"
@@ -35,11 +37,6 @@ color-link preproc.shebang "#ff7733"
 #color-link identifier.class "#ff3333"
 #color-link identifier.macro "#ff3333"
 #color-link identifier.var "#ff3333"
-
-
-
-
-#color-link underlined "#ff3333,#000000"
 
 # syntax.error (red), black
 color-link error "bold #ff3333,#000000"

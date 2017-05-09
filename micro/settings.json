@@ -1,6 +1,6 @@
 {
     "autoclose": true,
-	"autoindent": true,
+    "autoindent": false,
     "autosave": false,
     "colorcolumn": 0,
     "colorscheme": "paper-paper",
