@@ -54,7 +54,7 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Set a custom wallpaper image. Overrides El Capitan.jpg default
-sudo ln -sf $HOME/Dropbox/config/Wallpapers/imac.png /Library/Desktop\ Pictures/El\ Capitan.jpg
+#sudo ln -sf $HOME/Dropbox/config/Wallpapers/imac.png /Library/Desktop\ Pictures/El\ Capitan.jpg
 
 # Change DNS to Google DNS
 sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
@@ -242,29 +242,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 ###############################################################################
-# Terminal & iTerm 2                                                          #
-###############################################################################
-
-open $HOME/Dropbox/config/solarized.terminal
-
-osascript <<EOD
-
-tell application "Terminal"
-
-	set startup settings to settings set "solarized"
-	set default settings to settings set "solarized"
-
-	tell settings set "solarized"
-		set font name to "Source Code Pro"
-	end tell
-
-end tell
-
-EOD
-
-defaults write com.apple.Terminal AutoMarkPromptLines -int 0
-
-###############################################################################
 # Disk Utility                   																							#
 ###############################################################################
 
@@ -299,10 +276,6 @@ defaults write com.google.Chrome.canary DisablePrintPreview -bool true
 # Expand the print dialog by default
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
-
-###############################################################################
-# iTunes                                                                    #
-###############################################################################
 
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
