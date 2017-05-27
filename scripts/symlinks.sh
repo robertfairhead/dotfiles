@@ -44,6 +44,7 @@ chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf
 
 if [[ ! -d .config/micro ]]; then
+  mkdir .config
   mkdir .config/micro
 fi
 
