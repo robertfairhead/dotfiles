@@ -44,7 +44,7 @@ shopt -s checkwinsize
 
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
-if [[ -f $HOME/.dir_colors ]]; then
+if command -v dircolors >/dev/null 2>&1; then
   eval $(dircolors -b $HOME/.dir_colors)
 fi
 

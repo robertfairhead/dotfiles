@@ -6,6 +6,7 @@
     "colorscheme": "paper-paper",
     "cursorline": true,
     "eofnewline": false,
+    "ftoptions": true,
     "ignorecase": false,
     "indentchar": " ",
     "infobar": true,
@@ -26,7 +27,9 @@
     "splitRight": true,
     "statusline": true,
     "syntax": true,
+    "tabmovement": false,
     "tabsize": 4,
     "tabstospaces": false,
+    "termtitle": false,
     "useprimary": true
 }
