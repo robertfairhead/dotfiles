@@ -1,7 +1,7 @@
 export GOPATH=$HOME/go
 
-if [[ -d $HOME/anaconda3 ]]; then
-  CONDAPATH="$HOME/anaconda3/bin:"
+if [[ -d $HOME/anaconda ]]; then
+  CONDAPATH="$HOME/anaconda/bin:"
 else
   CONDAPATH=""
 fi
