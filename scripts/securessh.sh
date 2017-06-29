@@ -41,6 +41,7 @@ Host *
     UseRoaming No
     ForwardAgent No
     ForwardX11 No
+    IdentitiesOnly Yes
 
     # Ensure KnownHosts are unreadable if leaked - it is otherwise easier to know which hosts your keys have access to.
     HashKnownHosts yes

@@ -1,16 +1,14 @@
 Host github.com
     User git
     IdentityFile ~/.ssh/github_id_ed25519
-    IdentityFile ~/.ssh/github_id_rsa
 
 Host gitlab.com
     User git
     IdentityFile ~/.ssh/gitlab_id_ed25519
-    IdentityFile ~/.ssh/gitlab_id_rsa
 
-Host 192.168.1.10
+Host 192.168.1.*
     User bob
-    IdentityFile ~/.ssh/github_id_ed25519
+    IdentityFile ~/.ssh/localnet_id_ed25519
 
 ### Jumpbox configuration.
 Host vetsgov-dev-jumpbox-govwest-1b
