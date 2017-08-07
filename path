@@ -12,12 +12,12 @@ else
   BREWPATH=""
 fi
 
-COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
-
-if [[ -d $HOME/texlive/2016/bin/x86_64-darwin ]]; then
-  LATEXPATH="$HOME/texlive/2016/bin/x86_64-darwin:"
+if [[ -d /mnt/c/Program\ Files/Docker/Docker/resources/bin ]]; then
+	DOCKERPATH="/mnt/c/Program\ Files/Docker/Docker/resources/bin:"
 else
-  LATEXPATH=""
+	DOCKERPATH=""
 fi
 
-export PATH="${CONDAPATH}${BREWPATH}${LATEXPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
+COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
+
+export PATH="${CONDAPATH}${BREWPATH}${DOCKERPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"

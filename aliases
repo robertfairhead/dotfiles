@@ -22,8 +22,12 @@ alias rmd="rm -rf"
 
 if [[ $(which atom) ]]; then
   alias edit="atom"
-else
+elif [[ -e /mnt/c/Program\ Files\ \(x86\)/Microsoft\ VS\ Code/Code.exe ]]; then
   alias edit="/mnt/c/Program\ Files\ \(x86\)/Microsoft\ VS\ Code/Code.exe"
+elif [[ $(which micro) ]]; then
+  alias edit="micro"
+else
+  alias edit="nano"
 fi
 
 alias hex="hexdump -Cv"
