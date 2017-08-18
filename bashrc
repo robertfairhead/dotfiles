@@ -60,4 +60,5 @@ if [[ -f $HOME/dotfiles/go-completion.bash ]]; then
   source $HOME/dotfiles/go-completion.bash
 fi
 
+export EDITOR=micro
 export MICRO_TRUECOLOR=1
