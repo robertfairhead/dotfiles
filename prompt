@@ -68,7 +68,7 @@ set_prompts() {
 
         # If ssh'd into the box, highlight hostname
         if [[ "$SSH_TTY" ]]; then
-          userhost+="${bold}${red}$HOSTNAME${reset}${gray}:";
+          userhost+="${bold}${red}[ssh to ${HOSTNAME}]${reset}${gray}:";
         else
           userhost+="${green}$HOSTNAME${gray}:";
         fi;
