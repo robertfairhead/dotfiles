@@ -73,8 +73,7 @@ set_prompts() {
 
 
     function prompt_git() {
-        # this is >5x faster than mathias's.
-
+    
         # if we're in .git then bail
         [[ "$(pwd)" == *".git"* ]] && return
 
@@ -105,7 +104,11 @@ set_prompts() {
         # Check for untracked files.
   			new=$([ -n "$(git ls-files --others --exclude-standard)" ] && echo -e "+" )
 
-        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}";
+        # Check if I have un-pushed commits
+        count=$(git rev-list --count --right-only @{u}..)
+        unpushed=$([[ $count -gt 0 ]] && echo -e "↑" )
+
+        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}$unpushed";
 
         return
     }
