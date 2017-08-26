@@ -1,14 +1,6 @@
+# Based on:
 # https://github.com/paulirish/dotfiles/blob/master/.bash_prompt
-# This prompt inspired by gf3, sindresorhus, alrra, and mathiasbynens.
-# but customized to me. <3
-
-default_username='bob'
-
-
-if [[ -n "$ZSH_VERSION" ]]; then  # quit now if in zsh
-    return 1 2> /dev/null || exit 1;
-fi;
-
+# which was inspired by gf3, sindresorhus, alrra, and mathiasbynens.
 
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM=gnome-256color
@@ -64,13 +56,13 @@ set_prompts() {
         fi
 
 
-    # Only show username/host if not default
+    # Only show username if not default
     function usernamehost() {
 
         userhost=""
 
         # Highlight the user name when logged in as root.
-        if [[ "${USER}" == *"root" ]]; then
+        if [[ "${USER}" != *"bob" ]]; then
             userhost+="\[${red}\]$USER ${white}at  ";
         fi;
 
@@ -83,11 +75,14 @@ set_prompts() {
     function prompt_git() {
         # this is >5x faster than mathias's.
 
+        # if we're in .git then bail
+        [[ "$(pwd)" == *".git"* ]] && return
+
         # check if we're in a git repo. (fast)
         git rev-parse --is-inside-work-tree &>/dev/null || return
 
         # Ensure the index is up to date.
-			     git update-index --really-refresh -q &>/dev/null;
+			  git update-index --really-refresh -q &>/dev/null;
 
         # check for what branch we're on. (fast)
         #   if… HEAD isn’t a symbolic ref (typical branch),
@@ -110,30 +105,7 @@ set_prompts() {
         # Check for untracked files.
   			new=$([ -n "$(git ls-files --others --exclude-standard)" ] && echo -e "+" )
 
-
-        #Check if ahead/behind remote
-        remote=$(git remote show 2> /dev/null | sed 's/ //g')
-
-
-        p="$"
-        if [[ -n "$remote" ]]; then
-          count=$(git rev-list --count --left-right ${remote}...HEAD 2> /dev/null)
-          case "$count" in
-            "") # no upstream
-              p="" ;;
-            0*0) # equal to upstream
-              p="" ;;
-            0*[1-9]*) # ahead of upstream
-              p="↑" ;;
-            [1-9]*0*) # behind upstream
-              p="↓" ;;
-            *) #both changed
-              p="↕" ;;
-          esac
-
-        fi
-
-        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}$p";
+        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}";
 
         return
     }
