@@ -66,14 +66,19 @@ set_prompts() {
             userhost+="\[${red}\]$USER ${white}at  ";
         fi;
 
-        userhost+="${green}$HOSTNAME${gray}:"
+        # If ssh'd into the box, highlight hostname
+        if [[ "$SSH_TTY" ]]; then
+          userhost+="${bold}${red}$HOSTNAME${reset}${gray}:";
+        else
+          userhost+="${green}$HOSTNAME${gray}:";
+        fi;
 
         echo $userhost "";
     }
 
 
     function prompt_git() {
-    
+
         # if we're in .git then bail
         [[ "$(pwd)" == *".git"* ]] && return
 
