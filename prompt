@@ -110,8 +110,14 @@ set_prompts() {
   			new=$([ -n "$(git ls-files --others --exclude-standard)" ] && echo -e "+" )
 
         # Check if I have un-pushed commits
-        count=$(git rev-list --count --right-only @{u}..)
-        unpushed=$([[ $count -gt 0 ]] && echo -e "↑" )
+        count=$(git rev-list --count --right-only @{u}.. 2> /dev/null)
+        if [[ $count -gt 0 ]]; then
+          unpushed=$(echo -e "↑");
+
+        # Check if upstream doesn't exist yet
+        elif [[ -z "$count" ]]; then
+          unpushed=$(echo -e "∅");
+        fi
 
         echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}$unpushed";
 

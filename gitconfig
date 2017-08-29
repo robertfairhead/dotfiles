@@ -16,7 +16,7 @@
   br = branch -vva
   br-clean = !~/dotfiles/bin/git-clean-br.sh
 
-  changes=diff --stat -r HEAD
+  changes=diff --cached
 
   resolve-ours = "!grep -lr '<<<<<<<' . | xargs git checkout --ours"
   resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"
