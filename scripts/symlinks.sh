@@ -21,6 +21,8 @@ ln -sf $HOME/dotfiles/gitignore_global .gitignore_global
 
 ln -sf $HOME/dotfiles/dir_colors .dir_colors
 
+ln -sf $HOME/dotfiles/hyper.js .hyper.js
+
 if [[ ! -d bin ]]; then
   mkdir bin
   chmod 700 bin
