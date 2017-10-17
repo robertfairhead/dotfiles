@@ -21,6 +21,8 @@
   resolve-ours = "!grep -lr '<<<<<<<' . | xargs git checkout --ours"
   resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"
 
+  conflicts = diff --name-only --diff-filter=U
+
 [user]
   name = Robert Fairhead
   email = bob@adhocteam.us
