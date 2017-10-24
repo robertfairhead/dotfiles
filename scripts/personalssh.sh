@@ -22,15 +22,7 @@ chmod 700 $HOME/.ssh
 
 cat <<EOF > "$HOME/.ssh/config"
 
-Host github.com
-    User git
-    IdentityFile ~/.ssh/github_id_ed25519
-
-Host gitlab.com
-    User git
-    IdentityFile ~/.ssh/gitlab_id_ed25519
-
-EOF
+cp $HOME/dotfiles/config $HOME/.ssh/config
 
 chmod 600 $HOME/.ssh/config*
 
@@ -57,7 +49,4 @@ for SERVICE in {"github","gitlab"}; do
 
     $SSHADD "$HOME/.ssh/${SERVICE}_id_ed25519"
 
-    $HOME/dotfiles/scripts/add_git_ssh_key $SERVICE ed25519
-
-    ssh -T ${SERVICE}.com
 done
