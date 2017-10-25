@@ -61,5 +61,6 @@ if [[ -f ${HOME}/Library/Application\ Support/Code/User/settings.json ]]; then
 fi
 
 if [[ -f /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json ]]; then
-    ln -sf $HOME/dotfiles/settings.json /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json
+    rm -f /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json
+    cmd.exe /C "mklink C:\Users\rober\AppData\Roaming\Code\User\settings.json C:\Users\rober\dotfiles\settings.json"
 fi
