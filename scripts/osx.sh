@@ -53,14 +53,17 @@ sudo systemsetup -setrestartfreeze on
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
-# Set a custom wallpaper image. Overrides El Capitan.jpg default
-#sudo ln -sf $HOME/Dropbox/config/Wallpapers/imac.png /Library/Desktop\ Pictures/El\ Capitan.jpg
-
 # Change DNS to Google DNS
 sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
 sudo networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
 
+# Add improved Quartz filter for reducing PDF size in Preview
 
+if [[ ! -d ~/Library/Filters ]]; then
+	mkdir ~/Library/Filters
+fi
+
+cp ~/dotfiles/Better\ Reduce.qfilter ~/Library/Filters
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
