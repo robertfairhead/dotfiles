@@ -55,7 +55,7 @@ if [[ ! -d .config/micro ]]; then
 fi
 
 ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
-ln -sf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
+ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
 if [[ -f ${HOME}/Library/Application\ Support/Code/User/settings.json ]]; then
     ln -sf $HOME/dotfiles/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
