@@ -12,18 +12,15 @@ else
 
   alias ls="ls -hGF"
   alias l="more"
-
-  #For use after editing /etc/hosts
-  alias dnsreset="dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 fi
 
 alias lsl="ls -ahl"
 alias rmd="rm -rf"
 
-if [[ $(which atom) ]]; then
-  alias edit="atom"
-elif [[ -e /mnt/c/Program\ Files\ \(x86\)/Microsoft\ VS\ Code/Code.exe ]]; then
-  alias edit="/mnt/c/Program\ Files\ \(x86\)/Microsoft\ VS\ Code/Code.exe"
+if [[ -e /Applications/Visual\ Studio\ Coce.app/Contents/Resources/app/bin/code ]]; then
+  alias edit="/Applications/Visual\ Studio\ Coce.app/Contents/Resources/app/bin/code"
+elif [[ $(which code) ]]; then
+  alias edit="code"
 elif [[ $(which micro) ]]; then
   alias edit="micro"
 else
