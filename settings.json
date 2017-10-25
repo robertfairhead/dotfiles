@@ -1,6 +1,9 @@
 {
   // Controls the font family
-  "editor.fontFamily": "'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace",
+
+  // Controls the font size in pixels.
+  "editor.fontSize": 12,
 
   // Controls if the minimap is shown.
   "editor.minimap.enabled": false,
