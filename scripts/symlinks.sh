@@ -45,10 +45,21 @@ fi
 chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf
 
-if [[ ! -d .config/micro ]]; then
+if [[ ! -d .config ]]; then
   mkdir .config
+fi
+
+if [[ ! -d .config/micro ]]; then
   mkdir .config/micro
 fi
 
 ln -sf $HOME/dotfiles/micro/settings.json .config/micro/settings.json
 ln -sf $HOME/dotfiles/micro/colorschemes .config/micro/colorschemes
+
+if [[ -f ${HOME}/Library/Application\ Support/Code/User/settings.json ]]; then
+    ln -sf $HOME/dotfiles/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
+fi
+
+if [[ -f /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json ]]; then
+    ln -sf $HOME/dotfiles/settings.json /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json
+fi
