@@ -17,8 +17,8 @@ fi
 alias lsl="ls -ahl"
 alias rmd="rm -rf"
 
-if [[ -e /Applications/Visual\ Studio\ Coce.app/Contents/Resources/app/bin/code ]]; then
-  alias edit="/Applications/Visual\ Studio\ Coce.app/Contents/Resources/app/bin/code"
+if [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
+  alias edit="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 elif [[ $(which code) ]]; then
   alias edit="code"
 elif [[ $(which micro) ]]; then
