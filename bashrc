@@ -55,13 +55,13 @@ source $HOME/.prompt
 # Set terminal title, useful for hyper.js which doesn't set it automatically
 PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: $(basename ${PWD})\007"'
 
-if [[ -f $HOME/dotfiles/git-completion.bash ]]; then
-  source $HOME/dotfiles/git-completion.bash
-fi
+for bashcmp in $HOME/dotfiles/*.bash-completion; do
+  source $bashcmp
+done
 
-if [[ -f $HOME/dotfiles/go-completion.bash ]]; then
-  source $HOME/dotfiles/go-completion.bash
+if [[ $(which micro) ]]; then
+  export EDITOR=micro
+else
+  export EDITOR=nano
 fi
-
-export EDITOR=micro
 export MICRO_TRUECOLOR=1
