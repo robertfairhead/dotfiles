@@ -1,7 +1,7 @@
 if [[ $OSTYPE == 'linux-gnu' ]]; then
 	export OS="linux"
 
-  alias ls='ls -hF --color=auto'
+  alias ls='ls -F --color=auto'
   alias l="less"
 
   alias grep='grep --color=auto'
@@ -10,11 +10,17 @@ if [[ $OSTYPE == 'linux-gnu' ]]; then
 else
 	export OS="osx"
 
-  alias ls="ls -hGF"
+  alias ls="ls -GF"
   alias l="more"
 fi
 
-alias lsl="ls -ahl"
+if [[ $(which exa) ]]; then
+  alias ls="exa -F --group-directories-first --color=auto"
+  alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
+else
+  alias lsl="ls -ahl"
+fi
+
 alias rmd="rm -rf"
 
 if [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then

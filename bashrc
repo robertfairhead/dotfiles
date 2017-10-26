@@ -48,8 +48,8 @@ if command -v dircolors >/dev/null 2>&1; then
   eval $(dircolors -b $HOME/.dir_colors)
 fi
 
-source $HOME/.aliases
 source $HOME/.path
+source $HOME/.aliases
 source $HOME/.prompt
 
 # Set terminal title, useful for hyper.js which doesn't set it automatically
