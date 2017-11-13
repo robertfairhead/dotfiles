@@ -20,8 +20,6 @@ fi
 
 chmod 700 $HOME/.ssh
 
-cat <<EOF > "$HOME/.ssh/config"
-
 cp $HOME/dotfiles/config $HOME/.ssh/config
 
 chmod 600 $HOME/.ssh/config*
