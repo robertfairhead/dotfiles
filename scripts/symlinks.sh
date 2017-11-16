@@ -44,7 +44,7 @@ fi
 
 chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf
-ln -sf $HOME/dotfiles/gpg-agent.conf .gnupg/gpg.conf
+ln -sf $HOME/dotfiles/gpg-agent.conf .gnupg/gpg-agent.conf
 
 if [[ ! -d .config ]]; then
   mkdir .config
