@@ -4,9 +4,13 @@ set -euo pipefail
 
 # sudo apt update -y && sudo apt upgrade -y
 
-#sudo apt install apt-transport-https \
+# sudo apt install -y apt-transport-https \
 # 		  curl \
-#		  git
+#		  git \
+#         jq \
+#         ubuntu-restricted-extras
+
+# sudo apt remove 
 
 
 mkdir /tmp/apps
@@ -68,6 +72,12 @@ cd /tmp/apps
 # Exa
 #***************
 
+# curl -sfLo exa.zip $(curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep browser_download_url | grep linux-x86 | cut -f 4 -d '"')
+# curl -sfLO $(curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep browser_download_url | grep SHA1SUM | cut -f 4 -d '"')
+# unzip exa.zip
+# sha1sum --status --ignore-missing -c SHA1SUMS
+# sudo mv exa-linux-x86_64 /usr/local/bin/exa
+
 #***************
 # RipGrep
 #***************
@@ -80,4 +90,33 @@ cd /tmp/apps
 # Alacritty
 #***************
 
-rm -rf /tmp/apps
+#***************
+# Gnome Dash to Panel
+#***************
+
+# curl -sfLo dash2panel.zip $(curl -s https://api.github.com/repos/jderose9/dash-to-panel/releases/latest | grep zipball_url | cut -f 4 -d '"')
+# unzip dash2panel.zip
+# cd jderose9*
+# make install
+# cd ..
+
+# rm -rf /tmp/apps
+
+
+#***************
+# Set basic settings for above
+#***************
+
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
+gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
+gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com']"
+
+#***************
+# Additional settings
+#***************
+
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+gsettings set org.gnome.desktop.media-handling autorun-never true
+
