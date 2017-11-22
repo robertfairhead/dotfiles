@@ -8,12 +8,12 @@ set -euo pipefail
 # 		  curl \
 #		  git \
 #         jq \
-#         ubuntu-restricted-extras
+#         ubuntu-restricted-extras \
+#         shutter
 
-# sudo apt remove 
+# sudo apt remove
 
-
-mkdir /tmp/apps
+#mkdir /tmp/apps
 cd /tmp/apps
 
 #***************
@@ -74,7 +74,7 @@ cd /tmp/apps
 
 # curl -sfLo exa.zip $(curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep browser_download_url | grep linux-x86 | cut -f 4 -d '"')
 # curl -sfLO $(curl -s https://api.github.com/repos/ogham/exa/releases/latest | grep browser_download_url | grep SHA1SUM | cut -f 4 -d '"')
-# unzip exa.zip
+# unzip exa.zip > /dev/null
 # sha1sum --status --ignore-missing -c SHA1SUMS
 # sudo mv exa-linux-x86_64 /usr/local/bin/exa
 
@@ -82,26 +82,71 @@ cd /tmp/apps
 # RipGrep
 #***************
 
+# curl -sfLo rg.tar.gz $(curl -s https://api.github.com/repos/burntsushi/ripgrep/releases/latest | grep browser_download_url | grep x86_64-unknown-linux-musl.tar.gz | cut -f 4 -d '"')
+# tar xvzf rg.tar.gz > /dev/null
+# cd ripgrep*
+# cp complete/rg.bash-completion ~/dotfiles/
+
+# if [[ ! -d /usr/local/share/man/man1 ]]; then
+#     sudo mkdir /usr/local/share/man/man1
+# fi
+
+# sudo cp rg.1 /usr/local/share/man/man1/
+# sudo mandb
+# sudo cp rg /usr/local/bin
+
 #***************
 # Micro
 #***************
 
+# curl -sfLo m.tar.gz $(curl -s https://api.github.com/repos/zyedidia/micro/releases/latest | grep browser_download_url | grep linux64 | cut -f 4 -d '"')
+# tar xvzf m.tar.gz > /dev/null
+# cd micro*
+# sudo cp micro /usr/local/bin
+
 #***************
 # Alacritty
 #***************
+
+# TODO
 
 #***************
 # Gnome Dash to Panel
 #***************
 
 # curl -sfLo dash2panel.zip $(curl -s https://api.github.com/repos/jderose9/dash-to-panel/releases/latest | grep zipball_url | cut -f 4 -d '"')
-# unzip dash2panel.zip
+# unzip dash2panel.zip > /dev/null
 # cd jderose9*
-# make install
+# make install > /dev/null
 # cd ..
 
-# rm -rf /tmp/apps
+#***************
+# TopIconsPlus
+#***************
 
+# curl -sfLo topicons.zip $(curl -s https://api.github.com/repos/phocean/TopIcons-plus/releases/latest | grep zipball_url | cut -f 4 -d '"')
+# unzip topicons.zip > /dev/null
+# cd phocean*
+# make install > /dev/null
+# cd ..
+
+#***************
+# ArcMenu
+#***************
+
+curl -sfLo arcmenu.zip $(curl -s https://api.github.com/repos/LinxGem33/Arc-Menu/releases/latest | grep zipball_url | cut -f 4 -d '"')
+unzip arcmenu.zip > /dev/null
+cd LinxGem33*
+make install
+cd ..
+
+#***************
+# Clean up
+#***************
+
+# cd $HOME
+# rm -rf /tmp/apps
+# sudo apt clean && sudo apt autoremove
 
 #***************
 # Set basic settings for above
@@ -111,7 +156,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/Dropbox
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
-gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com']"
+gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
 
 #***************
 # Additional settings
@@ -119,4 +164,3 @@ gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.githu
 
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.desktop.media-handling autorun-never true
-
