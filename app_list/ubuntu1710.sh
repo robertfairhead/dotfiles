@@ -9,12 +9,23 @@ set -euo pipefail
 #		  git \
 #         jq \
 #         ubuntu-restricted-extras \
-#         shutter
+#         shutter \
+#         gnome-tweak-tool dconf-editor \
 
-# sudo apt remove
+# sudo apt remove ubuntu-web-launchers thunderbird telnet ufw aisleriot
 
 #mkdir /tmp/apps
-cd /tmp/apps
+# cd /tmp/apps
+
+#***************
+# Epson scanner software
+#***************
+
+# curl -sfLO https://download2.ebz.epson.net/imagescanv3/ubuntu/latest1/deb/x64/imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
+# tar xvzf imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
+# cd imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb
+# ./install.sh
+# cd ..
 
 #***************
 # Chrome
@@ -131,16 +142,6 @@ cd /tmp/apps
 # cd ..
 
 #***************
-# ArcMenu
-#***************
-
-curl -sfLo arcmenu.zip $(curl -s https://api.github.com/repos/LinxGem33/Arc-Menu/releases/latest | grep zipball_url | cut -f 4 -d '"')
-unzip arcmenu.zip > /dev/null
-cd LinxGem33*
-make install
-cd ..
-
-#***************
 # Clean up
 #***************
 
@@ -158,9 +159,38 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
 
+
 #***************
 # Additional settings
 #***************
 
+gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'code.desktop']"
+
+gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ categories "['Settings', 'DesktopSettings', 'X-GNOME-Settings-Panel']"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ categories "['System', 'Core']"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ categories "['AudioVideo', 'Audio', 'Video', 'Scanning', 'Graphics']"
+
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ name "Settings"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ name "System"
+gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ name "Multimedia"
+
+sudo sed -i 's/Categories=Utility;/Categories=Graphics;/' /usr/share/applications/shutter.desktop
+sudo sed -i 's/Categories=Utility;/Categories=/' /usr/share/applications/code.desktop
+sudo sed -i 's/Categories=GTK;GNOME;Utility;X-GNOME-Utilities;/Categories=GTK;GNOME;Graphics;/' /usr/share/applications/org.gnome.Screenshot.desktop
+
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.desktop.media-handling autorun-never true
+gsettings set org.gnome.shell enable-hot-corners false
+
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up', '<Control><Alt>Up', '<Control><Alt>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down', '<Control><Alt>Down', '<Control><Alt>Right']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
+
+dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 32
+dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
+dconf write /org/gnome/shell/extensions/topicons/icon-size 18
