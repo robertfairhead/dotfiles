@@ -70,6 +70,7 @@ set -euo pipefail
 
 #sudo apt update -y && sudo apt-get install -y docker-ce
 
+#sudo usermod -aG docker $(whoami)
 
 #***************
 # VSCode
@@ -78,6 +79,15 @@ set -euo pipefail
 #curl -sfL https://go.microsoft.com/fwlink/?LinkID=760868 -o vscode.deb
 #sudo dpkg -i vscode.deb
 #sudo apt install -fy
+
+
+#***************
+# Etcher
+#***************
+# echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | sudo tee /etc/apt/sources.list.d/etcher.list
+# sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 379CE192D401AB61
+# sudo apt update && sudo apt install -y etcher-electron
+
 
 #***************
 # Exa
@@ -119,7 +129,11 @@ set -euo pipefail
 # Alacritty
 #***************
 
-# TODO
+# sudo docker run
+# apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip
+# cd /apps
+# git clone https://github.com/jwilm/alacritty.git && cd alacritty
+# cargo build --release
 
 #***************
 # Gnome Dash to Panel
@@ -184,6 +198,7 @@ sudo sed -i 's/Categories=GTK;GNOME;Utility;X-GNOME-Utilities;/Categories=GTK;GN
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.desktop.media-handling autorun-never true
 gsettings set org.gnome.shell enable-hot-corners false
+gsettings set org.gnome.desktop.interface clock-format 12h
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up', '<Control><Alt>Up', '<Control><Alt>Left']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down', '<Control><Alt>Down', '<Control><Alt>Right']"
