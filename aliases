@@ -36,7 +36,7 @@ fi
 alias hex="hexdump -Cv"
 alias hexstruct="xxd -i"
 
-alias tcpconnections="netstat -lntp TCP"
+alias tcpconnections="ss -lntp TCP"
 
 alias vetsgov-internal="ssh socks -D 2001 -N"
 
