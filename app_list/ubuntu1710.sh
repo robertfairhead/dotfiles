@@ -14,8 +14,8 @@ set -euo pipefail
 
 # sudo apt remove ubuntu-web-launchers thunderbird telnet ufw aisleriot
 
-#mkdir /tmp/apps
-# cd /tmp/apps
+mkdir -p /tmp/apps
+cd /tmp/apps
 
 #***************
 # Epson scanner software
@@ -106,7 +106,6 @@ set -euo pipefail
 # curl -sfLo rg.tar.gz $(curl -s https://api.github.com/repos/burntsushi/ripgrep/releases/latest | grep browser_download_url | grep x86_64-unknown-linux-musl.tar.gz | cut -f 4 -d '"')
 # tar xvzf rg.tar.gz > /dev/null
 # cd ripgrep*
-# cp complete/rg.bash-completion ~/dotfiles/
 
 # if [[ ! -d /usr/local/share/man/man1 ]]; then
 #     sudo mkdir /usr/local/share/man/man1
@@ -129,11 +128,15 @@ set -euo pipefail
 # Alacritty
 #***************
 
-# sudo docker run
-# apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip
-# cd /apps
-# git clone https://github.com/jwilm/alacritty.git && cd alacritty
-# cargo build --release
+sudo docker run --name rustc --rm -dit rust bash
+sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
+sudo docker exec rustc sh -c "cd /apps && git clone https://github.com/jwilm/alacritty.git && cd alacritty && cargo build --release"
+sudo docker stop rustc
+sudo docker rmi rust
+
+cd alacritty
+sudo cp target/release/alacritty /usr/local/bin/
+sudo cp Alacritty.desktop /usr/share/applications/
 
 #***************
 # Gnome Dash to Panel
@@ -159,53 +162,53 @@ set -euo pipefail
 # Clean up
 #***************
 
-# cd $HOME
-# rm -rf /tmp/apps
+cd $HOME
+rm -rf /tmp/apps
 # sudo apt clean && sudo apt autoremove
 
 #***************
 # Set basic settings for above
 #***************
 
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
-gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
-gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
-gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
+# gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
+# gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
+# gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
+# gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+# gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
 
 
 #***************
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'code.desktop']"
+# gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'code.desktop']"
 
-gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ categories "['Settings', 'DesktopSettings', 'X-GNOME-Settings-Panel']"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ categories "['System', 'Core']"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ categories "['AudioVideo', 'Audio', 'Video', 'Scanning', 'Graphics']"
+# gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ categories "['Settings', 'DesktopSettings', 'X-GNOME-Settings-Panel']"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ categories "['System', 'Core']"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ categories "['AudioVideo', 'Audio', 'Video', 'Scanning', 'Graphics']"
 
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ name "Settings"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ name "System"
-gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ name "Multimedia"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Settings/ name "Settings"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ name "System"
+# gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ name "Multimedia"
 
-sudo sed -i 's/Categories=Utility;/Categories=Graphics;/' /usr/share/applications/shutter.desktop
-sudo sed -i 's/Categories=Utility;/Categories=/' /usr/share/applications/code.desktop
-sudo sed -i 's/Categories=GTK;GNOME;Utility;X-GNOME-Utilities;/Categories=GTK;GNOME;Graphics;/' /usr/share/applications/org.gnome.Screenshot.desktop
+# sudo sed -i 's/Categories=Utility;/Categories=Graphics;/' /usr/share/applications/shutter.desktop
+# sudo sed -i 's/Categories=Utility;/Categories=/' /usr/share/applications/code.desktop
+# sudo sed -i 's/Categories=GTK;GNOME;Utility;X-GNOME-Utilities;/Categories=GTK;GNOME;Graphics;/' /usr/share/applications/org.gnome.Screenshot.desktop
 
-gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-gsettings set org.gnome.desktop.media-handling autorun-never true
-gsettings set org.gnome.shell enable-hot-corners false
-gsettings set org.gnome.desktop.interface clock-format 12h
+# gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+# gsettings set org.gnome.desktop.media-handling autorun-never true
+# gsettings set org.gnome.shell enable-hot-corners false
+# gsettings set org.gnome.desktop.interface clock-format 12h
 
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up', '<Control><Alt>Up', '<Control><Alt>Left']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down', '<Control><Alt>Down', '<Control><Alt>Right']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up', '<Control><Alt>Up', '<Control><Alt>Left']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down', '<Control><Alt>Down', '<Control><Alt>Right']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
+# gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
 
-dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 32
-dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
-dconf write /org/gnome/shell/extensions/topicons/icon-size 18
+# dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 32
+# dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
+# dconf write /org/gnome/shell/extensions/topicons/icon-size 18
