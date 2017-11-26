@@ -4,11 +4,8 @@ set -euo pipefail
 
 # sudo apt update -y && sudo apt upgrade -y
 
-# sudo apt install -y apt-transport-https \
-# 		  curl \
-#		  git \
-#         jq \
-#         ubuntu-restricted-extras \
+# sudo apt install -y apt-transport-https ubuntu-restricted-extras\
+# 		  curl git jq \
 #         shutter \
 #         gnome-tweak-tool dconf-editor \
 
@@ -57,6 +54,14 @@ cd /tmp/apps
 #curl -sfLO https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
 #sudo dpkg -i dropbox_2015.10.28_amd64.deb
 #sudo apt install -fy
+
+#***************
+# Simplenote
+#***************
+
+# curl -sfLo simplenote.deb $(curl -s https://api.github.com/repos/Automattic/simplenote-electron/releases/latest | grep browser_download_url | grep \.deb | cut -f 4 -d '"')
+# sudo dpkg -i simplenote.deb
+# sudo apt install -fy
 
 #***************
 # Docker - Currently broken: https://github.com/docker/for-linux/issues/141
@@ -128,15 +133,15 @@ cd /tmp/apps
 # Alacritty
 #***************
 
-sudo docker run --name rustc --rm -dit rust bash
-sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
-sudo docker exec rustc sh -c "cd /apps && git clone https://github.com/jwilm/alacritty.git && cd alacritty && cargo build --release"
-sudo docker stop rustc
-sudo docker rmi rust
+# git clone https://github.com/jwilm/alacritty.git
+# sudo docker run --name rustc --rm -dit -v "$(pwd)":/apps rust bash
+# sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
+# sudo docker exec rustc sh -c "cd /apps/alacritty && cargo build --release"
+# sudo docker stop rustc
 
-cd alacritty
-sudo cp target/release/alacritty /usr/local/bin/
-sudo cp Alacritty.desktop /usr/share/applications/
+# cd alacritty
+# sudo cp target/release/alacritty /usr/local/bin/
+# sudo cp Alacritty.desktop /usr/share/applications/
 
 #***************
 # Gnome Dash to Panel
@@ -163,8 +168,11 @@ sudo cp Alacritty.desktop /usr/share/applications/
 #***************
 
 cd $HOME
-rm -rf /tmp/apps
+sudo rm -rf /tmp/apps
 # sudo apt clean && sudo apt autoremove
+# sudo docker container prune
+# sudo docker rmi rust
+
 
 #***************
 # Set basic settings for above
@@ -181,7 +189,7 @@ rm -rf /tmp/apps
 # Additional settings
 #***************
 
-# gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'code.desktop']"
+# gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop']"
 
 # gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
 # gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"

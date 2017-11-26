@@ -23,6 +23,8 @@ ln -sf $HOME/dotfiles/dir_colors .dir_colors
 
 ln -sf $HOME/dotfiles/hyper.js .hyper.js
 
+ln -sf $HOME/dotfiles/tmux.conf .tmux.conf
+
 mkdir -p bin
 chmod 700 bin
 for program in $HOME/dotfiles/bin/*; do
