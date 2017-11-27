@@ -168,10 +168,10 @@ cd /tmp/apps
 #***************
 
 cd $HOME
-sudo rm -rf /tmp/apps
+# sudo rm -rf /tmp/apps
 # sudo apt clean && sudo apt autoremove
 # sudo docker container prune
-# sudo docker rmi rust
+# sudo docker rmi -f rust
 
 
 #***************
