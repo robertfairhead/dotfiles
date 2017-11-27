@@ -14,7 +14,6 @@
   ghbranch = push -u origin HEAD
 
   br = branch -vva
-  br-clean = !~/dotfiles/bin/git-clean-br.sh
 
   changes=diff --cached
 
