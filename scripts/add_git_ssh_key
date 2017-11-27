@@ -10,7 +10,6 @@ TOKEN=$( git config --get ${SERVICE}.token )
 PUBKEY=$( cat $HOME/.ssh/${SERVICE}_id_$KEY.pub )
 TITLE="$(hostname)-$KEY"
 
-
 if [[ $SERVICE == "github" ]]; then
     http -j POST https://api.github.com/user/keys \
         Authorization:"token $TOKEN" \

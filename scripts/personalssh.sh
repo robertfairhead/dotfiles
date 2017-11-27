@@ -12,9 +12,9 @@
 ############################################################
 
 echo "Creating ~/.ssh/config"
-if [[ ! -d "$HOME/.ssh" ]]; then
-    mkdir "$HOME/.ssh"
-elif [[ -e "$HOME/.ssh/config" ]]; then
+
+mkdir -p "$HOME/.ssh"
+if [[ -e "$HOME/.ssh/config" ]]; then
     mv "${HOME}/.ssh/config" "${HOME}/.ssh/config.bak"
 fi
 
@@ -33,7 +33,7 @@ chmod 600 $HOME/.ssh/config*
 
 echo "Creating Git SSH keys"
 
-GIT_EMAIL=$( git config --get user.email )
+GIT_EMAIL=$( git config --get user.email || echo "bob@ahocteam.us" )
 
 for SERVICE in {"github","gitlab"}; do
     ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f ${HOME}/.ssh/${SERVICE}_id_ed25519 -o -a 64
@@ -47,4 +47,5 @@ for SERVICE in {"github","gitlab"}; do
 
     $SSHADD "$HOME/.ssh/${SERVICE}_id_ed25519"
 
+    $HOME/dotfiles/scripts/add_git_ssh_key "$SERVICE" "ed25519"
 done
