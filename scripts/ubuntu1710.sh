@@ -38,7 +38,7 @@ cd ..
 
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 curl -sfLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb || true
 sudo apt install -fy
 
 #***************
@@ -51,7 +51,7 @@ curl -sfO https://prerelease.keybase.io/keybase_amd64.deb.sig
 curl -sfLO https://prerelease.keybase.io/keybase_amd64.deb
 gpg --verify keybase_amd64.deb.sig 2> keybase_verify
 grep "222B 85B0 F90B E2D2 4CFE  B93F 4748 4E50 656D 16C7" keybase_verify
-sudo dpkg -i keybase_amd64.deb
+sudo dpkg -i keybase_amd64.deb || true
 sudo apt-get install -fy
 run_keybase
 
@@ -60,7 +60,7 @@ run_keybase
 #***************
 
 curl -sfLO https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
-sudo dpkg -i dropbox_2015.10.28_amd64.deb
+sudo dpkg -i dropbox_2015.10.28_amd64.deb || true
 sudo apt install -fy
 
 #***************
@@ -68,7 +68,7 @@ sudo apt install -fy
 #***************
 
 curl -sfLo simplenote.deb $(curl -s https://api.github.com/repos/Automattic/simplenote-electron/releases/latest | grep browser_download_url | grep \.deb | cut -f 4 -d '"')
-sudo dpkg -i simplenote.deb
+sudo dpkg -i simplenote.deb || true
 sudo apt install -fy
 
 #***************
@@ -81,7 +81,7 @@ sudo add-apt-repository \
   $(lsb_release -cs) \
   stable"
 
-sudo apt update -y && sudo apt-get install -y docker-ce
+sudo apt update -qq && sudo apt-get install -y docker-ce
 
 sudo usermod -aG docker $(whoami)
 
@@ -90,7 +90,7 @@ sudo usermod -aG docker $(whoami)
 #***************
 
 curl -sfL https://go.microsoft.com/fwlink/?LinkID=760868 -o vscode.deb
-sudo dpkg -i vscode.deb
+sudo dpkg -i vscode.deb || true
 sudo apt install -fy
 
 
@@ -100,7 +100,7 @@ sudo apt install -fy
 
 echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | sudo tee /etc/apt/sources.list.d/etcher.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 379CE192D401AB61
-sudo apt update && sudo apt install -y etcher-electron
+sudo apt update -qq && sudo apt install -y etcher-electron
 
 #***************
 # Exa
