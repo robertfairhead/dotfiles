@@ -12,14 +12,6 @@ else
   BREWPATH=""
 fi
 
-if [[ -d $HOME/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ ]]; then
-	VSCODEPATH="${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/:"
-elif [[ -d /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ ]]; then
-	VSCODEPATH="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/:"
-else
-	VSCODEPATH=""
-fi
+COMPILERS="/usr/local/go/bin:/usr/local/swift/bin:"
 
-COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
-
-export PATH="${CONDAPATH}${BREWPATH}${VSCODEPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
+export PATH="${CONDAPATH}${BREWPATH}${PATH}:${COMPILERS}$HOME/bin:$GOPATH/bin"
