@@ -1,5 +1,5 @@
 if [[ $OSTYPE == 'linux-gnu' ]]; then
-	export OS="linux"
+  export OS="linux"
 
   alias ls='ls -F --color=auto'
   alias l="less"
@@ -8,7 +8,7 @@ if [[ $OSTYPE == 'linux-gnu' ]]; then
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 else
-	export OS="osx"
+  export OS="osx"
 
   alias ls="ls -GF"
   alias l="more"
@@ -23,9 +23,7 @@ fi
 
 alias rmd="rm -rf"
 
-if [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
-  alias edit="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-elif [[ $(which code) ]]; then
+if [[ $(which code) ]]; then
   alias edit="code"
 elif [[ $(which micro) ]]; then
   alias edit="micro"

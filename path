@@ -12,12 +12,14 @@ else
   BREWPATH=""
 fi
 
-if [[ -d /mnt/c/Program\ Files/Docker/Docker/resources/bin ]]; then
-	DOCKERPATH="/mnt/c/Program\ Files/Docker/Docker/resources/bin:"
+if [[ -d $HOME/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ ]]; then
+	VSCODEPATH="${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/:"
+elif [[ -d /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ ]]; then
+	VSCODEPATH="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/:"
 else
-	DOCKERPATH=""
+	VSCODEPATH=""
 fi
 
 COMPILERS="/usr/local/go/bin:/usr/local/swift/bin"
 
-export PATH="${CONDAPATH}${BREWPATH}${DOCKERPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
+export PATH="${CONDAPATH}${BREWPATH}${VSCODEPATH}${PATH}:$COMPILERS:$HOME/bin:$GOPATH/bin"
