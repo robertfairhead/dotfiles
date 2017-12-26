@@ -1,13 +1,10 @@
-- Slack
-
 - Chrome
-- Firefox Developer
+- Firefox
 
 - 1Password
 
-- Hyper.js
+- iTerm2
 
-- Atom
 - VSCode
 
 - Simplenote
@@ -21,5 +18,7 @@
 
 - Etcher
 
-- Join.me
+Work:
 - Zoom
+- Join.me
+- Slack
