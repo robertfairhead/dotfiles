@@ -49,9 +49,9 @@ ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
-if [[ -e ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]
+if [[ -e ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
 	ln -sf ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ $HOME/bin/code
-elif [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]
+elif [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
 	ln -sf /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ $HOME/bin/code
 fi
 
