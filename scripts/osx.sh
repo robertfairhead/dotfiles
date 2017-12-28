@@ -54,8 +54,8 @@ sudo systemsetup -setrestartfreeze on
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Change DNS to Google DNS
-sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
-sudo networksetup -setdnsservers Ethernet 8.8.8.8 8.8.4.4
+sudo networksetup -setdnsservers Wi-Fi 9.9.9.9 8.8.8.8
+sudo networksetup -setdnsservers Ethernet 9.9.9.9 8.8.8.8
 
 # Add improved Quartz filter for reducing PDF size in Preview
 
