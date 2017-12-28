@@ -50,9 +50,9 @@ mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 if [[ -e ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
-	ln -sf ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ $HOME/bin/code
+	ln -sf ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $HOME/bin/code
 elif [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
-	ln -sf /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/ $HOME/bin/code
+	ln -sf /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $HOME/bin/code
 fi
 
 if [[ -d ${HOME}/Library/Application\ Support/Code/User ]]; then
