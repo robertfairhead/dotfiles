@@ -9,16 +9,12 @@
   # reset
   unadd = reset HEAD              # remove files from index (tracking)
   uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
-  restore = git
 
   ghbranch = push -u origin HEAD
 
   br = branch -vva
 
-  changes=diff --cached
-
-  resolve-ours = "!grep -lr '<<<<<<<' . | xargs git checkout --ours"
-  resolve-theirs = "!grep -lr '<<<<<<<' . | xargs git checkout --theirs"
+  staged = diff --cached
 
   conflicts = diff --name-only --diff-filter=U
 
@@ -28,6 +24,7 @@
 
 [color]
   ui = always
+
 [color "diff"]
   meta = yellow bold
   commit = cyan
@@ -53,16 +50,14 @@
   excludesfile = ~/.gitignore_global
   autocrlf = input
   editor = micro
+  # Don't prompt for commit message on merge commits
+  mergeoptions = --no-edit
 
 [fetch]
     prune = true
 
-[github]
-    username = robertfairhead
-
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  insteadOf = "git://github.com"
+[push]
+  default = simple
 
 [status]
   showUntrackedFiles = all
@@ -70,5 +65,10 @@
 [help]
   autocorrect = 1
 
-[push]
-  default = simple
+
+[github]
+    username = robertfairhead
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  insteadOf = "git://github.com"
