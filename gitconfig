@@ -23,7 +23,7 @@
   email = bob@adhocteam.us
 
 [color]
-  ui = always
+  ui = auto
 
 [color "diff"]
   meta = yellow bold
