@@ -6,8 +6,8 @@ sudo add-apt-repository ppa:papirus/papirus
 
 sudo apt update -y && sudo apt upgrade -y
 
-sudo apt install -y apt-transport-https ubuntu-restricted-extras\
-		curl git jq \
+sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
+		curl git jq tmux xclip \
         shutter \
         gnome-tweak-tool dconf-editor \
         arc-theme papirus-icon-theme \
@@ -36,7 +36,7 @@ cd ..
 # Chrome
 #***************
 
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+curl https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 curl -sfLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb || true
 sudo apt install -fy
@@ -59,9 +59,9 @@ run_keybase
 # Dropbox
 #***************
 
-curl -sfLO https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
-sudo dpkg -i dropbox_2015.10.28_amd64.deb || true
-sudo apt install -fy
+# curl -sfLO https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+# sudo dpkg -i dropbox_2015.10.28_amd64.deb || true
+# sudo apt install -fy
 
 #***************
 # Simplenote
@@ -122,7 +122,7 @@ cd ripgrep*
 
 sudo mkdir -p /usr/local/share/man/man1
 
-sudo cp rg.1 /usr/local/share/man/man1/
+sudo cp doc/rg.1 /usr/local/share/man/man1/
 sudo mandb
 sudo cp rg /usr/local/bin
 
@@ -222,6 +222,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
 
-dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 32
+dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 48
 dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
-dconf write /org/gnome/shell/extensions/topicons/icon-size 18
+dconf write /org/gnome/shell/extensions/topicons/icon-size 24

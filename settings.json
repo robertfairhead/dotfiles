@@ -3,7 +3,7 @@
   "editor.fontFamily": "'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace",
 
   // Controls the font size in pixels.
-  "editor.fontSize": 12,
+  "editor.fontSize": 13,
 
   // Controls if the minimap is shown.
   "editor.minimap.enabled": false,
