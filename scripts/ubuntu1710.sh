@@ -179,13 +179,20 @@ sudo apt clean && sudo apt autoremove
 sudo docker container prune
 sudo docker rmi -f rust
 
+#***************
+# Randomize MAC addresses
+#***************
+
+curl -sfLO https://gist.githubusercontent.com/robertfairhead/9df546e252750a496787ef3d90f7b6c6/raw/71cfb42d0ff16edb1fe6789d20f0c21b2fe2a694/30-randomize-mac-address.conf
+sudo mv 30-randomize-mac-address.conf /etc/NetworkManager/conf.d/
+sudo sed -i 's/wifi.scan-rand-mac-address=no/wifi.scan-rand-mac-address=yes/' /etc/NetworkManager/NetworkManager.conf
 
 #***************
 # Set basic settings for above
 #***************
 
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/Dropbox/config/Wallpapers/jedi_order.jpg'
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/dotfiles/wallpaper/empire.jpg'
+gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/dotfiles/wallpaper/empire.jpg'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
