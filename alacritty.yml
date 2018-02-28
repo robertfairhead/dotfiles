@@ -14,19 +14,25 @@ env:
   # `infocmp xterm-256color`.
   TERM: xterm-256color
 
-# Window dimensions in character columns and lines
-# Falls back to size specified by window manager if set to 0x0.
-# (changes require restart)
-dimensions:
-  columns: 120
-  lines: 50
 
-# Adds this many blank pixels of padding around the window
-# Units are physical pixels; this is not DPI aware.
-# (change requires restart)
-padding:
-  x: 2
-  y: 2
+window:
+  # Window dimensions in character columns and lines
+  # Falls back to size specified by window manager if set to 0x0.
+  # (changes require restart)
+  dimensions:
+    columns: 120
+    lines: 50
+
+  # Adds this many blank pixels of padding around the window
+  # Units are physical pixels; this is not DPI aware.
+  # (change requires restart)
+  padding:
+    x: 2
+    y: 2
+
+  # Window decorations
+  # Setting this to false will result in window without borders and title bar.
+  decorations: true
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
@@ -174,7 +180,7 @@ background_opacity: 1.0
 # - PasteSelection
 # - Copy (TODO)
 mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+  - { mouse: Middle, action: Paste }
 
 mouse:
   double_click: { threshold: 300 }
@@ -183,7 +189,17 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
+dynamic_title: true
+
 hide_cursor_when_typing: false
+
+# Style of the cursor
+#
+# Values for 'cursor_style':
+# - Block
+# - Underline
+# - Beam
+cursor_style: Block
 
 # Live config reload (changes require restart)
 live_config_reload: true

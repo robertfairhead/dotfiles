@@ -72,7 +72,7 @@ sudo dpkg -i simplenote.deb || true
 sudo apt install -fy
 
 #***************
-# Docker - Currently broken: https://github.com/docker/for-linux/issues/141
+# Docker
 #***************
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -147,6 +147,7 @@ sudo docker stop rustc
 
 cd alacritty
 sudo cp target/release/alacritty /usr/local/bin/
+sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' Alacritty.desktop
 sudo cp Alacritty.desktop /usr/share/applications/
 
 #***************
@@ -196,6 +197,10 @@ gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/dotfil
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'TopIcons@phocean.net']"
+
+# Set login screen background to black
+sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/theme/gdm.css
+sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/theme/ubuntu.css
 
 #***************
 # Additional settings
