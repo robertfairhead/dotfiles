@@ -36,8 +36,6 @@ alias hexstruct="xxd -i"
 
 alias tcpconnections="ss -lntp TCP"
 
-alias vetsgov-internal="ssh socks -D 2001 -N"
-
 # Get a sum of the total size of a file/folder in human readable units:
 alias space="du -sh"
 
