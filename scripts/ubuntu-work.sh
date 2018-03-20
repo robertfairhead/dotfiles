@@ -45,4 +45,4 @@ sudo apt clean && sudo apt autoremove
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'slack_slack.desktop', 'code.desktop']"
+gsettings set org.gnome.shell favorite-apps ['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop', 'slack_slack.desktop']
