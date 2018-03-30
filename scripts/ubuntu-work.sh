@@ -30,7 +30,12 @@ sudo apt update && sudo apt install peek
 # TODO: Restic for back-ups
 #***************
 
+#***************
+# TODO: Heroku CLI
+#***************
 
+curl -sSf https://cli-assets.heroku.com/install-ubuntu.sh | sudo bash
+sudo apt install postgresql-client -y --no-install-recommends
 
 #***************
 # Clean up
