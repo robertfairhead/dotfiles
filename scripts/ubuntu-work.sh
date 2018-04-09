@@ -38,6 +38,12 @@ curl -sSf https://cli-assets.heroku.com/install-ubuntu.sh | sudo bash
 sudo apt install postgresql-client -y --no-install-recommends
 
 #***************
+# TODO: AWS CLI
+#***************
+
+sudo apt install awscli -y
+
+#***************
 # Clean up
 #***************
 

@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+if code --list-extensions | diff -q $HOME/dotfiles/code_extensions - >/dev/null
+then
+    echo "Visual Studio Code extensions up to date"
+else
+    TEMPDIR=$(mktemp -d)
+    trap "rm -rf $TEMPDIR" EXIT
+    cd $TEMPDIR
+    code --list-extensions > current
+    echo "Shows current installed extensions (lefthand pane) to allow editing of dotfiles (righthand pane) to desired state"
+    code --wait --diff current $HOME/dotfiles/code_extensions
+    for ext in $(cat $HOME/dotfiles/code_extensions); do
+        code --install-extension $ext
+    done
+
+    for ext in $(code --list-extensions | diff $HOME/dotfiles/code_extensions - | grep "^> " | sed "s/^> //g"); do
+        code --uninstall-extension $ext
+    done
+fi
+

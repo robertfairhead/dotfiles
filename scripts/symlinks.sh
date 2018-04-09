@@ -31,10 +31,10 @@ for program in $HOME/dotfiles/bin/*; do
   ln -sf $program $HOME/bin/$(basename $program)
 done
 
-if [[ -f $HOME/Dropbox/config/aws-credentials ]]; then
+if [[ -f /keybase/private/fairhead/aws-config ]]; then
   mkdir -p $HOME/.aws
   chmod 700 $HOME/.aws
-  ln -sf $HOME/Dropbox/config/credentials $HOME/.aws/credentials
+  ln -sf /keybase/private/fairhead/aws-config $HOME/.aws/config
 fi
 
 mkdir -p .gnupg
@@ -49,21 +49,25 @@ ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
+# Drop VSCode into $PATH for Mac
 if [[ -e ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
 	ln -sf ${HOME}/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $HOME/bin/code
 elif [[ -e /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code ]]; then
 	ln -sf /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $HOME/bin/code
 fi
 
+# Mac
 if [[ -d ${HOME}/Library/Application\ Support/Code/User ]]; then
     ln -sf $HOME/dotfiles/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 fi
 
+# Windows 10 WSL
 if [[ -f /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json ]]; then
     rm -f /mnt/c/Users/rober/AppData/Roaming/Code/User/settings.json
     cmd.exe /C "mklink C:\Users\rober\AppData\Roaming\Code\User\settings.json C:\Users\rober\dotfiles\settings.json"
 fi
 
+# Linux
 if [[ -d ${HOME}/.config/Code/User ]]; then
 	ln -sf $HOME/dotfiles/settings.json $HOME/.config/Code/User/settings.json
 fi
