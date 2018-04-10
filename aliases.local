@@ -1,0 +1,6 @@
+#AWS
+alias ssh-aws="ssh -i $HOME/.ssh/terraform_id_rsa -l ec2-user"
+alias ec2-check="aws --profile=qp-admin --region=us-east-1 --output=table ec2 describe-instances --filter Name='instance-state-name',Values='running'"
+
+#ansible
+#alias ansible="PATH=/usr/bin:/usr/local/bin:$PATH ansible"
