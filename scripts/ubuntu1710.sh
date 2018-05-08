@@ -230,3 +230,13 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
 gsettings set org.gnome.shell.extensions.user-theme name "Arc-Dark"
 dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 48
 dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
+
+#***************
+# Set touchpad middle clickk to emulate left click instead
+#***************
+sudo cat > /usr/share/X11/xorg.conf.d/99-no-middle-button-touchpad.conf <<EOF
+Section "InputClass"
+    Identifier  "SynPS/2 Synaptics TouchPad"
+    Option  "ButtonMapping" "1 1 3 4 5 6 7"
+EndSection
+EOF

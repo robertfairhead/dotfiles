@@ -31,17 +31,26 @@ sudo apt update && sudo apt install peek
 #***************
 
 #***************
-# TODO: Heroku CLI
+# Heroku CLI
 #***************
 
 curl -sSf https://cli-assets.heroku.com/install-ubuntu.sh | sudo bash
 sudo apt install postgresql-client -y --no-install-recommends
 
 #***************
-# TODO: AWS CLI
+# AWS CLI
 #***************
 
 sudo apt install awscli -y
+
+
+#***************
+# Terraform
+#***************
+
+curl -sfLO $(curl -sSf https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*64" | sort -rV | head -1 | cut -d'"' -f4)
+unzip terraform_*_linux_amd64.zip
+sudo mv terraform /usr/local/bin
 
 #***************
 # Clean up
