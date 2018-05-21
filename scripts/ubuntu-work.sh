@@ -56,8 +56,10 @@ sudo mv terraform /usr/local/bin
 # Ansible
 #***************
 
- sudo apt install python3-pip -y
- pip3 install ansible
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+$ sudo apt-get update
+$ sudo apt-get install ansible -y
 
 #***************
 # Clean up
