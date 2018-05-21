@@ -53,6 +53,13 @@ unzip terraform_*_linux_amd64.zip
 sudo mv terraform /usr/local/bin
 
 #***************
+# Ansible
+#***************
+
+ sudo apt install python3-pip -y
+ pip3 install ansible
+
+#***************
 # Clean up
 #***************
 
