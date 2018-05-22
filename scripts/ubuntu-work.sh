@@ -56,10 +56,18 @@ sudo mv terraform /usr/local/bin
 # Ansible
 #***************
 
-$ sudo apt-get install software-properties-common
-$ sudo apt-add-repository ppa:ansible/ansible
-$ sudo apt-get update
-$ sudo apt-get install ansible -y
+sudo apt-add-repository ppa:ansible/ansible -y
+sudo apt update
+sudo apt install ansible python-pip -y
+pip install boto boto3
+
+#***************
+# Yarn
+#***************
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn -y
 
 #***************
 # Clean up
