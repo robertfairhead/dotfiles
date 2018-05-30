@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-sudo add-apt-repository ppa:papirus/papirus
+sudo add-apt-repository ppa:papirus/papirus -y
 
 sudo apt update -y && sudo apt upgrade -y
 
 sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
-		curl git jq tmux xclip \
+		curl git jq tmux xclip make \
         shutter \
         gnome-tweak-tool dconf-editor \
         gnome-shell-extensions arc-theme papirus-icon-theme \
@@ -99,7 +99,7 @@ sudo apt install -fy
 #***************
 
 echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | sudo tee /etc/apt/sources.list.d/etcher.list
-sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 379CE192D401AB61
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
 sudo apt update -qq && sudo apt install -y etcher-electron
 
 #***************
@@ -139,24 +139,26 @@ sudo cp micro /usr/local/bin
 # Alacritty
 #***************
 
-git clone https://github.com/jwilm/alacritty.git
-sudo docker run --name rustc --rm -dit -v "$(pwd)":/apps rust bash
-sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
-sudo docker exec rustc sh -c "cd /apps/alacritty && cargo build --release"
-sudo docker stop rustc
+## To be replaced soon with .deb install
 
-cd alacritty
-sudo cp target/release/alacritty /usr/local/bin/
-sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' Alacritty.desktop
-sudo cp Alacritty.desktop /usr/share/applications/
+# git clone https://github.com/jwilm/alacritty.git
+# sudo docker run --name rustc --rm -dit -v "$(pwd)":/apps rust bash
+# sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
+# sudo docker exec rustc sh -c "cd /apps/alacritty && cargo build --release"
+# sudo docker stop rustc
+
+# cd alacritty
+# sudo cp target/release/alacritty /usr/local/bin/
+# sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' alacritty.desktop
+# sudo cp alacritty.desktop /usr/share/applications/
 
 #***************
 # Gnome Dash to Panel
 #***************
 
-curl -sfLo dash2panel.zip $(curl -s https://api.github.com/repos/jderose9/dash-to-panel/releases/latest | grep zipball_url | cut -f 4 -d '"')
+curl -sfLo dash2panel.zip $(curl -s https://api.github.com/repos/home-sweet-gnome/dash-to-panel/releases/latest | grep zipball_url | cut -f 4 -d '"')
 unzip dash2panel.zip > /dev/null
-cd jderose9*
+cd home-sweet-gnome*
 make install > /dev/null
 cd ..
 
@@ -168,8 +170,9 @@ cd ..
 cd $HOME
 sudo rm -rf /tmp/apps
 sudo apt clean && sudo apt autoremove
-sudo docker container prune
-sudo docker rmi -f rust
+sudo docker container prune -f
+#sudo docker rmi -f rust
+sudo docker system prune -af --volumes
 
 #***************
 # Randomize MAC addresses
@@ -187,17 +190,17 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/dotfile
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/dotfiles/wallpaper/empire.jpg'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
-gsettings set org.gnome.shell enabled-extensions ['dash-to-panel@jderose9.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']"
 
 # Set login screen background to black
-sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/theme/gdm.css
+sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/theme/gdm3.css
 sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/theme/ubuntu.css
 
 #***************
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps ['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop']
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop']"
 
 gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
@@ -234,9 +237,7 @@ dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
 #***************
 # Set touchpad middle clickk to emulate left click instead
 #***************
-sudo cat > /usr/share/X11/xorg.conf.d/99-no-middle-button-touchpad.conf <<EOF
-Section "InputClass"
+echo 'Section "InputClass"
     Identifier  "SynPS/2 Synaptics TouchPad"
     Option  "ButtonMapping" "1 1 3 4 5 6 7"
-EndSection
-EOF
+EndSection' | sudo tee /usr/share/X11/xorg.conf.d/99-no-middle-button-touchpad.conf
