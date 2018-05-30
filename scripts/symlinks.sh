@@ -35,8 +35,8 @@ if [[ -f /keybase/private/fairhead/aws-config ]]; then
   mkdir -p $HOME/.aws
   chmod 700 $HOME/.aws
   ln -sf /keybase/private/fairhead/aws-config $HOME/.aws/config
-  head -n 3 config | tee credentials &>/dev/null
-  chmod 700 credentials
+  head -n 3 $HOME/.aws/config | tee $HOME/.aws/credentials &>/dev/null
+  chmod 700 $HOME/.aws/credentials
 fi
 
 mkdir -p .gnupg
