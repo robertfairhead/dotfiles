@@ -41,7 +41,7 @@ sudo apt install postgresql-client -y --no-install-recommends
 # AWS CLI
 #***************
 
-sudo apt install awscli -y
+sudo snap install aws-cli --classic
 
 
 #***************
@@ -82,4 +82,4 @@ sudo apt clean && sudo apt autoremove
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop', 'slack_slack.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'alacritty.desktop', 'code.desktop', 'slack_slack.desktop']"

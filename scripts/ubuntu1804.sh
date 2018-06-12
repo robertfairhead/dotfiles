@@ -8,7 +8,7 @@ sudo apt update -y && sudo apt upgrade -y
 
 sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
 		curl git jq tmux xclip make \
-        shutter \
+        flameshot \
         gnome-tweak-tool dconf-editor \
         gnome-shell-extensions arc-theme papirus-icon-theme \
 
@@ -200,7 +200,7 @@ sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'code.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'alacritty.desktop', 'code.desktop']"
 
 gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
@@ -213,7 +213,6 @@ gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folder
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/System/ name "System"
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Multimedia/ name "Multimedia"
 
-sudo sed -i 's/Categories=Utility;/Categories=Graphics;/' /usr/share/applications/shutter.desktop
 sudo sed -i 's/Categories=Utility;/Categories=/' /usr/share/applications/code.desktop
 sudo sed -i 's/Categories=GTK;GNOME;Utility;X-GNOME-Utilities;/Categories=GTK;GNOME;Graphics;/' /usr/share/applications/org.gnome.Screenshot.desktop
 
