@@ -49,3 +49,12 @@ alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -
 if [[ -f $HOME/Dropbox/config/aliases.local ]]; then
   source $HOME/Dropbox/config/aliases.local
 fi
+
+gosrc () {
+  if [[ -d "$GOPATH/src/github.com/adhocteam" ]]; then
+    cd "$GOPATH/src/github.com/adhocteam"
+    return 0
+  fi
+
+  cd "$GOPATH/src/github.com/robertfairhead"
+}
