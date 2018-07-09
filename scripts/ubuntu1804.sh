@@ -136,6 +136,14 @@ cd micro*
 sudo cp micro /usr/local/bin
 
 #***************
+# USQL universal sql client
+#***************
+
+curl -sfLo usql.tar.bz2 $(curl -s https://api.github.com/repos/xo/usql/releases/latest | grep browser_download_url | grep linux | cut -f 4 -d '"')
+tar -vxjf usql.tar.bz2 > /dev/null
+sudo mv usql /usr/local/bin/
+
+#***************
 # Alacritty
 #***************
 
