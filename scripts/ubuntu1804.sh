@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:papirus/papirus -y
 sudo apt update -y && sudo apt upgrade -y
 
 sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
-		curl git jq tmux xclip make \
+		curl git jq tmux xclip make htop \
         flameshot \
         gnome-tweak-tool dconf-editor \
         gnome-shell-extensions arc-theme papirus-icon-theme \
