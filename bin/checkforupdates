@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function update_count {
+    local ARCH_COUNT=$(yay -Sy > /dev/null && yay -Pu | wc -l)
+
+    local TOTAL=ARCH_COUNT
+
+    if [[ ARCH_COUNT -gt 0 ]]; then
+        echo ""
+    else
+        echo ""
+    fi
+
+}
+
+update_count
