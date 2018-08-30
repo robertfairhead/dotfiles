@@ -46,5 +46,5 @@ mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 if [[ -d ${HOME}/.config/Code/User ]]; then
-	ln -sf $HOME/dotfiles/settings.json $HOME/.config/Code/User/settings.json
+	ln -sf $HOME/dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
 fi
