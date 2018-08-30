@@ -34,7 +34,7 @@ fi
 alias hex="hexdump -Cv"
 alias hexstruct="xxd -i"
 
-alias tcpconnections="ss -lntp TCP"
+alias tcpconnections="sudo ss -lntp TCP"
 
 # Get a sum of the total size of a file/folder in human readable units:
 alias space="du -sh"
@@ -46,9 +46,7 @@ alias ps="ps aux"
 
 alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -it -p 127.0.0.1:4000:4000 jekyll/jekyll jekyll serve"
 
-if [[ -f $HOME/Dropbox/config/aliases.local ]]; then
-  source $HOME/Dropbox/config/aliases.local
-fi
+alias pacnew='find /etc -regextype posix-extended -regex ".+\.pac(new|save)" 2> /dev/null'
 
 gosrc () {
   if [[ -d "$GOPATH/src/github.com/adhocteam" ]]; then
