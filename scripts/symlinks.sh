@@ -6,24 +6,18 @@ echo "###############################"
 
 cd $HOME
 
-rm -rf .profile .bash_aliases .aws
+rm -rf .profile .bash_aliases
 
-ln -sf $HOME/dotfiles/bashrc .bashrc
-ln -sf $HOME/dotfiles/bash_profile .bash_profile
-ln -sf $HOME/dotfiles/path .path
-ln -sf $HOME/dotfiles/aliases .aliases
-ln -sf $HOME/dotfiles/prompt .prompt
-
-ln -sf $HOME/dotfiles/inputrc .inputrc
-
-ln -sf $HOME/dotfiles/gitconfig .gitconfig
-ln -sf $HOME/dotfiles/gitignore_global .gitignore_global
-
-ln -sf $HOME/dotfiles/dir_colors .dir_colors
-
-ln -sf $HOME/dotfiles/hyper.js .hyper.js
+## Bash and command line setup
+ln -sf $HOME/dotfiles/bash/bash_profile .bash_profile
+ln -sf $HOME/dotfiles/bash/bashrc .bashrc
+ln -sf $HOME/dotfiles/bash/inputrc .inputrc
 
 ln -sf $HOME/dotfiles/tmux.conf .tmux.conf
+
+ln -sf $HOME/dotfiles/git/gitconfig .gitconfig
+ln -sf $HOME/dotfiles/git/gitignore_global .gitignore_global
+
 
 mkdir -p bin
 chmod 700 bin

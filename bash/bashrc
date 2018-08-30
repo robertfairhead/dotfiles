@@ -30,20 +30,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# 1.   directory - Bold Cyan
-# 2.   symbolic link - Magenta
-# 3.   socket - Green
-# 4.   pipe - Brown
-# 5.   executable - Red
-# 6.   block special - Blue Cyan
-# 7.   character special - Blue Brown
-# 8.   executable with setuid bit set - Black Red
-# 9.   executable with setgid bit set - Black Cyan
-# 10.  directory writable to others, with sticky bit - Black Green
-# 11.  directory writable to others, without sticky bit - Black Brown
-
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-
 if command -v dircolors >/dev/null 2>&1; then
   eval $(dircolors -b $HOME/dotfiles/bash/dir_colors)
 fi
