@@ -20,7 +20,7 @@ fi
 
 chmod 700 $HOME/.ssh
 
-cp $HOME/dotfiles/config $HOME/.ssh/config
+cp $HOME/dotfiles/ssh/config $HOME/.ssh/config
 
 chmod 600 $HOME/.ssh/config*
 
@@ -47,5 +47,4 @@ for SERVICE in {"github","gitlab"}; do
 
     $SSHADD "$HOME/.ssh/${SERVICE}_id_ed25519"
 
-    $HOME/dotfiles/scripts/add_git_ssh_key "$SERVICE" "ed25519"
 done
