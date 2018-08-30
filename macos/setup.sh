@@ -63,7 +63,7 @@ if [[ ! -d ~/Library/Filters ]]; then
 	mkdir ~/Library/Filters
 fi
 
-cp ~/dotfiles/Better\ Reduce.qfilter ~/Library/Filters
+cp ~/dotfiles/macos/Better\ Reduce.qfilter ~/Library/Filters
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
