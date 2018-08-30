@@ -18,7 +18,7 @@ ln -sf $HOME/dotfiles/tmux.conf .tmux.conf
 ln -sf $HOME/dotfiles/git/gitconfig .gitconfig
 ln -sf $HOME/dotfiles/git/gitignore_global .gitignore_global
 
-
+## Setup local bin
 mkdir -p bin
 chmod 700 bin
 for program in $HOME/dotfiles/bin/*; do
@@ -35,8 +35,8 @@ fi
 
 mkdir -p .gnupg
 chmod 700 .gnupg
-ln -sf $HOME/dotfiles/gpg.conf .gnupg/gpg.conf
-ln -sf $HOME/dotfiles/gpg-agent.conf .gnupg/gpg-agent.conf
+ln -sf $HOME/dotfiles/gpg/gpg.conf .gnupg/gpg.conf
+ln -sf $HOME/dotfiles/gpg/gpg-agent.conf .gnupg/gpg-agent.conf
 
 mkdir -p .config/micro
 ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
