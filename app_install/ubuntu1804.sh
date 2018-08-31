@@ -13,7 +13,7 @@ sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates
         gnome-shell-extensions arc-theme papirus-icon-theme \
 
 sudo apt remove -y ubuntu-web-launchers thunderbird \
-                telnet ufw \
+                telnet ufw avahi* popularity-contest \
                 aisleriot transmission-common transmission-gtk remmina remmina-common vino \
                 deja-dup gnome-user-share gedit gedit-common ubuntu-software gnome-software update-manager \
                 libreoffice-core libreoffice-common cheese rhythmbox rhythmbox-data shotwell shotwell-common \
@@ -197,6 +197,7 @@ sudo sed -i 's/wifi.scan-rand-mac-address=no/wifi.scan-rand-mac-address=yes/' /e
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/bob/dotfiles/wallpaper/empire.jpg'
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/bob/dotfiles/wallpaper/empire.jpg'
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
+gsettings set org.gnome.shell.extensions.user-theme name "Arc-Dark"
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 gsettings set org.gnome.shell enabled-extensions "['dash-to-panel@jderose9.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']"
 
@@ -237,7 +238,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
 
-gsettings set org.gnome.shell.extensions.user-theme name "Arc-Dark"
 dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 48
 dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
 
