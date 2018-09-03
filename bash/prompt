@@ -22,18 +22,16 @@ set_prompts() {
             bold=$(tput bold)
             reset=$(tput sgr0)
 
-            # Solarized colors
+            # Ayu colors
             black=$(tput setaf 0)
             blue=$(tput setaf 4)
             cyan=$(tput setaf 6)
             green=$(tput setaf 2)
-            orange=$(tput setaf 9)
+            brightred=$(tput setaf 9)
             purple=$(tput setaf 13)
             red=$(tput setaf 1)
-            magenta=$(tput setaf 5)
             white=$(tput setaf 7)
             yellow=$(tput setaf 3)
-            brblack=$(tput setaf 8)
             gray=$(tput setaf 10)
 
         else
@@ -70,7 +68,7 @@ set_prompts() {
         if [[ "$SSH_TTY" ]]; then
           userhost+="${gray}[ssh to ${red}${HOSTNAME}${gray}]:";
         else
-          userhost+="${green}$HOSTNAME${gray}:";
+          userhost+="${cyan}$HOSTNAME${white}:";
         fi;
 
         echo $userhost "";
@@ -116,10 +114,10 @@ set_prompts() {
 
         # Check if upstream doesn't exist yet
         elif [[ -z "$count" ]]; then
-          unpushed=$(echo -e "∅");
+          new=$(echo -e "∅");
         fi
 
-        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$new${4}$unpushed";
+        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$unpushed${4}$new";
 
         return
     }
@@ -132,7 +130,7 @@ set_prompts() {
 
     PS1="\[$(usernamehost)\]"                              # username at host
     PS1+="\[$blue\]\w"                                     # working directory
-    PS1+="\$(prompt_git \"$gray on $purple\" \"$magenta\" \"$cyan\" \"$yellow\")"   # git repository details
+    PS1+="\$(prompt_git \"$white on $purple\" \"$yellow\" \"$red\" \"$brightred\")"   # git repository details\
     PS1+="\n"
     PS1+="\[$reset$blue\] > \[$reset\]"
 
