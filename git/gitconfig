@@ -62,7 +62,7 @@
   mergeoptions = --no-edit
 
   # get word level highlights in diffs
-  pager = /usr/share/git/diff-highlight/diff-highlight | less
+  pager = diff-so-fancy | less
 
 [fetch]
     prune = true
