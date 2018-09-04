@@ -77,9 +77,6 @@ set_prompts() {
 
     function prompt_git() {
 
-        # if we're in .git then bail
-        [[ "$(pwd)" == *".git"* ]] && return
-
         # check if we're in a git repo. (fast)
         git rev-parse --is-inside-work-tree &>/dev/null || return
 
