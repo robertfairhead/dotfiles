@@ -1,7 +1,7 @@
 #https://camo.githubusercontent.com/7926c5d4efa9802d31a2d03945f1bcf87e1fd3e9/68747470733a2f2f63646e2e7261776769742e636f6d2f6179752d7468656d652f6179752d636f6c6f72732f6d61737465722f636f6c6f72732e737667
 
 #common.fg (cream), common.bg (dark grey)
-color-link default "#d9d7ce,#212733"
+color-link default "#BFBAB0,#0F1419"
 
 #syntax.comment (medium grey)
 color-link comment "#5c6773"

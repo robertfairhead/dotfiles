@@ -3,8 +3,8 @@
   path = ~/gitconfig.local
 
 [alias]
-  history =  log --all --graph --decorate --oneline --simplify-by-decoration
-  commit-history = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  history = log --all --graph --abbrev-commit --simplify-by-decoration
+  graph = log --all --graph --abbrev-commit
 
   # reset
   unadd = reset HEAD              # remove files from index (tracking)
@@ -26,25 +26,33 @@
   ui = auto
 
 [color "diff"]
-  meta = yellow bold
+  meta = white bold
   commit = cyan
-  frag = white bold
-  old = magenta reverse
+  frag = blue bold
+  old = red reverse
   new = cyan reverse
-  whitespace = white
+  whitespace = red
+  context = 238
 [color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = "red bold 52"
-  newNormal = "green bold"
-  newHighlight = "green bold 22"
+  oldNormal = white
+  oldHighlight = red reverse
+  newNormal = 248
+  newHighlight = cyan reverse
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+  current = cyan reverse
+  local = blue
+  remote = magenta
 [color "status"]
-  added = yellow
-  changed = cyan
-  untracked = blue
+  branch = blue
+  added = green
+  changed = white
+  untracked = red
+[color "decorate"]
+  branch = blue
+  remoteBranch = magenta
+  head = white
+  tag = white
+  stash = red
 
 [core]
   excludesfile = ~/.gitignore_global
@@ -52,6 +60,9 @@
   editor = micro
   # Don't prompt for commit message on merge commits
   mergeoptions = --no-edit
+
+  # get word level highlights in diffs
+  pager = /usr/share/git/diff-highlight/diff-highlight | less
 
 [fetch]
     prune = true
@@ -62,9 +73,14 @@
 [status]
   showUntrackedFiles = all
 
+[log]
+  date = relative
+
+[format]
+  pretty = %Creset%h -%C(green)%d%C(blue) %s %C(yellow)(%cr) %C(magenta)<%an>%Creset
+
 [help]
   autocorrect = 1
-
 
 [github]
     username = robertfairhead
