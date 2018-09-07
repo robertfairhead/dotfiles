@@ -6,12 +6,6 @@ sudo add-apt-repository ppa:papirus/papirus -y
 
 sudo apt update -y && sudo apt upgrade -y
 
-sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
-		curl git jq tmux xclip make htop \
-        flameshot \
-        gnome-tweak-tool dconf-editor \
-        gnome-shell-extensions arc-theme papirus-icon-theme \
-
 sudo apt remove -y ubuntu-web-launchers thunderbird \
                 telnet ufw avahi* popularity-contest \
                 aisleriot transmission-common transmission-gtk remmina remmina-common vino \
@@ -19,8 +13,38 @@ sudo apt remove -y ubuntu-web-launchers thunderbird \
                 libreoffice-core libreoffice-common cheese rhythmbox rhythmbox-data shotwell shotwell-common \
                 gnome-calendar gnome-mahjongg gnome-mines gnome-online-accounts gnome-orca gnome-sudoku
 
+sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
+		curl git jq tmux xclip make htop \
+        flameshot \
+        gnome-tweak-tool dconf-editor \
+        gnome-shell-extensions arc-theme papirus-icon-theme \
+        libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
+        libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
+        libstartup-notification0-dev libxcb-randr0-dev \
+        libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
+        libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
+        autoconf libxcb-xrm0 libxcb-xrm-dev automake
+
 mkdir -p /tmp/apps
 cd /tmp/apps
+
+#***************
+# i3-gaps
+#***************
+
+git clone https://www.github.com/Airblader/i3 i3-gaps
+cd i3-gaps
+
+# compile & install
+autoreconf --force --install
+rm -rf build/
+mkdir -p build && cd build/
+
+# Disabling sanitizers is important for release versions!
+# The prefix and sysconfdir are, obviously, dependent on the distribution.
+../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+make
+sudo make install
 
 #***************
 # Epson scanner software
@@ -127,6 +151,14 @@ sudo mandb
 sudo cp rg /usr/local/bin
 
 #***************
+# Bat
+#***************
+
+curl -sfLo bat.deb $(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest | grep browser_download_url | grep bat_.*amd64\.deb | cut -f 4 -d '"')
+sudo dpkg -i bat.deb || true
+sudo apt install -fy
+
+#***************
 # Micro
 #***************
 
@@ -170,6 +202,69 @@ cd home-sweet-gnome*
 make install > /dev/null
 cd ..
 
+#***************
+# Slack
+#***************
+
+sudo snap install slack --classic
+
+#***************
+# Zoom
+#***************
+
+curl -sfLO https://zoom.us/client/latest/zoom_amd64.deb
+sudo dpkg -i zoom_amd64.deb || true
+sudo apt install -fy
+
+#***************
+# Peek - GIF Recorder
+#***************
+
+sudo add-apt-repository -y ppa:peek-developers/stable
+sudo apt update && sudo apt install peek -y
+
+#***************
+# TODO: Restic for back-ups
+#***************
+
+#***************
+# Heroku CLI
+#***************
+
+curl -sSf https://cli-assets.heroku.com/install-ubuntu.sh | sudo bash
+sudo apt install postgresql-client -y --no-install-recommends
+
+#***************
+# AWS CLI
+#***************
+
+sudo snap install aws-cli --classic
+
+
+#***************
+# Terraform
+#***************
+
+curl -sfLO $(curl -sSf https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*64" | sort -rV | head -1 | cut -d'"' -f4)
+unzip terraform_*_linux_amd64.zip
+sudo mv terraform /usr/local/bin
+
+#***************
+# Ansible
+#***************
+
+sudo apt-add-repository ppa:ansible/ansible -y
+sudo apt update
+sudo apt install ansible python-pip -y
+pip install boto boto3
+
+#***************
+# Yarn
+#***************
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn -y
 
 #***************
 # Clean up
@@ -177,10 +272,7 @@ cd ..
 
 cd $HOME
 sudo rm -rf /tmp/apps
-sudo apt clean && sudo apt autoremove
-sudo docker container prune -f
-#sudo docker rmi -f rust
-sudo docker system prune -af --volumes
+sudo apt clean && sudo apt autoremove -y
 
 #***************
 # Randomize MAC addresses
@@ -209,7 +301,7 @@ sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'alacritty.desktop', 'code.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'alacritty.desktop', 'code.desktop', 'slack_slack.desktop']"
 
 gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
