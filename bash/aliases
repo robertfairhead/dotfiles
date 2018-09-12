@@ -2,7 +2,6 @@ if [[ $OSTYPE == 'linux-gnu' ]]; then
   export OS="linux"
 
   alias ls='ls -F --color=auto'
-  alias l="less"
 
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
@@ -11,6 +10,13 @@ else
   export OS="osx"
 
   alias ls="ls -GF"
+fi
+
+if [[ $(which bat) ]]; then
+  alias l='bat --style="numbers,changes"'
+elif [[ $(which less) ]]; then
+  alias l="less"
+else
   alias l="more"
 fi
 

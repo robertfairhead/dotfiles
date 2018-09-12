@@ -1,6 +1,8 @@
-export MICRO_TRUECOLOR=1
 export GOPATH=$HOME/go
 
+export MICRO_TRUECOLOR=1
+
+export BAT_THEME="DarkNeon"
 
 ## For MacOS
 # 1.   directory - Bold Cyan
