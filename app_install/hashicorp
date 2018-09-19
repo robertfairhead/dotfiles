@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+die() {
+  echo "FATAL: $1"
+  exit 1
+}
+
+must_have() {
+    for dep in "$@"; do
+        which $dep >/dev/null || die "missing required utility: $dep"
+    done
+}
+
+hashicorp_install() {
+
+    local application="$1"
+    if [[ -z "$application" ]]; then
+        die "no application name supplied"
+    fi
+
+    if [[ ! "x86_64" == $(uname -m) ]]; then
+        echo "WARNING: Will retrieve amd64 bianaries!"
+    fi
+
+    local os="linux"
+    local shasum="sha256sum"
+
+    if [[ ! "GNU/Linux" == $(uname -o) ]]; then
+        echo "WARNING: Linux not detected. Downloading MacOS binaries"
+        os="darwin"
+        shasum="shasum -a 256"
+    fi
+
+    local tmp=$(mktemp -d)
+
+    pushd ${tmp} >/dev/null
+
+    # Check if we already have Hashicorp signing key
+    gpg -k "91A6 E7F8 5D05 C656 30BE F189 5185 2D87 348F FC4C" 2&> /dev/null
+    if [[ ! $? ]]; then
+        echo "INFO: Getting Hashicorp key from Keybase"
+        curl -sSfLO https://keybase.io/hashicorp/key.asc
+        gpg --import key.asc
+    fi
+
+
+    curl -sSfLO https://releases.hashicorp.com/index.json
+
+    local versions=".${application}.versions | to_entries | map_values(.value) | .[].version"
+    local latest=$(jq "${versions}" index.json | sort -rV | head -n 1 | cut -f 2 -d '"')
+
+    # Use specified version or fall back to the latest available
+    local version=${2:-$latest}
+
+    echo "INFO: Getting ${application} version ${version}"
+    if [[ $version != $latest ]]; then
+        echo "WARNING: Newer version ${latest} is available"
+    fi
+
+    local filter_base=".${application}.versions | to_entries | map_values(.value) | .[] | select(.version==\"${version}\")"
+    local dl_base="https://releases.hashicorp.com/${application}/${version}/"
+
+    # Get valid checksums
+    local checksums=$(jq "${filter_base} | .shasums" index.json | cut -f 2 -d '"')
+    local sig=$(jq "${filter_base} | .shasums_signature" index.json | cut -f 2 -d '"')
+
+    curl -sfLO "${dl_base}${checksums}"
+    curl -sfLO "${dl_base}${sig}"
+
+    gpg --verify "${sig}" "${checksums}" 2> hashicorp_verify
+    grep -q "91A6 E7F8 5D05 C656 30BE  F189 5185 2D87 348F FC4C" hashicorp_verify
+
+    # Get the compressed executable
+    local binary_filter="${filter_base} | .builds | map(select(.os==\"${os}\" and .arch==\"amd64\")) | .[0].url"
+    local remote_archive=$(jq "${binary_filter}" index.json | cut -f 2 -d '"')
+    curl -sfLO $(jq "${binary_filter}" index.json | cut -f 2 -d '"')
+
+    $shasum --ignore-missing --quiet --strict --check ${checksums}
+
+    unzip -qq $(basename ${remote_archive})
+    sudo mv ${application} /usr/local/bin
+
+    popd >/dev/null
+
+    rm -rf ${tmp}
+}
+
+must_have "gpg" "jq" "curl"
+
+hashicorp_install $@

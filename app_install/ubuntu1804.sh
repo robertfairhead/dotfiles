@@ -74,7 +74,7 @@ gpg --import code_signing_key.asc 2> /dev/null
 curl -sfO https://prerelease.keybase.io/keybase_amd64.deb.sig
 curl -sfLO https://prerelease.keybase.io/keybase_amd64.deb
 gpg --verify keybase_amd64.deb.sig 2> keybase_verify
-grep "222B 85B0 F90B E2D2 4CFE  B93F 4748 4E50 656D 16C7" keybase_verify
+grep -q "222B 85B0 F90B E2D2 4CFE  B93F 4748 4E50 656D 16C7" keybase_verify
 sudo dpkg -i keybase_amd64.deb || true
 sudo apt-get install -fy
 run_keybase
@@ -242,12 +242,11 @@ sudo snap install aws-cli --classic
 
 
 #***************
-# Terraform
+# Hashicorp utilities
 #***************
 
-curl -sfLO $(curl -sSf https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*64" | sort -rV | head -1 | cut -d'"' -f4)
-unzip terraform_*_linux_amd64.zip
-sudo mv terraform /usr/local/bin
+./hashicorp terraform 0.11.8
+./hashicorp packer 1.3.1
 
 #***************
 # Ansible
