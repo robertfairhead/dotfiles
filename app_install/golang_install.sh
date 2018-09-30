@@ -9,3 +9,5 @@ if [[ -d "/usr/local/go" ]]; then
 fi
 
 curl -sSL "https://storage.googleapis.com/golang/${GO_VERSION}.${OS}-amd64.tar.gz" | sudo tar -xz -C /usr/local
+
+mkdir -p $HOME/go/github.com/robertfairhead
