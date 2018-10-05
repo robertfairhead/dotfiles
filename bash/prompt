@@ -81,7 +81,7 @@ set_prompts() {
         git rev-parse --is-inside-work-tree &>/dev/null || return
 
         # Ensure the index is up to date.
-			  git update-index --really-refresh -q &>/dev/null;
+        git update-index --really-refresh -q &>/dev/null;
 
         # check for what branch we're on. (fast)
         #   if… HEAD isn’t a symbolic ref (typical branch),
@@ -99,10 +99,10 @@ set_prompts() {
         unadded=$(git diff --no-ext-diff --quiet --ignore-submodules || echo -e "?")
 
         # Check for uncommitted changes in the index.
-  			uncommited=$(git diff --cached --quiet --ignore-submodules || echo -e "!")
+        uncommited=$(git diff --cached --quiet --ignore-submodules || echo -e "!")
 
         # Check for untracked files.
-  			new=$([ -n "$(git ls-files --others --exclude-standard)" ] && echo -e "+" )
+        untracked=$([ -n "$(git ls-files --others --exclude-standard)" ] && echo -e "+" )
 
         # Check if I have un-pushed commits
         count=$(git rev-list --count --right-only @{u}.. 2> /dev/null)
@@ -114,7 +114,7 @@ set_prompts() {
           new=$(echo -e "∅");
         fi
 
-        echo -e "${1}${branchName}${2}$unadded$uncommited${3}$unpushed${4}$new";
+        echo -e "${1}${branchName}${2}${untracked}${unadded}${uncommited}${3}${unpushed}${4}${new}";
 
         return
     }
