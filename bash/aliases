@@ -54,6 +54,8 @@ alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -
 
 alias pacnew='find /etc -regextype posix-extended -regex ".+\.pac(new|save)" 2> /dev/null'
 
+alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | xclip -selection c'
+
 gosrc () {
   if [[ -d "$GOPATH/src/github.com/adhocteam" ]]; then
     cd "$GOPATH/src/github.com/adhocteam"
