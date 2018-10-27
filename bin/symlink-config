@@ -25,6 +25,7 @@ for program in $HOME/dotfiles/bin/*; do
   ln -sf $program $HOME/bin/$(basename $program)
 done
 
+## AWS credentials
 if [[ -f /keybase/private/fairhead/aws-config ]]; then
   mkdir -p $HOME/.aws
   chmod 700 $HOME/.aws
@@ -33,20 +34,52 @@ if [[ -f /keybase/private/fairhead/aws-config ]]; then
   chmod 600 $HOME/.aws/credentials
 fi
 
+## GPG
 mkdir -p .gnupg
 chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg/gpg.conf .gnupg/gpg.conf
 ln -sf $HOME/dotfiles/gpg/gpg-agent.conf .gnupg/gpg-agent.conf
 
+## Micro
 mkdir -p .config/micro
 ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
 ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
+## Alacritty
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
+## VS Code
 mkdir -p ${HOME}/.config/Code/User
 ln -sf $HOME/dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
 
 rm -rf "$HOME/.config/Code - OSS"
 ln -sf $HOME/.config/Code "$HOME/.config/Code - OSS"
+
+## Yay
+mkdir -p .config/yay
+ln -sf $HOME/dotfiles/yay.json $HOME/.config/yay/config.json
+
+## xinitrc
+ln -sf $HOME/dotfiles/i3/xinitrc $HOME/.xinitrc
+
+## i3
+mkdir -p .config/i3
+ln -sf $HOME/dotfiles/i3/i3.config $HOME/.config/i3/config
+
+## Polybar - Info bar on top
+mkdir -p .config/polybar
+ln -sf $HOME/dotfiles/i3/polybar.config $HOME/.config/polybar/config
+ln -sf $HOME/dotfiles/i3/launch.sh $HOME/.config/polybar/launch.sh
+
+## Redshift - Change color temp at night
+mkdir -p .config/redshift
+ln -sf $HOME/dotfiles/i3/redshift.conf $HOME/.config/redshift/redshift.conf
+
+## Dunst - Notification display
+mkdir -p .config/dunst
+ln -sf $HOME/dotfiles/i3/dunstrc $HOME/.config/dunst/dunstrc
+
+## Rofi - Application switcher
+mkdir -p .config/rofi
+ln -sf $HOME/dotfiles/i3/config.rasi $HOME/.config/rofi/config.rasi
