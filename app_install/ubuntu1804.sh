@@ -179,18 +179,12 @@ sudo mv usql /usr/local/bin/
 # Alacritty
 #***************
 
-## To be replaced soon with .deb install
+# As of now, the deb fails and requires a manual intervention to change it's requirement from libpng12-0 to libpng16-16
+curl -sfLo alacritty.deb $(curl -s https://api.github.com/repos/jwilm/alacritty/releases/latest | grep browser_download_url | grep deb | cut -f 4 -d '"')
+sudo dpkg -i alacritty.deb || true
+sudo apt install -fy
 
-# git clone https://github.com/jwilm/alacritty.git
-# sudo docker run --name rustc --rm -dit -v "$(pwd)":/apps rust bash
-# sudo docker exec rustc sh -c "apt-get update && apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip"
-# sudo docker exec rustc sh -c "cd /apps/alacritty && cargo build --release"
-# sudo docker stop rustc
-
-# cd alacritty
-# sudo cp target/release/alacritty /usr/local/bin/
-# sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' alacritty.desktop
-# sudo cp alacritty.desktop /usr/share/applications/
+sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' /usr/share/applications/alacritty.desktop
 
 #***************
 # Gnome Dash to Panel
