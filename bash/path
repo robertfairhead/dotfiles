@@ -10,4 +10,4 @@ else
   BREWPATH=""
 fi
 
-export PATH="${CONDAPATH}${BREWPATH}${PATH}:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$GOPATH/bin"
+export PATH="${CONDAPATH}${BREWPATH}${PATH}:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:/home/bob/go/bin"

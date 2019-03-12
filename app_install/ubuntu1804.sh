@@ -110,6 +110,18 @@ sudo apt update -qq && sudo apt-get install -y docker-ce
 sudo usermod -aG docker $(whoami)
 
 #***************
+# Docker Compose
+#***************
+
+curl -sfLO $( curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep "$(uname -s)-$(uname -m)" | head -n 1 | cut -f 4 -d '"')
+curl -sfLo docker-compose.sha256 $(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep "$(uname -s)-$(uname -m)" | tail -n 1 | cut -f 4 -d '"')
+sha256sum --status --ignore-missing -c docker-compose.sha256
+mv "docker-compose-$(uname -s)-$(uname -m)" docker-compose
+chmod +x docker-compose
+sudo mv docker-compose /usr/local/bin/docker-compose
+
+
+#***************
 # VSCode
 #***************
 

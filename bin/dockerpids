@@ -1,0 +1,32 @@
+
+#!/usr/bin/env bash
+pidlist() {
+  echo "$1"
+	local thispid=$1
+	local fulllist=
+	local childlist=
+	childlist=$(/bin/ps --ppid $thispid -o pid h)
+	for pid in $childlist
+	do
+		fulllist="$(pidlist $pid) $fulllist"
+	done
+	echo "$thispid $fulllist"
+}
+dockerpids() {
+	local fulllist=
+	local dockerpids="$(pidof containerd-shim)"
+	for p in ${dockerpids}
+	do
+		for q in $(/bin/ps --ppid $p -o pid h)
+		do
+      echo "$q"
+			fulllist="$(pidlist $q) $fulllist"
+		done
+	done
+	echo "$fulllist"
+}
+ary=($(dockerpids))
+DOCKER_PIDS=${ary[@]}
+/bin/ps -Ho etime,pid,ppid,user,cmd --pid ${DOCKER_PIDS// +/,} 2> /dev/null
+
+## h/t http://theodorejsalvo.com/post/2019/02/23/match-containers-to-host-processes/
