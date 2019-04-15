@@ -44,6 +44,8 @@ alias hexstruct="xxd -i"
 
 alias tcpconnections="sudo ss -lntp TCP"
 
+alias master="git checkout master && git pull"
+
 # Get a sum of the total size of a file/folder in human readable units:
 alias space="du -sh"
 

@@ -2,11 +2,19 @@
 
 set -euo pipefail
 
+cleanup () {
+  cd $HOME
+  sudo rm -rf /tmp/apps
+  sudo apt clean && sudo apt autoremove -y
+}
+
+trap cleanup EXIT
+
 sudo add-apt-repository ppa:papirus/papirus -y
 
 sudo apt update -y && sudo apt upgrade -y
 
-sudo apt remove -y ubuntu-web-launchers thunderbird \
+sudo apt remove -y --no-install-recommends ubuntu-web-launchers thunderbird \
                 telnet ufw avahi* popularity-contest \
                 aisleriot transmission-common transmission-gtk remmina remmina-common vino \
                 deja-dup gnome-user-share gedit gedit-common ubuntu-software gnome-software update-manager \
@@ -14,47 +22,23 @@ sudo apt remove -y ubuntu-web-launchers thunderbird \
                 gnome-calendar gnome-mahjongg gnome-mines gnome-online-accounts gnome-orca gnome-sudoku
 
 sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
-		curl git jq tmux xclip make htop \
+		curl git jq tmux xclip make htop neovim \
         flameshot \
         gnome-tweak-tool dconf-editor \
-        gnome-shell-extensions arc-theme papirus-icon-theme \
-        libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
-        libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
-        libstartup-notification0-dev libxcb-randr0-dev \
-        libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
-        libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
-        autoconf libxcb-xrm0 libxcb-xrm-dev automake
+        gnome-shell-extensions arc-theme papirus-icon-theme
 
 mkdir -p /tmp/apps
 cd /tmp/apps
 
 #***************
-# i3-gaps
-#***************
-
-git clone https://www.github.com/Airblader/i3 i3-gaps
-cd i3-gaps
-
-# compile & install
-autoreconf --force --install
-rm -rf build/
-mkdir -p build && cd build/
-
-# Disabling sanitizers is important for release versions!
-# The prefix and sysconfdir are, obviously, dependent on the distribution.
-../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make
-sudo make install
-
-#***************
 # Epson scanner software
 #***************
 
-curl -sfLO https://download2.ebz.epson.net/imagescanv3/ubuntu/latest1/deb/x64/imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
-tar xvzf imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
-cd imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb
-./install.sh
-cd ..
+# curl -sfLO https://download2.ebz.epson.net/imagescanv3/ubuntu/latest1/deb/x64/imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
+# tar xvzf imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb.tar.gz
+# cd imagescan-bundle-ubuntu-17.10-1.3.23.x64.deb
+# ./install.sh
+# cd ..
 
 #***************
 # Chrome
@@ -91,11 +75,11 @@ run_keybase
 # Simplenote
 #***************
 
-curl -sfLo simplenote.deb $(curl -s https://api.github.com/repos/Automattic/simplenote-electron/releases/latest | grep browser_download_url | grep \.deb | cut -f 4 -d '"')
+curl -sfLo simplenote.deb $(curl -s https://api.github.com/repos/Automattic/simplenote-electron/releases/latest | grep browser_download_url | grep amd64\.deb | cut -f 4 -d '"')
 sudo dpkg -i simplenote.deb || true
 sudo apt install -fy
 
-#***************
+#***************kj
 # Docker
 #***************
 
@@ -134,9 +118,9 @@ sudo apt install -fy
 # Etcher
 #***************
 
-echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | sudo tee /etc/apt/sources.list.d/etcher.list
+echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-sudo apt update -qq && sudo apt install -y etcher-electron
+sudo apt update -qq && sudo apt install -y balena-etcher-electron
 
 #***************
 # Exa
@@ -188,15 +172,23 @@ tar -vxjf usql.tar.bz2 > /dev/null
 sudo mv usql /usr/local/bin/
 
 #***************
+# psql
+#***************
+
+sudo apt install postgresql-client -y --no-install-recommends
+
+#***************
 # Alacritty
 #***************
 
-# As of now, the deb fails and requires a manual intervention to change it's requirement from libpng12-0 to libpng16-16
-curl -sfLo alacritty.deb $(curl -s https://api.github.com/repos/jwilm/alacritty/releases/latest | grep browser_download_url | grep deb | cut -f 4 -d '"')
-sudo dpkg -i alacritty.deb || true
-sudo apt install -fy
+sudo add-apt-repository -y ppa:system76/pop
+sudo apt-get update -y
+sudo apt install -y --no-install-recommends alacritty
 
-sed -i 's/^Exec=alacritty/Exec=alacritty --command tmux/g' /usr/share/applications/alacritty.desktop
+# As of now, the deb fails and requires a manual intervention to change it's requirement from libpng12-0 to libpng16-16
+# curl -sfLo alacritty.deb $(curl -s https://api.github.com/repos/jwilm/alacritty/releases/latest | grep browser_download_url | grep deb | cut -f 4 -d '"')
+# sudo dpkg -i alacritty.deb || true
+# sudo apt install -fy
 
 #***************
 # Gnome Dash to Panel
@@ -234,13 +226,6 @@ sudo apt update && sudo apt install peek -y
 #***************
 
 #***************
-# Heroku CLI
-#***************
-
-curl -sSf https://cli-assets.heroku.com/install-ubuntu.sh | sudo bash
-sudo apt install postgresql-client -y --no-install-recommends
-
-#***************
 # AWS CLI
 #***************
 
@@ -251,8 +236,8 @@ sudo snap install aws-cli --classic
 # Hashicorp utilities
 #***************
 
-./hashicorp terraform 0.11.8
-./hashicorp packer 1.3.1
+#hashicorp terraform
+hashicorp packer
 
 #***************
 # Ansible
@@ -267,17 +252,9 @@ pip install boto boto3
 # Yarn
 #***************
 
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get update && sudo apt-get install yarn -y
-
-#***************
-# Clean up
-#***************
-
-cd $HOME
-sudo rm -rf /tmp/apps
-sudo apt clean && sudo apt autoremove -y
+# curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+# echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+# sudo apt-get update && sudo apt-get install yarn -y
 
 #***************
 # Randomize MAC addresses
@@ -327,7 +304,7 @@ gsettings set org.gnome.desktop.media-handling autorun-never true
 gsettings set org.gnome.shell enable-hot-corners false
 gsettings set org.gnome.desktop.interface clock-format 12h
 gsettings set org.gnome.desktop.interface clock-show-date true
-
+gsettings set org.gnome.mutter auto-maximize false
 
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up', '<Control><Alt>Up', '<Control><Alt>Left']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down', '<Control><Alt>Down', '<Control><Alt>Right']"

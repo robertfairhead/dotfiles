@@ -1,14 +1,16 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
 # Deprecated env section
+env:
+  WINIT_HIDPI_FACTOR: 1.0
 
 window:
   # Window dimensions in character columns and lines
   # Falls back to size specified by window manager if set to 0x0.
   # (changes require restart)
   dimensions:
-    columns: 140
-    lines: 50
+    columns: 87
+    lines: 60
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -16,6 +18,9 @@ window:
   padding:
     x: 2
     y: 2
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: false
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
@@ -238,8 +243,8 @@ live_config_reload: true
 #
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
-# shell:
-#   program: /bin/bash
+shell:
+  program: tmux
 #   args:
 #     - --login
 
