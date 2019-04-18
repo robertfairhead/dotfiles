@@ -18,6 +18,8 @@
 
   conflicts = diff --name-only --diff-filter=U
 
+  prdiff = difftool origin/master
+
 [user]
   name = Robert Fairhead
   email = bob@adhocteam.us
@@ -63,6 +65,19 @@
 
   # get word level highlights in diffs
   pager = diff-so-fancy | less
+
+[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gvdiff\" \"$MERGED\"
+[difftool]
+  prompt = false
+[diff]
+  tool = nvim
 
 [fetch]
     prune = true
