@@ -39,6 +39,7 @@ depends=(
     'lxrandr-gtk3'
     'micro'
     'nautilus'
+    'neovim'
     'network-manager-applet'
     'networkmanager'
     'nmap'
