@@ -2,7 +2,7 @@
 
 pkgname=bob-base
 pkgver=1
-pkgrel=1
+pkgrel=2
 pkgdesc='My base collection of software to install'
 arch=('any')
 url='https://github.com/robertfairhead/dotfiles'
@@ -18,7 +18,7 @@ depends=(
     'docker'
     'dunst'
     'efibootmgr'
-    'etcher'
+    'etcher-bin'
     'exa-git'
     'expac-git'
     'fd'
@@ -42,6 +42,7 @@ depends=(
     'network-manager-applet'
     'networkmanager'
     'nmap'
+    'neovim'
     'openssh'
     'pacman-contrib'
     'papirus-icon-theme'

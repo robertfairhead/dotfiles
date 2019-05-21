@@ -26,7 +26,6 @@
   // Enable usage data and errors to be sent to Microsoft.
   "telemetry.enableTelemetry": false,
 
-  "workbench.iconTheme": "vscode-icons",
   "workbench.colorTheme": "Ayu Dark",
   "window.zoomLevel": 0,
 
