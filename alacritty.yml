@@ -1,8 +1,8 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
 
 # Deprecated env section
-env:
-  WINIT_HIDPI_FACTOR: 1.0
+# env:
+  # TERM: "screen-256color"
 
 window:
   # Window dimensions in character columns and lines
