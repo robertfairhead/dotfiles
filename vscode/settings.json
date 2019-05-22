@@ -34,5 +34,6 @@
 
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "go.useLanguageServer": true
 }

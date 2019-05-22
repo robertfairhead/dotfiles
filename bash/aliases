@@ -74,5 +74,5 @@ compress_img () {
 }
 
 docker-here () {
-  docker run -it --rm -v "$(pwd):/src" -w "/src" $1 bash
+  docker run -it --rm -v "$(pwd):/src" -w "/src" -u $(id -u):$(id -g) --entrypoint "" $1 bash
 }
