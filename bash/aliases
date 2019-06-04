@@ -31,7 +31,9 @@ fi
 
 alias rmd="rm -rf"
 
-if [[ $(which code) ]]; then
+if [[ $(command -v nvim) ]]; then
+  alias edit="nvim"
+elif [[ $(which code) ]]; then
   alias edit="code"
 elif [[ $(which micro) ]]; then
   alias edit="micro"

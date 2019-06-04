@@ -15,6 +15,7 @@ Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim' 
 Plug 'elzr/vim-json'
 Plug 'godlygeek/tabular'
+Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'plasticboy/vim-markdown'
 Plug 'stephpy/vim-yaml'
@@ -67,6 +68,11 @@ let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 "Prevent setting conceal
 let g:vim_json_syntax_conceal = 0
+
+" Terraform
+" Prevent fmt on save since ale does it
+let g:terraform_fmt_on_save=1
+
 """""
 " Key bindings
 """""
