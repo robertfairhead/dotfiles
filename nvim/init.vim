@@ -109,6 +109,8 @@ nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
+" File selection
+nnoremap <leader>e :Explore<cr>
 
 """"
 " General settings
@@ -173,4 +175,6 @@ if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
   set t_Co=16
 endif
 " Prevent creation of .netrwhist files
-:let g:netrw_dirhistmax = 0
+let g:netrw_dirhistmax = 0
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0

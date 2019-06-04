@@ -59,7 +59,7 @@
 [core]
   excludesfile = ~/.gitignore_global
   autocrlf = input
-  editor = micro
+  editor = nvim
   # Don't prompt for commit message on merge commits
   mergeoptions = --no-edit
 
