@@ -17,6 +17,7 @@ Plug 'elzr/vim-json'
 Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'modille/groovy.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'stephpy/vim-yaml'
 Plug 'tpope/vim-surround'
@@ -44,8 +45,10 @@ let g:ale_fixers = {
 
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 
 " Statusline
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline_section_a = ''
 let g:airline_section_b = '%{FugitiveHead()}'
@@ -92,6 +95,8 @@ nnoremap <silent> <leader>ec :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 " Move between buffers
 nnoremap <silent> <leader><leader> :bprevious<CR>
+" Close current buffer
+nnoremap <silent> <leader>w :bd<cr>
 " Searching
 nnoremap <silent> <leader>c :nohlsearch<CR>
 nnoremap <leader>s :%s//g<Left><Left>
@@ -178,3 +183,8 @@ endif
 let g:netrw_dirhistmax = 0
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
+
+" Set default indent to 2 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
