@@ -43,7 +43,9 @@ for bashcmp in $HOME/dotfiles/completions/*.bash-completion; do
   source $bashcmp
 done
 
-if [[ $(which micro) ]]; then
+if [[ $(command -v nvim) ]]; then
+  export EDITOR=nvim
+elif [[ $(commend -v micro) ]]; then
   export EDITOR=micro
 else
   export EDITOR=nano
