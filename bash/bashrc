@@ -42,12 +42,3 @@ source $HOME/dotfiles/bash/env
 for bashcmp in $HOME/dotfiles/completions/*.bash-completion; do
   source $bashcmp
 done
-
-if [[ $(command -v nvim) ]]; then
-  export EDITOR=nvim
-elif [[ $(commend -v micro) ]]; then
-  export EDITOR=micro
-else
-  export EDITOR=nano
-fi
-

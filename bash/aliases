@@ -31,8 +31,8 @@ fi
 
 alias rmd="rm -rf"
 
-if [[ $(command -v nvim) ]]; then
-  alias edit="nvim"
+if [[ $(command -v vim) ]]; then
+  alias edit="vim"
 elif [[ $(which code) ]]; then
   alias edit="code"
 elif [[ $(which micro) ]]; then
@@ -55,6 +55,8 @@ alias space="du -sh"
 alias lsspace="du -k"
 
 alias ps="ps aux"
+
+alias password="tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n1"
 
 alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -it -p 127.0.0.1:4000:4000 jekyll/jekyll jekyll serve"
 

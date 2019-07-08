@@ -59,7 +59,7 @@
 [core]
   excludesfile = ~/.gitignore_global
   autocrlf = input
-  editor = nvim
+  editor = vim
   # Don't prompt for commit message on merge commits
   mergeoptions = --no-edit
 
@@ -71,13 +71,13 @@
 [mergetool]
   prompt = false
 [mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[mergetool "nvim"]
-  cmd = nvim -f -c \"Gvdiff\" \"$MERGED\"
+  cmd = vim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "vim"]
+  cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
 [difftool]
   prompt = false
 [diff]
-  tool = nvim
+  tool = vim
 
 [fetch]
     prune = true

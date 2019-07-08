@@ -11,6 +11,7 @@ cleanup () {
 trap cleanup EXIT
 
 sudo add-apt-repository ppa:papirus/papirus -y
+sudo add-apt-repository ppa:jonathonf/vim -y
 
 sudo apt update -y && sudo apt upgrade -y
 
@@ -22,7 +23,7 @@ sudo apt remove -y --no-install-recommends ubuntu-web-launchers thunderbird \
                 gnome-calendar gnome-mahjongg gnome-mines gnome-online-accounts gnome-orca gnome-sudoku
 
 sudo apt install -y apt-transport-https ubuntu-restricted-extras ca-certificates \
-		curl git jq tmux xclip make htop neovim \
+		curl git jq tmux xclip make htop vim vim-gnome \
         flameshot \
         gnome-tweak-tool dconf-editor \
         gnome-shell-extensions arc-theme papirus-icon-theme
@@ -155,6 +156,14 @@ sudo dpkg -i bat.deb || true
 sudo apt install -fy
 
 #***************
+# Dive
+#***************
+# All releases are pre-release so this doesn't work yet
+# curl -sfLo bat.deb $(curl -s https://api.github.com/repos/wagoodman/dive/releases/latest | grep browser_download_url | grep dive.*amd64\.deb | cut -f 4 -d '"')
+# sudo apt install -fy
+# sudo cp dive /usr/local/bin
+
+#***************
 # Micro
 #***************
 
@@ -184,11 +193,6 @@ sudo apt install postgresql-client -y --no-install-recommends
 sudo add-apt-repository -y ppa:system76/pop
 sudo apt-get update -y
 sudo apt install -y --no-install-recommends alacritty
-
-# As of now, the deb fails and requires a manual intervention to change it's requirement from libpng12-0 to libpng16-16
-# curl -sfLo alacritty.deb $(curl -s https://api.github.com/repos/jwilm/alacritty/releases/latest | grep browser_download_url | grep deb | cut -f 4 -d '"')
-# sudo dpkg -i alacritty.deb || true
-# sudo apt install -fy
 
 #***************
 # Gnome Dash to Panel
@@ -230,7 +234,6 @@ sudo apt update && sudo apt install peek -y
 #***************
 
 sudo snap install aws-cli --classic
-
 
 #***************
 # Hashicorp utilities
@@ -316,7 +319,7 @@ dconf write /org/gnome/shell/extensions/dash-to-panel/panel-size 48
 dconf write /org/gnome/shell/extensions/dash-to-panel/appicon-margin 2
 
 #***************
-# Set touchpad middle clickk to emulate left click instead
+# Set touchpad middle click to emulate left click instead
 #***************
 echo 'Section "InputClass"
     Identifier  "SynPS/2 Synaptics TouchPad"

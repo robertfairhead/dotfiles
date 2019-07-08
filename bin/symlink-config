@@ -45,8 +45,9 @@ mkdir -p .config/micro
 ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
 ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
-## Neovim
-ln -snf $HOME/dotfiles/nvim $HOME/.config/nvim
+## Vim
+ln -snf $HOME/dotfiles/vimrc $HOME/.vimrc
+mkdir -p $HOME/.vim/tmp
 
 ## Alacritty
 mkdir -p .config/alacritty
