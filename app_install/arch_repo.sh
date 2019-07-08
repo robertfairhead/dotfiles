@@ -3,7 +3,7 @@
 set -euo pipefail
 
 check_yay() {
-    if ! command -v yay >/dev/null;
+    if ! command -v yay >/dev/null; then
         echo "Installing yay"
 
         local tmp=$(mktemp -d)
