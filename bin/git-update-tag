@@ -1,0 +1,31 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+if [[ -z "${1}" ]]; then
+    echo "No tag name supplied. Use like git update-tag tagname"
+    exit 1
+fi
+
+if ! git tag --list | grep -vq "${1}"; then 
+    echo "${1} is not a current tag" 
+    exit 1
+fi
+
+if ! git ls-remote --exit-code --tags origin "${1}" &>/dev/null; then 
+    echo "${1} is not a tag on your remote origin (e.g., GitHub)"
+    exit 1
+fi
+
+msg="$(git tag -n ${1} | cut -f 1 -d ' ' --complement | awk '{$1=$1;print}')"
+
+echo "Replacing ${1} (${msg}) on local and remote (e.g., GitHub)"
+
+# Delete existing tag on GitHub
+git push origin master ":refs/tags/${1}"
+
+# Overwrite out local tag. Will pop-up editor to change message
+git tag -fa "${1}" -m "${msg}"
+
+# Push changes to GitHub
+git push origin --tags
+

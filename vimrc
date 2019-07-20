@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
 Plug 'ayu-theme/ayu-vim'
 Plug 'cespare/vim-toml'
 Plug 'chr4/nginx.vim'
@@ -19,6 +20,7 @@ Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'modille/groovy.vim'
+Plug 'myitcv/govim'
 Plug 'plasticboy/vim-markdown'
 Plug 'stephpy/vim-yaml'
 Plug 'tpope/vim-surround'
@@ -97,7 +99,7 @@ nnoremap <leader>q :qa<CR>
 " Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
 nnoremap <silent> <leader>ec :e $MYVIMRC<CR>
 " Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
-nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
+nnoremap <silent> <leader>rc :source $MYVIMRC<CR>
 " Move between buffers
 nnoremap <silent> <leader><leader> :bprevious<CR>
 nnoremap <silent> <leader><CR> :bn<CR>
@@ -106,6 +108,8 @@ nnoremap <silent> <leader>w :bd<cr>
 " Searching
 nnoremap <silent> <leader>c :nohlsearch<CR>
 nnoremap <leader>s :%s//g<Left><Left>
+" Search and replace over all files in quickfix, e.g., from RipGrep
+nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 " Copy/paste to clipboard
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
@@ -133,6 +137,20 @@ if executable("rg")
 endif
 command! -nargs=+ RipGrep execute 'silent grep! <args>' | copen 12
 nnoremap <leader>g :RipGrep<space>
+
+""""
+" Spellcheck
+" [s and ]s to move forward and back. z= for suggestions
+""""
+function! ToggleSpellCheck()
+  setlocal spell! spelllang=en_us 
+  if &syntax !=# 'OFF' && &spell
+      setlocal syntax=OFF
+  else
+      syntax enable
+  endif
+endfunction
+nnoremap <silent> <leader>sc :call ToggleSpellCheck()<CR> 
 
 """"
 " General settings
@@ -205,6 +223,8 @@ let g:netrw_dirhistmax = 0
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
+set nobackup
+set nowritebackup
 " Put all swap files in one place
 set directory^=$HOME/.vim/tmp//
 
@@ -212,3 +232,6 @@ set directory^=$HOME/.vim/tmp//
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Short updatetime time for govim are more responsive for quickfixlist
+set updatetime=500
