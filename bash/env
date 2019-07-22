@@ -5,3 +5,5 @@ export MICRO_TRUECOLOR=1
 export BAT_THEME="DarkNeon"
 
 export WINIT_HIDPI_FACTOR=1.0
+
+export AWS_SDK_LOAD_CONFIG=1

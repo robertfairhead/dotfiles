@@ -239,17 +239,17 @@ sudo snap install aws-cli --classic
 # Hashicorp utilities
 #***************
 
-#hashicorp terraform
+hashicorp terraform
 hashicorp packer
 
 #***************
 # Ansible
 #***************
 
-sudo apt-add-repository ppa:ansible/ansible -y
-sudo apt update
-sudo apt install ansible python-pip -y
-pip install boto boto3
+# sudo apt-add-repository ppa:ansible/ansible -y
+# sudo apt update
+# sudo apt install ansible python-pip -y
+# pip install boto boto3
 
 #***************
 # Yarn
