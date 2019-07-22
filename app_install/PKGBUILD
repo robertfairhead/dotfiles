@@ -15,6 +15,7 @@ depends=(
     'autorandr'
     'bat'
     'bind-tools'
+    'dive'
     'docker'
     'dunst'
     'efibootmgr'
