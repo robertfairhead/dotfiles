@@ -64,6 +64,9 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%l:%c'
 
+"Vim-Rooter
+let g:rooter_silent_chdir = 1
+
 " GitGutter
 if exists('&signcolumn')
     set signcolumn=yes

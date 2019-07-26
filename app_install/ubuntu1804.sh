@@ -286,7 +286,7 @@ sudo sed -i 's/background: #2c001e/background: #000000/' /usr/share/gnome-shell/
 # Additional settings
 #***************
 
-gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'alacritty.desktop', 'code.desktop', 'slack_slack.desktop']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'firefox.desktop', 'google-chrome.desktop', 'com.alacritty.Alacritty.desktop', 'slack_slack.desktop']"
 
 gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'Settings' ,'System', 'Multimedia']"
 gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ categories "['X-GNOME-Utilities', 'Utility']"
