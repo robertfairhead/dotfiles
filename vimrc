@@ -122,6 +122,8 @@ nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 nnoremap <Up> <nop>
 nnoremap <Down> <nop>
+" Disable q from starting macro mode
+nnoremap q <nop>
 " Easier movement between splits
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
