@@ -237,6 +237,7 @@ set directory^=$HOME/.vim/tmp//
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set shiftround
 
 " Short updatetime time for govim are more responsive for quickfixlist
 set updatetime=500
