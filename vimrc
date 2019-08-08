@@ -111,8 +111,6 @@ nnoremap <silent> <leader>w :bd<cr>
 " Searching
 nnoremap <silent> <leader>c :nohlsearch<CR>
 nnoremap <leader>s :%s//g<Left><Left>
-" Search and replace over all files in quickfix, e.g., from RipGrep
-nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 " Copy/paste to clipboard
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
@@ -142,6 +140,9 @@ if executable("rg")
 endif
 command! -nargs=+ RipGrep execute 'silent grep! <args>' | copen 12
 nnoremap <leader>g :RipGrep<space>
+
+" Search and replace over all files in quickfix, e.g., from RipGrep
+nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 
 """"
 " Spellcheck

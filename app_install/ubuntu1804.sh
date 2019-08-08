@@ -325,3 +325,8 @@ echo 'Section "InputClass"
     Identifier  "SynPS/2 Synaptics TouchPad"
     Option  "ButtonMapping" "1 1 3 4 5 6 7"
 EndSection' | sudo tee /usr/share/X11/xorg.conf.d/99-no-middle-button-touchpad.conf
+
+echo 'Section "InputClass"
+    Identifier  "SynPS/2 Synaptics TouchPad"
+    Option "NaturalScrolling" "true"
+EndSection' | sudo tee /usr/share/X11/xorg.conf.d/90-natural-scrolling.conf
