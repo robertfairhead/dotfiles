@@ -47,7 +47,7 @@ ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
 ## Vim
 ln -snf $HOME/dotfiles/vimrc $HOME/.vimrc
-mkdir -p $HOME/.vim/tmp
+mkdir -p $HOME/.vim/{swap,undodir,backup,tmp}
 
 ## Alacritty
 mkdir -p .config/alacritty

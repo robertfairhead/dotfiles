@@ -9,7 +9,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'ayu-theme/ayu-vim'
 Plug 'cespare/vim-toml'
@@ -20,6 +19,7 @@ Plug 'godlygeek/tabular'
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'modille/groovy.vim'
+Plug 'mhinz/vim-signify'
 Plug 'myitcv/govim'
 Plug 'plasticboy/vim-markdown'
 Plug 'stephpy/vim-yaml'
@@ -67,12 +67,10 @@ let g:airline_section_z = '%l:%c'
 "Vim-Rooter
 let g:rooter_silent_chdir = 1
 
-" GitGutter
-if exists('&signcolumn')
-    set signcolumn=yes
-else
-    let g:gitgutter_sign_column_always = 1
-endif
+" Signify
+set signcolumn=yes
+let g:signify_vcs_list = [ 'git' ]
+
 " Markdown
 let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_folding_disabled = 1
@@ -99,10 +97,8 @@ inoremap jk <Esc>
 
 " Quick way out of all buffers when using merge tool
 nnoremap <leader>q :qa<CR>
-" Shortcut to edit THIS configuration file: (e)dit (c)onfiguration
+" Shortcut to edit THIS configuration file and automatically reload it
 nnoremap <silent> <leader>ec :e $MYVIMRC<CR>
-" Shortcut to source (reload) THIS configuration file after editing it: (s)ource (c)onfiguraiton
-nnoremap <silent> <leader>rc :source $MYVIMRC<CR>
 " Move between buffers
 nnoremap <silent> <leader><leader> :bprevious<CR>
 nnoremap <silent> <leader><CR> :bn<CR>
@@ -144,19 +140,28 @@ nnoremap <leader>g :RipGrep<space>
 " Search and replace over all files in quickfix, e.g., from RipGrep
 nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 
+"""""
+" Autogroups
+"""""
+augroup vimrc_defaults
+    autocmd!
+    autocmd bufwritepost .vimrc source ~/.vimrc
+    autocmd BufWritePre * if ! &bin | silent! %s/\s\+$//ge | endif
+augroup END
+
 """"
 " Spellcheck
 " [s and ]s to move forward and back. z= for suggestions
 """"
 function! ToggleSpellCheck()
-  setlocal spell! spelllang=en_us 
+  setlocal spell! spelllang=en_us
   if &syntax !=# 'OFF' && &spell
       setlocal syntax=OFF
   else
       syntax enable
   endif
 endfunction
-nnoremap <silent> <leader>sc :call ToggleSpellCheck()<CR> 
+nnoremap <silent> <leader>sc :call ToggleSpellCheck()<CR>
 
 """"
 " General settings
@@ -229,10 +234,6 @@ let g:netrw_dirhistmax = 0
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
-set nobackup
-set nowritebackup
-" Put all swap files in one place
-set directory^=$HOME/.vim/tmp//
 
 " Set default indent to 4 spaces
 set tabstop=4
@@ -242,3 +243,25 @@ set shiftround
 
 " Short updatetime time for govim are more responsive for quickfixlist
 set updatetime=500
+
+" Inspired by https://begriffs.com/posts/2019-07-19-history-use-vim.html
+" Protect changes between writes.
+set swapfile
+set directory^=~/.vim/swap//
+
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
+set nobackup
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+" consolidate the writebackups -- not a big
+" deal either way, since they usually get deleted
+    set backupdir^=~/.vim/backup//
+end
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/undo//
