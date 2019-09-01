@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function docker_running {
+    local DOCKER_RUNNING=$( docker ps | wc -l)
+
+
+    if [[ DOCKER_RUNNING -gt 1 ]]; then
+        echo ""
+    else
+        echo ""
+    fi
+
+}
+
+docker_running

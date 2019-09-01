@@ -42,6 +42,7 @@ depends=(
     'lxrandr-gtk3'
     'micro'
     'nautilus'
+    'nerd-fonts-complete'
     'network-manager-applet'
     'networkmanager'
     'nmap'
