@@ -47,15 +47,15 @@ ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
 ## Vim
 ln -snf $HOME/dotfiles/vimrc $HOME/.vimrc
-mkdir -p $HOME/.vim/{swap,undodir,backup,tmp}
+mkdir -p $HOME/.vim/{swap,undo,backup,tmp}
 
 ## Alacritty
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 ## VS Code
-mkdir -p ${HOME}/.config/Code/User
-ln -sf $HOME/dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
+#mkdir -p ${HOME}/.config/Code/User
+#ln -sf $HOME/dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
 
 ## Yay
 mkdir -p .config/yay

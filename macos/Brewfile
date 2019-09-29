@@ -1,0 +1,42 @@
+tap "homebrew/cask"
+tap "caskroom/fonts"
+
+cask_args appdir: "/Applications"
+
+cask "font-source-code-pro"
+cask "alacritty"
+
+brew "coreutils"
+brew "diffutils"
+brew "findutils"
+brew "ed"
+brew "gawk"
+brew "gnu-sed"
+brew "gnu-which"
+brew "grep"
+brew "less"
+brew "m4"
+brew "make"
+
+brew "gzip"
+brew "gnu-tar"
+brew "unzip"
+
+brew "bash"
+brew "tmux"
+
+brew "nano"
+brew "vim"
+
+brew "git"
+
+brew "jq"
+brew "bat"
+brew "exa"
+brew "ripgrep"
+brew "fd"
+brew "htop"
+cask "balenaetcher"
+
+cask "docker"
+brew "go"
