@@ -1,5 +1,5 @@
 # Use Vi, not Emacs, style editing
-set editing-mode vi
+# set editing-mode vi
 
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
@@ -35,16 +35,20 @@ set output-meta on
 set convert-meta off
 
 # Display an indicator of which mode we are in
-set show-mode-in-prompt on
-set vi-ins-mode-string
+# set show-mode-in-prompt on
+# set vi-ins-mode-string
 
 # Keymaps for when we're in command mode (e.g., after hitting ESC)
-set keymap vi-command
+# set keymap vi-command
+
+# Flip through autocompletion matches with Shift-Tab.
+"\e[Z": menu-complete
 
 # Filtered history search
 #Up Arrow
 "\e[A": history-search-backward
-"k": history-search-backward
-# Down Arrowk
+# Down Arrow
 "\e[B": history-search-forward
-"j": history-search-backward
+
+# Control Left Arrow
+"\e[1;5D": kill-whole-line

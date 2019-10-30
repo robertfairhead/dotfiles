@@ -29,6 +29,8 @@ brew "nano"
 brew "vim"
 
 brew "git"
+cask "wireshark"
+cask "balenaetcher"
 
 brew "jq"
 brew "bat"
@@ -36,7 +38,21 @@ brew "exa"
 brew "ripgrep"
 brew "fd"
 brew "htop"
-cask "balenaetcher"
 
 cask "docker"
 brew "go"
+brew "node"
+
+cask "aptible"
+brew "gpg2"
+brew "chruby"
+brew "ruby-install"
+
+cask "little-snitch"
+cask "slack"
+cask "zoomus"
+cask "encryptme"
+
+# mas can only reinstall once added to account
+mas "1Password", id: 1333542190
+# mas "ScreenshotMenu", id: 562169322

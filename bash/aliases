@@ -46,8 +46,6 @@ alias hexstruct="xxd -i"
 
 alias tcpconnections="sudo ss -lntp TCP"
 
-alias master="git checkout master && git pull"
-
 # Get a sum of the total size of a file/folder in human readable units:
 alias space="du -sh"
 
@@ -60,15 +58,16 @@ alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -
 
 alias pacnew='find /etc -regextype posix-extended -regex ".+\.pac(new|save)" 2> /dev/null'
 
-alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | head -n -7 | tail -n +5 | xclip -selection c'
+alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | head -n -7 | tail -n +5 | copy2clip'
 
-gosrc () {
-  if [[ -d "$GOPATH/src/github.com/adhocteam" ]]; then
-    cd "$GOPATH/src/github.com/adhocteam"
-    return 0
-  fi
+alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 
-  cd "$GOPATH/src/github.com/robertfairhead"
+master () {
+    git checkout master
+    git pull
+    if [[ $(git ls-remote --heads upstream master 2>/dev/null) > 0 ]]; then
+        git pull --rebase upstream master
+    fi
 }
 
 compress_img () {
@@ -78,3 +77,4 @@ compress_img () {
 docker-here () {
   docker run -it --rm -v "$(pwd):/src" -w "/src" -u $(id -u):$(id -g) --entrypoint "" $1 bash
 }
+

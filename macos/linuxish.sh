@@ -7,13 +7,19 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Check for Homebrew,
 # Install if we don't have it
-if test ! $(which brew); then
+if ! command -v brew &>/dev/null; then
     echo "Installing homebrew..."
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 brew update
 brew upgrade
+
+if ! command -v mas &>/dev/null; then
+    echo "Install mas-cli for reinstalling App Store apps"
+    brew install mas
+fi
+
 brew bundle
 brew cleanup
 
@@ -32,7 +38,7 @@ if ! infocmp alacritty &>/dev/null; then
     rm -f /tmp/alacritty.info
 fi
 
-bins=(dircolors sed make tr)
+bins=(dircolors sed make tr fold)
 
 for bin in ${bins[@]}; do
     sudo ln -sf /usr/local/bin/g${bin} /usr/local/bin/${bin}
