@@ -46,10 +46,11 @@ colorscheme ayu
 let g:ale_linters_explicit = 1
 
 let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'markdown': ['prettier'],
             \   'javascript': ['prettier'],
             \   'python': ['black'],
             \ }
-
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
@@ -87,7 +88,8 @@ let g:terraform_fmt_on_save=1
 """""
 " Key bindings
 """""
-
+" Let :W also save since my fingers are lazy
+command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
 " change the leader key from "\" to the space bar
 let mapleader="\<SPACE>"
 
@@ -140,13 +142,22 @@ nnoremap <leader>g :RipGrep<space>
 " Search and replace over all files in quickfix, e.g., from RipGrep
 nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 
+" Toggle signcolumn for easier mouse-based copy
+function! SignColumnToggle()
+    if &signcolumn == "yes"
+        setlocal signcolumn=no
+    else
+        setlocal signcolumn=yes
+    endif
+endfunction
+nnoremap <leader>ns :call SignColumnToggle()<cr>
+
 """""
 " Autogroups
 """""
 augroup vimrc_defaults
     autocmd!
     autocmd bufwritepost .vimrc source ~/.vimrc
-    autocmd BufWritePre * if ! &bin | silent! %s/\s\+$//ge | endif
 augroup END
 
 """"

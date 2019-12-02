@@ -274,7 +274,7 @@ shell:
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
   - { key: C, mods: Control|Shift, action: Copy }
-  - { key: N, mods: Command, command: { program: "open", args: ["-nb", "io.alacritty"] } }
+  - { key: N, mods: Command, action: SpawnNewInstance }
   - { key: Q, mods: Command, action: Quit }
   - { key: W, mods: Command, action: Quit }
   - { key: Insert, mods: Shift, action: PasteSelection }
