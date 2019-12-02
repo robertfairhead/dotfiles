@@ -5,6 +5,7 @@ cask_args appdir: "/Applications"
 
 cask "font-source-code-pro"
 cask "alacritty"
+cask "amethyst"
 
 brew "coreutils"
 brew "diffutils"
@@ -17,6 +18,7 @@ brew "grep"
 brew "less"
 brew "m4"
 brew "make"
+brew "pstree"
 
 brew "gzip"
 brew "gnu-tar"
@@ -42,6 +44,7 @@ brew "htop"
 cask "docker"
 brew "go"
 brew "node"
+brew "postgresql@9.6"
 
 cask "aptible"
 brew "gpg2"
