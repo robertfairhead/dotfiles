@@ -39,12 +39,7 @@ make_local_repo() {
 
     check_yay
 
-    local package=$(compgen -G "*.pkg.tar.xz")
-
-    if [[ -z "${package}" ]]; then
-        create_pkg
-        package=$(compgen -G "*.pkg.tar.xz")
-    fi
+    create_pkg
 
     local repo_dir="$HOME/.local/lib/bob-base"
     local repo_file="${repo_dir}/bob-base.db.tar.gz"
@@ -54,8 +49,8 @@ make_local_repo() {
         rm -f "${repo_file}"
     fi
 
-    repo-add "${repo_file}" "${package}"
-    cp "${package}" "${repo_dir}"
+    repo-add "${repo_file}" *.pkg.tar.xz
+    mv *.pkg.tar.xz "${repo_dir}"
 
     if grep -q "bob-base" /etc/pacman.conf; then
         return 0
@@ -63,10 +58,6 @@ make_local_repo() {
         sudo cp /etc/pacman.conf /etc/pacman.conf.old
         echo -e "[bob-base]\nSigLevel = Optional TrustAll\nServer = file:///${repo_dir}/" | sudo tee -a /etc/pacman.conf
     fi
-
-    echo "Installing with yay -S bob-base"
-    yay
-    yay -S bob-base
 }
 
 make_local_repo

@@ -1,81 +1,128 @@
 # Maintainer: Robert Fairhead
+pkgbase=bob
+pkgname=('bob-base' 'bob-db' 'bob-docker' 'bob-fonts' 'bob-i3' 'bob-k8s' 'bob-programming')
+pkgver=19.09
+pkgrel=1
 
-pkgname=bob-base
-pkgver=1
-pkgrel=2
 pkgdesc='My base collection of software to install'
 arch=('any')
 url='https://github.com/robertfairhead/dotfiles'
 license=('MIT')
-depends=(
-    'adobe-source-code-pro-fonts'
-    'alacritty'
-    'ansible'
-    'arc-gtk-theme'
-    'autorandr'
-    'bat'
-    'bind-tools'
-    'dive'
-    'docker'
-    'dunst'
-    'drawing'
-    'efibootmgr'
-    'etcher-bin'
-    'exa-git'
-    'expac-git'
-    'fd'
-    'feh'
-    'firefox'
-    'git'
-    'go'
-    'google-chrome'
-    'grub'
-    'gvim'
-    'i3-gaps'
-    'i3lock'
-    'intel-ucode'
-    'iw'
-    'iwd-git'
-    'jq'
-    'keybase-bin'
-    'libu2f-host'
-    'lxrandr-gtk3'
-    'micro'
-    'nautilus'
-    'nerd-fonts-complete'
-    'network-manager-applet'
-    'networkmanager'
-    'nmap'
-    'openssh'
-    'pacman-contrib'
-    'papirus-icon-theme'
-    'picocom'
-    'polybar'
-    'redshift'
-    'rofi'
-    'rofi-dmenu'
-    'siji-git'
-    'simplenote-electron-bin'
-    'tlp'
-    'tlp-rdw'
-    'tmux'
-    'ttf-croscore'
-    'ttf-droid'
-    'ttf-font-awesome'
-    'ttf-liberation'
-    'ttf-roboto'
-    'ttf-ubuntu-font-family'
-    'unzip'
-    'x86_energy_perf_policy'
-    'xautolock'
-    'xorg-server'
-    'xorg-xhost'
-    'xorg-xinit'
-    'xorg-xprop'
-    'xorg-xrandr'
-    'xorg-xsetroot'
-    'yay'
-    'zip'
-)
-provides=('bob-base')
-conflicts=('bob-base')
+
+package_bob-base() {
+    pkgdesc='always installed software'
+    depends=(
+        'bat'
+        'bind-tools'
+        'efibootmgr'
+        'exa-git'
+        'expac-git'
+        'fd'
+        'feh'
+        'git'
+        'grub'
+        'htop'
+        'intel-ucode'
+        'iw'
+        'iwd-git'
+        'jq'
+        'keybase-bin'
+        'libu2f-host'
+        'micro'
+        'network-manager-applet'
+        'networkmanager'
+        'nmap'
+        'openssh'
+        'pacman-contrib'
+        'picocom'
+        'ripgrep'
+        'tmux'
+        'unzip'
+        'yay'
+        'zip'
+    )
+}
+
+package_bob-db() {
+    pkgdesc='postgresl and other db utilities'
+    depends=(
+        'pspg'
+    )
+}
+
+package_bob-docker() {
+    pkgdesc='docker and related utilities'
+    depends=(
+        'dive'
+        'docker'
+        'hadolint-bin'
+    )
+}
+
+package_bob-fonts() {
+    pkgdesc='fonts to make various things look good'
+    depends=(
+        'adobe-source-code-pro-fonts'
+        'nerd-fonts-complete'
+        'siji-git'
+        'ttf-croscore'
+        'ttf-droid'
+        'ttf-font-awesome'
+        'ttf-liberation'
+        'ttf-roboto'
+        'ttf-ubuntu-font-family'
+    )
+}
+
+package_bob-gui() {
+    pkgdesc='fonts to make various things look good'
+    depends=(
+        'alacritty'
+        'drawing'
+        'etcher-bin'
+        'firefox'
+        'google-chrome'
+        'nautilus'
+        'simplenote-electron-bin'
+    )
+}
+
+package_bob-i3() {
+    pkgdesc='i3, utilities, and xserver'
+    depends=(
+        'arc-gtk-theme'
+        'autorandr'
+        'dunst'
+        'i3-gaps'
+        'i3lock'
+        'lxrandr-gtk3'
+        'papirus-icon-theme'
+        'polybar'
+        'redshift'
+        'rofi'
+        'rofi-dmenu'
+        'xautolock'
+        'xorg-server'
+        'xorg-xhost'
+        'xorg-xinit'
+        'xorg-xprop'
+        'xorg-xrandr'
+        'xorg-xsetroot'
+    )
+}
+
+package_bob-k8s() {
+    pkgdesc='kubernetes-related tools'
+    depends=(
+        'kubectl'
+    )
+}
+
+package_bob-programming() {
+    pkgdesc='programming languages, vim, and code utilities'
+    depends=(
+        'ansible'
+        'go'
+        'gvim'
+    )
+}
