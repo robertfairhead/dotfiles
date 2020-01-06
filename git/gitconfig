@@ -64,7 +64,8 @@
   mergeoptions = --no-edit
 
   # get word level highlights in diffs
-  pager = diff-so-fancy | less
+  # pager = diff-so-fancy | less
+  pager = delta --dark --plus-color="#002222" --plus-emph-color="#069306" --minus-color="#260D0D" --minus-emph-color="#930606" --hunk-style plain --file-style box --theme 'Sublime Snazzy'
 
 [merge]
   tool = vimdiff
@@ -106,4 +107,3 @@
 
 [include]
   path = ~/.gitconfig_local
-

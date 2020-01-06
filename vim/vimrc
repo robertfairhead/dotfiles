@@ -47,6 +47,7 @@ let g:ale_linters_explicit = 1
 
 let g:ale_linters = {
             \   'Dockerfile': ['hadolint'],
+            \   'ruby': ['ruby', 'rubocop'],
             \   'sh': ['shellcheck']
             \ }
 

@@ -31,9 +31,11 @@ brew "nano"
 brew "vim"
 
 brew "git"
+brew "git-delta"
 cask "wireshark"
 cask "balenaetcher"
 cask "kap"
+cask "lepton"
 
 brew "jq"
 brew "bat"
