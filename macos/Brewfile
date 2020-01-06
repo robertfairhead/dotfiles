@@ -31,8 +31,11 @@ brew "nano"
 brew "vim"
 
 brew "git"
+brew "git-delta"
 cask "wireshark"
 cask "balenaetcher"
+cask "kap"
+cask "lepton"
 
 brew "jq"
 brew "bat"
@@ -41,9 +44,15 @@ brew "ripgrep"
 brew "fd"
 brew "htop"
 
+brew "bats"
+brew "shellcheck"
+brew "shfmt"
+brew "hadolint"
+
 cask "docker"
 brew "go"
 brew "node"
+brew "nvm"
 brew "postgresql@9.6"
 
 cask "aptible"
@@ -58,4 +67,5 @@ cask "encryptme"
 
 # mas can only reinstall once added to account
 mas "1Password", id: 1333542190
-# mas "ScreenshotMenu", id: 562169322
+mas "Hidden Bar", id: 1452453066
+mas "Microsoft Remote Desktop", id: 1295203466
