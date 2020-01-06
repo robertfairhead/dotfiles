@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ "$OS" == "osx" ]]; then
-    pbcopy
-else
-    xclip -selection c
-fi
