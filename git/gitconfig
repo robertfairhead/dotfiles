@@ -10,11 +10,13 @@
 
   br = branch -vva
 
+  d = diff -w
+
   staged = diff --cached
 
   conflicts = diff --name-only --diff-filter=U
 
-  prdiff = difftool origin/master
+  prdiff = diff origin/master
 
   fetch-pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 
@@ -73,12 +75,12 @@
   prompt = false
 [mergetool "vimdiff"]
   cmd = vim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[mergetool "vim"]
-  cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
+[mergetool "vim-fugitive"]
+  cmd = vim -f -c \"Gvdiffsplit\" \"$MERGED\"
 [difftool]
   prompt = false
 [diff]
-  tool = vim
+  tool = vimdiff
 
 [fetch]
     prune = true

@@ -22,16 +22,16 @@ ln -sf $HOME/dotfiles/git/gitignore_global .gitignore_global
 mkdir -p bin
 chmod 700 bin
 for program in $HOME/dotfiles/bin/*; do
-  ln -sf $program $HOME/bin/$(basename $program)
+    ln -sf $program $HOME/bin/$(basename $program)
 done
 
 ## AWS credentials
 if [[ -f /keybase/private/fairhead/aws-config ]]; then
-  mkdir -p $HOME/.aws
-  chmod 700 $HOME/.aws
-  ln -sf /keybase/private/fairhead/aws-config $HOME/.aws/config
-  head -n 3 $HOME/.aws/config | tee $HOME/.aws/credentials &>/dev/null
-  chmod 600 $HOME/.aws/credentials
+    mkdir -p $HOME/.aws
+    chmod 700 $HOME/.aws
+    ln -sf /keybase/private/fairhead/aws-config $HOME/.aws/config
+    head -n 3 $HOME/.aws/config | tee $HOME/.aws/credentials &>/dev/null
+    chmod 600 $HOME/.aws/credentials
 fi
 
 ## GPG
