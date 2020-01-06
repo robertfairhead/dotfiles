@@ -1,8 +1,8 @@
 # Maintainer: Robert Fairhead
 pkgbase=bob
 pkgname=('bob-base' 'bob-db' 'bob-docker' 'bob-fonts' 'bob-i3' 'bob-k8s' 'bob-programming')
-pkgver=19.09
-pkgrel=1
+pkgver=20.01
+pkgrel=3
 
 pkgdesc='My base collection of software to install'
 arch=('any')
@@ -20,11 +20,11 @@ package_bob-base() {
         'fd'
         'feh'
         'git'
+        'git-delta'
         'grub'
         'htop'
         'intel-ucode'
-        'iw'
-        'iwd-git'
+        'iwd'
         'jq'
         'keybase-bin'
         'libu2f-host'
@@ -44,7 +44,7 @@ package_bob-base() {
 }
 
 package_bob-db() {
-    pkgdesc='postgresl and other db utilities'
+    pkgdesc='postgresql and other db utilities'
     depends=(
         'pspg'
     )
@@ -124,5 +124,7 @@ package_bob-programming() {
         'ansible'
         'go'
         'gvim'
+        'shellcheck'
+        'shfmt'
     )
 }
