@@ -32,6 +32,8 @@ brew "vim"
 
 brew "git"
 brew "git-delta"
+brew "github/gh/gh"
+
 cask "wireshark"
 cask "balenaetcher"
 cask "kap"
@@ -54,6 +56,8 @@ brew "go"
 brew "node"
 brew "nvm"
 brew "postgresql@9.6"
+brew "awscli"
+brew "terraform"
 
 cask "aptible"
 brew "gpg2"

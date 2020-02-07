@@ -16,6 +16,8 @@
 
   conflicts = diff --name-only --diff-filter=U
 
+  rebase-on-master = rebase -Xtheirs master
+
   prdiff = diff origin/master
 
   fetch-pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
@@ -70,7 +72,7 @@
   pager = delta --dark --plus-color="#002222" --plus-emph-color="#069306" --minus-color="#260D0D" --minus-emph-color="#930606" --hunk-style plain --file-style box --theme 'Sublime Snazzy'
 
 [merge]
-  tool = vimdiff
+  tool = vim-fugitive
 [mergetool]
   prompt = false
 [mergetool "vimdiff"]

@@ -125,6 +125,9 @@ nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 nnoremap <Up> <nop>
 nnoremap <Down> <nop>
+" Add fast skip down the page
+nnoremap <C-u> 10jzz
+nnoremap <C-i> 10kzz
 " Disable q from starting macro mode
 nnoremap q <nop>
 " Easier movement between splits

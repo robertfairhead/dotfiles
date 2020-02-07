@@ -1,44 +1,44 @@
 #!/usr/bin/env bash
 
 if [[ $OSTYPE == 'linux-gnu' ]]; then
-  export OS="linux"
+    export OS="linux"
 
-  alias ls='ls -F --color=auto'
+    alias ls='ls -F --color=auto'
 
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 else
-  export OS="osx"
+    export OS="osx"
 
-  alias ls="ls -GF"
+    alias ls="ls -GF"
 fi
 
-if [[ $(which bat) ]]; then
-  alias l='bat --style="numbers,changes"'
-elif [[ $(which less) ]]; then
-  alias l="less"
+if [[ $(command -v bat) ]]; then
+    alias l='bat --style="numbers,changes"'
+elif [[ $(command -v less) ]]; then
+    alias l="less"
 else
-  alias l="more"
+    alias l="more"
 fi
 
-if [[ $(which exa) ]]; then
-  alias ls="exa -F --group-directories-first --color=auto"
-  alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
+if [[ $(command -v exa) ]]; then
+    alias ls="exa -F --group-directories-first --color=auto"
+    alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
 else
-  alias lsl="ls -ahl"
+    alias lsl="ls -ahl"
 fi
 
 alias rmd="rm -rf"
 
 if [[ $(command -v vim) ]]; then
-  alias edit="vim"
-elif [[ $(which code) ]]; then
-  alias edit="code"
-elif [[ $(which micro) ]]; then
-  alias edit="micro"
+    alias edit="vim"
+elif [[ $(command -v code) ]]; then
+    alias edit="code"
+elif [[ $(command -v micro) ]]; then
+    alias edit="micro"
 else
-  alias edit="nano"
+    alias edit="nano"
 fi
 
 alias hex="hexdump -Cv"
@@ -54,7 +54,7 @@ alias lsspace="du -k"
 
 alias password="tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n1"
 
-alias jekyll-serve="docker run --rm --label=jekyll --volume=$(pwd):/srv/jekyll -it -p 127.0.0.1:4000:4000 jekyll/jekyll jekyll serve"
+alias jekyll-serve="docker run --rm --label=jekyll --volume=\$(pwd):/srv/jekyll -it -p 127.0.0.1:4000:4000 jekyll/jekyll jekyll serve"
 
 alias pacnew='find /etc -regextype posix-extended -regex ".+\.pac(new|save)" 2> /dev/null'
 
@@ -62,26 +62,25 @@ alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | head 
 
 alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 
-master () {
+master() {
     git checkout master
     git pull
 
     # If we're a fork, pull down upstream as well
-    if [[ $(git ls-remote --heads upstream master 2>/dev/null) > 0 ]]; then
+    if git ls-remote --heads upstream master 2>/dev/null; then
         git pull --rebase upstream master
     fi
 
     # If we have new commits from upstream push to update our GitHub master
-    if [[ $(git rev-list --count --right-only @{u}.. 2> /dev/null) > 0 ]]; then
+    if git rev-list --count --right-only '@{u}..' 2>/dev/null; then
         git push origin master
     fi
 }
 
-compress_img () {
-  convert $1 -filter Triangle -define filter:support=2 -thumbnail 400 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip $1
+compress_img() {
+    convert "$1" -filter Triangle -define filter:support=2 -thumbnail 400 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip "$1"
 }
 
-docker-here () {
-  docker run -it --rm -v "$(pwd):/src" -w "/src" -u $(id -u):$(id -g) --entrypoint "" $1 bash
+docker-here() {
+    docker run -it --rm -v "$(pwd):/src" -w "/src" -u "$(id -u):$(id -g)" --entrypoint "" "$1" bash
 }
-
