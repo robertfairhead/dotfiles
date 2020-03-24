@@ -14,6 +14,8 @@
 
   staged = diff --cached
 
+  amend = commit --amend --no-edit
+
   conflicts = diff --name-only --diff-filter=U
 
   rebase-on-master = rebase -Xtheirs master

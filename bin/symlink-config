@@ -50,6 +50,9 @@ ln -sf $HOME/dotfiles/vim/vimrc $HOME/.vimrc
 ln -snf $HOME/dotfiles/vim/after $HOME/.vim/after
 mkdir -p $HOME/.vim/{swap,undo,backup,tmp}
 
+## Bat
+ln -snf $HOME/dotfiles/bat $HOME/.config/bat
+
 ## Alacritty
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml

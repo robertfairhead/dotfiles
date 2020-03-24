@@ -16,11 +16,13 @@ Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'godlygeek/tabular'
+Plug 'govim/govim', { 'for': 'go' }
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'marshallward/vim-restructuredtext'
 Plug 'modille/groovy.vim'
 Plug 'mhinz/vim-signify'
-Plug 'myitcv/govim'
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'handlebars' }
 Plug 'plasticboy/vim-markdown'
 Plug 'stephpy/vim-yaml'
 Plug 'tpope/vim-surround'
@@ -51,10 +53,10 @@ let g:ale_linters = {
             \   'sh': ['shellcheck']
             \ }
 
+            " \   'javascript': ['prettier'],
 let g:ale_fixers = {
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \   'markdown': ['prettier'],
-            \   'javascript': ['prettier'],
             \   'python': ['black'],
             \   'sh': ['shfmt'],
             \ }
@@ -257,13 +259,13 @@ let g:netrw_banner = 0
 
 
 " Set default indent to 4 spaces
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set shiftround
 
 " Short updatetime time for govim are more responsive for quickfixlist
-set updatetime=500
+" set updatetime=500
 
 " Inspired by https://begriffs.com/posts/2019-07-19-history-use-vim.html
 " Protect changes between writes.

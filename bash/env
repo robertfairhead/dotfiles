@@ -2,7 +2,7 @@ export GOPATH=$HOME/go
 
 export MICRO_TRUECOLOR=1
 
-export BAT_THEME="DarkNeon"
+export BAT_THEME="ayu-dark"
 
 export WINIT_HIDPI_FACTOR=1.0
 
