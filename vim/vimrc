@@ -143,6 +143,9 @@ nnoremap <silent> <leader>e :Explore<cr>
 nnoremap <silent> <leader>o o<ESC>k
 nnoremap <silent> <leader>O O<ESC>j
 
+" Toggle quicklist for Golang errors
+nnoremap <silent> <leader>f :copen<cr>
+
 " Use ripgrep to search
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading

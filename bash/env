@@ -1,3 +1,5 @@
+export EDITOR=edit
+
 export GOPATH=$HOME/go
 
 export MICRO_TRUECOLOR=1

@@ -1,44 +1,44 @@
 #!/usr/bin/env bash
 
 if [[ $OSTYPE == 'linux-gnu' ]]; then
-    export OS="linux"
+  export OS="linux"
 
-    alias ls='ls -F --color=auto'
+  alias ls='ls -F --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 else
-    export OS="osx"
+  export OS="osx"
 
-    alias ls="ls -GF"
+  alias ls="ls -GF"
 fi
 
 if [[ $(command -v bat) ]]; then
-    alias l='bat --style="numbers,changes"'
+  alias l='bat --style="numbers,changes"'
 elif [[ $(command -v less) ]]; then
-    alias l="less"
+  alias l="less"
 else
-    alias l="more"
+  alias l="more"
 fi
 
 if [[ $(command -v exa) ]]; then
-    alias ls="exa -F --group-directories-first --color=auto"
-    alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
+  alias ls="exa -F --group-directories-first --color=auto"
+  alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
 else
-    alias lsl="ls -ahl"
+  alias lsl="ls -ahl"
 fi
 
 alias rmd="rm -rf"
 
 if [[ $(command -v vim) ]]; then
-    alias edit="vim"
+  alias edit="vim"
 elif [[ $(command -v code) ]]; then
-    alias edit="code"
+  alias edit="code"
 elif [[ $(command -v micro) ]]; then
-    alias edit="micro"
+  alias edit="micro"
 else
-    alias edit="nano"
+  alias edit="nano"
 fi
 
 alias hex="hexdump -Cv"
@@ -63,24 +63,26 @@ alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | head 
 alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 
 master() {
-    git checkout master
-    git pull
+  git checkout master
+  git pull
 
-    # If we're a fork, pull down upstream as well
-    if git ls-remote --heads upstream master 2>/dev/null; then
-        git pull --rebase upstream master
-    fi
+  # If we're a fork, pull down upstream as well
+  if git ls-remote --heads upstream master 2>/dev/null; then
+    git fetch upstream
+    git pull --rebase upstream master
+  fi
 
-    # If we have new commits from upstream push to update our GitHub master
-    if git rev-list --count --right-only '@{u}..' 2>/dev/null; then
-        git push origin master
-    fi
+  # If we have new commits from upstream push to update our GitHub master
+  if git rev-list --count --right-only '@{u}..' 2>/dev/null; then
+    git push origin master
+    git push --tags
+  fi
 }
 
 compress_img() {
-    convert "$1" -filter Triangle -define filter:support=2 -thumbnail 400 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip "$1"
+  convert "$1" -filter Triangle -define filter:support=2 -thumbnail 400 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip "$1"
 }
 
 docker-here() {
-    docker run -it --rm -v "$(pwd):/src" -w "/src" -u "$(id -u):$(id -g)" --entrypoint "" "$1" bash
+  docker run -it --rm -v "$(pwd):/src" -w "/src" -u "$(id -u):$(id -g)" --entrypoint "" "$1" bash
 }
