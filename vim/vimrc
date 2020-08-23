@@ -9,27 +9,38 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'airblade/vim-rooter'
 Plug 'ayu-theme/ayu-vim'
-Plug 'cespare/vim-toml'
-Plug 'chr4/nginx.vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json'
-Plug 'godlygeek/tabular'
-Plug 'govim/govim', { 'for': 'go' }
-Plug 'hashivim/vim-terraform'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'marshallward/vim-restructuredtext'
-Plug 'modille/groovy.vim'
+
+Plug 'airblade/vim-rooter'
+Plug 'arp242/undofile_warn.vim'
+Plug 'arp242/switchy.vim'
 Plug 'mhinz/vim-signify'
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'handlebars' }
-Plug 'plasticboy/vim-markdown'
-Plug 'stephpy/vim-yaml'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
+
+Plug 'cespare/vim-toml'
+Plug 'elzr/vim-json'
+Plug 'stephpy/vim-yaml'
+
+Plug 'govim/govim', { 'for': 'go' }
+Plug 'modille/groovy.vim'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+
+Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'marshallward/vim-restructuredtext'
+Plug 'mustache/vim-mustache-handlebars'
+
+Plug 'chr4/nginx.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'wgwoods/vim-systemd-syntax'
 
 " Initialize plugin system
 call plug#end()
@@ -42,6 +53,10 @@ if exists('+termguicolors')
 endif
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
+    set t_Co=16
+endif
 
 " ALE
 " Only run what I specifically ask for
@@ -91,19 +106,18 @@ let g:vim_markdown_json_frontmatter = 1
 let g:vim_json_syntax_conceal = 0
 
 " Terraform
-" Prevent fmt on save since ale does it
+" Prevent fmt on save because ale does it
 let g:terraform_fmt_on_save=1
 
 """""
 " Key bindings
 """""
-" Let :W also save since my fingers are lazy
+" Let :W also save because my fingers are lazy
 command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
 " change the leader key from "\" to the space bar
 let mapleader="\<SPACE>"
 
 " Alternate ways to exit insert mode
-inoremap <M-CR> <Esc>
 inoremap jk <Esc>
 
 " Quick way out of all buffers when using merge tool
@@ -115,9 +129,6 @@ nnoremap <silent> <leader><leader> :bprevious<CR>
 nnoremap <silent> <leader><CR> :bn<CR>
 " Close current buffer
 nnoremap <silent> <leader>w :bd<cr>
-" Searching
-nnoremap <silent> <leader>c :nohlsearch<CR>
-nnoremap <leader>s :%s//g<Left><Left>
 " Copy/paste to clipboard
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
@@ -130,22 +141,19 @@ nnoremap <Down> <nop>
 " Add fast skip down the page
 nnoremap <C-u> 10jzz
 nnoremap <C-i> 10kzz
-" Disable q from starting macro mode
+" Make Q start macro mode and disable q because lazy fingers
+nnoremap Q q
 nnoremap q <nop>
 " Easier movement between splits
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
+nnoremap <leader>j <C-w><C-w>
 " File selection
 nnoremap <silent> <leader>e :Explore<cr>
-" Enter blank lines
-nnoremap <silent> <leader>o o<ESC>k
-nnoremap <silent> <leader>O O<ESC>j
 
 " Toggle quicklist for Golang errors
 nnoremap <silent> <leader>f :copen<cr>
 
+" Searching
+nnoremap <leader>s :%s//g<Left><Left>
 " Use ripgrep to search
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
@@ -167,6 +175,8 @@ function! SignColumnToggle()
 endfunction
 nnoremap <leader>ns :call SignColumnToggle()<cr>
 
+" Switch to test file
+nnoremap <silent> <Leader>t :call switchy#switch('edit', 'sbuf')<CR>
 """""
 " Autogroups
 """""
@@ -251,10 +261,6 @@ if !empty(&viminfo)
 endif
 set sessionoptions-=options
 
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
-    set t_Co=16
-endif
 " Prevent creation of .netrwhist files
 let g:netrw_dirhistmax = 0
 let g:netrw_liststyle = 3
