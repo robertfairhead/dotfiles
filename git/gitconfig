@@ -1,4 +1,6 @@
 [alias]
+  default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/"
+
   history = log --all --graph --abbrev-commit --simplify-by-decoration
   graph = log --all --graph --abbrev-commit
 
@@ -18,11 +20,9 @@
 
   conflicts = diff --name-only --diff-filter=U
 
-  rebase-on-master = rebase -Xtheirs master
+  rebase-on-main = rebase -Xtheirs $(git default-branch)
 
-  prdiff = diff origin/master
-
-  fetch-pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  prdiff = diff refs/remotes/origin/HEAD
 
   patch = !git --no-pager diff --no-color
 
@@ -115,3 +115,5 @@
   path = ~/.gitconfig_local
 [pull]
 	ff = only
+[init]
+	defaultBranch = main

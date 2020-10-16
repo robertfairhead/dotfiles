@@ -1,5 +1,6 @@
 tap "homebrew/cask"
 tap "caskroom/fonts"
+tap "hashicorp/tap"
 
 cask_args appdir: "/Applications"
 
@@ -30,10 +31,11 @@ brew "tmux"
 
 brew "nano"
 brew "vim"
+brew "lnav"
 
 brew "git"
 brew "git-delta"
-brew "github/gh/gh"
+brew "gh"
 brew "gpg2"
 
 cask "balenaetcher"
@@ -46,6 +48,7 @@ brew "exa"
 brew "ripgrep"
 brew "fd"
 brew "htop"
+brew "procs"
 
 brew "bats"
 brew "shellcheck"
@@ -53,6 +56,7 @@ brew "shfmt"
 brew "hadolint"
 
 cask "docker"
+cask "multipass"
 brew "go"
 brew "node"
 
@@ -61,7 +65,8 @@ brew "postgresql@9.6"
 
 cask "aptible"
 brew "awscli"
-brew "terraform"
+brew "hashicorp/tap/terraform"
+brew "hashicorp/tap/packer"
 brew "travis"
 
 brew "chruby"

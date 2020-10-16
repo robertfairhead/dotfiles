@@ -8,38 +8,55 @@ endif
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+" Make vim slightly more IDEish
 Plug 'ayu-theme/ayu-vim'
-
-Plug 'airblade/vim-rooter'
-Plug 'arp242/undofile_warn.vim'
-Plug 'arp242/switchy.vim'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
+Plug 'benmills/vimux'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 
+" General vim improvements
+Plug 'airblade/vim-rooter'
+Plug 'arp242/undofile_warn.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'junegunn/vim-peekaboo'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+
+" Git helpers
+Plug 'benmills/vimux-golang'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+
+" Config files
 Plug 'cespare/vim-toml'
 Plug 'elzr/vim-json'
 Plug 'stephpy/vim-yaml'
 
+" Go
 Plug 'govim/govim', { 'for': 'go' }
-Plug 'modille/groovy.vim'
+
+" Ruby/Rails
+Plug 'pgr0ss/vimux-ruby-test'
+Plug 'rhysd/vim-textobj-ruby'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
-Plug 'plasticboy/vim-markdown'
-Plug 'godlygeek/tabular'
+" Text editing
+Plug 'tpope/vim-markdown'
 Plug 'marshallward/vim-restructuredtext'
 Plug 'mustache/vim-mustache-handlebars'
 
+" Devops related-language
 Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'modille/groovy.vim'
 Plug 'wgwoods/vim-systemd-syntax'
 
 " Initialize plugin system
@@ -51,6 +68,10 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+" Set italics
+set t_ZH=[3m
+set t_ZR=[23m
+
 let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 " Allow color schemes to do bright colors without forcing bold.
@@ -75,13 +96,15 @@ let g:ale_fixers = {
             \   'python': ['black'],
             \   'sh': ['shfmt'],
             \ }
-let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
+nnoremap [a <Plug>(ale_previous_wrap)
+nnoremap ]a <Plug>(ale_next_wrap)
 
 " Statusline
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 " let g:airline_section_a = ''
 let g:airline_section_b = '%{FugitiveHead()}'
 let g:airline_section_c = '%m%r'
@@ -93,15 +116,19 @@ let g:airline_section_z = '%l:%c'
 let g:rooter_silent_chdir = 1
 
 " Signify
-set signcolumn=yes
 let g:signify_vcs_list = [ 'git' ]
 
+" Autopairs
+let g:AutoPairsMapSpace = 0
+
 " Markdown
-let g:vim_markdown_no_default_key_mappings = 1
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'ruby']
+let g:markdown_folding = 1
+
+" Ruby
+let ruby_fold = 1
+let ruby_foldable_groups = 'def class module'
+
 "Prevent setting conceal
 let g:vim_json_syntax_conceal = 0
 
@@ -117,40 +144,64 @@ command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>wr
 " change the leader key from "\" to the space bar
 let mapleader="\<SPACE>"
 
-" Alternate ways to exit insert mode
+" Alternate way to exit insert mode
 inoremap jk <Esc>
 
-" Quick way out of all buffers when using merge tool
+" Quick way out of all buffers when, e.g., using merge tool
 nnoremap <leader>q :qa<CR>
 " Shortcut to edit THIS configuration file and automatically reload it
 nnoremap <silent> <leader>ec :e $MYVIMRC<CR>
-" Move between buffers
-nnoremap <silent> <leader><leader> :bprevious<CR>
-nnoremap <silent> <leader><CR> :bn<CR>
 " Close current buffer
 nnoremap <silent> <leader>w :bd<cr>
-" Copy/paste to clipboard
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
+" Copy/paste to clipboard using reindent helpers
+vnoremap <leader>y "+y
+nmap <leader>p "+p`[v`]=
+nmap <leader>P "+<Plug>unimpairedPutAbove =']
 " Disable arrow keys in normal mode
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 nnoremap <Up> <nop>
 nnoremap <Down> <nop>
+
+" Make yank work like other capital letters
+nnoremap Y y$
+
 " Add fast skip down the page
 nnoremap <C-u> 10jzz
 nnoremap <C-i> 10kzz
 " Make Q start macro mode and disable q because lazy fingers
 nnoremap Q q
 nnoremap q <nop>
-" Easier movement between splits
-nnoremap <leader>j <C-w><C-w>
+" Easier movement between splits following vim-unimpaired
+nnoremap [s <C-W>W
+nnoremap ]s <C-W>w
+nnoremap <leader><leader> :b#<CR>
 " File selection
 nnoremap <silent> <leader>e :Explore<cr>
+" Unfold a section
+nnoremap <leader>f zO
 
-" Toggle quicklist for Golang errors
-nnoremap <silent> <leader>f :copen<cr>
+" Vimux runner
+nnoremap <leader>vp  :VimuxPromptCommand<CR>
+nnoremap <leader>vc  :VimuxCloseRunner<CR>
+nnoremap <leader>vr  :VimuxRunLastCommand<CR>
+
+" Toggle quicklist
+" https://vim.fandom.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+  else
+    execute "copen " . 10
+  endif
+endfunction
+augroup QFixToggle
+ autocmd!
+ autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
+ autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
+augroup END
+nnoremap <silent> <leader>l :QFix<cr>
 
 " Searching
 nnoremap <leader>s :%s//g<Left><Left>
@@ -165,18 +216,6 @@ nnoremap <leader>g :RipGrep<space>
 " Search and replace over all files in quickfix, e.g., from RipGrep
 nnoremap <leader>sg :cfdo %s///g <bar> update<C-Left><C-Left><C-Left><Right><Right><Right>
 
-" Toggle signcolumn for easier mouse-based copy
-function! SignColumnToggle()
-    if &signcolumn == "yes"
-        setlocal signcolumn=no
-    else
-        setlocal signcolumn=yes
-    endif
-endfunction
-nnoremap <leader>ns :call SignColumnToggle()<cr>
-
-" Switch to test file
-nnoremap <silent> <Leader>t :call switchy#switch('edit', 'sbuf')<CR>
 """""
 " Autogroups
 """""
@@ -206,9 +245,26 @@ nnoremap <silent> <leader>sc :call ToggleSpellCheck()<CR>
 """""
 set encoding=utf-8
 
-" No numbers by default toggle on relative for easy line selection
-set nonumber
-nnoremap <silent> <leader>n :set relativenumber!<CR>
+" Allow opening new files without having to save old ones
+set hidden
+
+set splitright
+
+" Relative numbers by default, toggle on/of or easy line selection
+set relativenumber
+set signcolumn=number
+set cursorline
+
+" Toggle signcolumn for easier mouse-based copy
+function! SignColumnToggle()
+    if &signcolumn == "number"
+        setlocal signcolumn=no
+    else
+        setlocal signcolumn=number
+    endif
+    setlocal relativenumber!
+endfunction
+nnoremap <leader>ns :call SignColumnToggle()<cr>
 
 set hlsearch
 set incsearch
@@ -217,6 +273,12 @@ set backspace=indent,eol,start
 set complete-=i
 set smarttab
 set showmatch
+
+" Disable folding to start so everything is open
+set nofoldenable
+
+" Prevent preview window opening during autocomplete
+set completeopt-=preview
 
 set nrformats-=octal
 
@@ -227,7 +289,6 @@ set wildmenu
 " searching
 set ignorecase          " Make searching case insensitive
 set smartcase           " ... unless the query has capital letters
-set gdefault            " Use 'g' flag by default with :s/foo/bar/
 
 " Scrolling display
 if !&scrolloff
@@ -237,7 +298,6 @@ if !&sidescrolloff
     set sidescrolloff=5
 endif
 set display+=lastline
-
 
 if &listchars ==# 'eol:$'
     set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -273,8 +333,8 @@ set shiftwidth=2
 set expandtab
 set shiftround
 
-" Short updatetime time for govim are more responsive for quickfixlist
-" set updatetime=500
+" Short updatetime time for async plugins like govim and signify
+set updatetime=100
 
 " Inspired by https://begriffs.com/posts/2019-07-19-history-use-vim.html
 " Protect changes between writes.
