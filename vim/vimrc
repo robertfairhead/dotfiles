@@ -35,9 +35,6 @@ Plug 'cespare/vim-toml'
 Plug 'elzr/vim-json'
 Plug 'stephpy/vim-yaml'
 
-" Go
-Plug 'govim/govim', { 'for': 'go' }
-
 " Ruby/Rails
 Plug 'pgr0ss/vimux-ruby-test'
 Plug 'rhysd/vim-textobj-ruby'
@@ -79,11 +76,11 @@ if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
     set t_Co=16
 endif
 
-" ALE
-" Only run what I specifically ask for
+" ALE: only run what I specifically ask for
 let g:ale_linters_explicit = 1
 
 let g:ale_linters = {
+            \   'go': ['gopls'],
             \   'Dockerfile': ['hadolint'],
             \   'ruby': ['ruby', 'rubocop'],
             \   'sh': ['shellcheck']
@@ -92,12 +89,15 @@ let g:ale_linters = {
             " \   'javascript': ['prettier'],
 let g:ale_fixers = {
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'go': ['goimports'],
             \   'markdown': ['prettier'],
             \   'python': ['black'],
             \   'sh': ['shfmt'],
             \ }
+            " \   'json': ['prettier'],
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
 nnoremap [a <Plug>(ale_previous_wrap)
 nnoremap ]a <Plug>(ale_next_wrap)
 

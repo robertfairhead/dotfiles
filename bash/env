@@ -2,6 +2,7 @@ export EDITOR=vim
 export VISUAL=vim
 
 export GOPATH=$HOME/go
+export GO111MODULE=on
 
 export MICRO_TRUECOLOR=1
 

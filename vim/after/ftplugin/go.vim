@@ -1,4 +1,4 @@
-nmap <silent> <buffer> <Leader>h : <C-u>call GOVIMHover()<CR>
+nmap <silent> <buffer> <Leader>h :ALEHover<CR>
 
 " Set mappings to test files
 let g:projectionist_heuristics = {
@@ -12,6 +12,9 @@ let g:projectionist_heuristics = {
             \       'type': 'test'
             \   },
             \ }}
+
+" Use standard goto definition mapping
+nnoremap <silent> gd :ALEGoToDefinition<CR>
 
 " Switch to test file
 nnoremap <silent> <Leader>et :AV<CR>
