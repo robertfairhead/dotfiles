@@ -6,10 +6,10 @@
 case $- in
 *i*) ;;
 *)
-    # shellcheck source=path
-    source "$HOME/dotfiles/bash/path"
-    return
-    ;;
+  # shellcheck source=path
+  source "$HOME/dotfiles/bash/path"
+  return
+  ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -34,7 +34,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 if command -v dircolors >/dev/null 2>&1; then
-    eval "$(dircolors -b "$HOME/dotfiles/bash/dir_colors")"
+  eval "$(dircolors -b "$HOME/dotfiles/bash/dir_colors")"
 fi
 
 # shellcheck source=path
@@ -47,12 +47,16 @@ source "$HOME/dotfiles/bash/prompt"
 source "$HOME/dotfiles/bash/env"
 
 for bashcmp in "$HOME"/dotfiles/completions/*.bash-completion; do
-    # shellcheck source=/dev/null
-    source "$bashcmp"
+  # shellcheck source=/dev/null
+  source "$bashcmp"
 done
 
 # If we have local settings, pull those in
 if [[ -f "$HOME/.bash_local" ]]; then
-    # shellcheck source=/dev/null
-    source "$HOME/.bash_local"
+  # shellcheck source=/dev/null
+  source "$HOME/.bash_local"
+fi
+
+if [[ ! -f "$HOME/.alacritty_local.yml" ]]; then
+  echo -e "font:\n  size: 10" >.alacritty_local.yml
 fi

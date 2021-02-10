@@ -13,3 +13,5 @@ export WINIT_HIDPI_FACTOR=1.0
 export AWS_SDK_LOAD_CONFIG=1
 
 export AWS_DEFAULT_REGION=us-east-1
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
