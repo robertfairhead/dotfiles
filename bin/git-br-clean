@@ -1,18 +1,19 @@
 #! /usr/bin/env bash
 set -euo pipefail
 
-git checkout master
+DEFAULT_BRANCH="$(git default-branch)"
+git checkout "$DEFAULT_BRANCH"
 git fetch --prune
 
 IFS=$'\n'
-REMOTES=( $(git for-each-ref --format="%(refname:short)" refs/remotes) )
+read -ra REMOTES <<<"$(git for-each-ref --format="%(refname:short)" refs/remotes)"
 
 IFS=$' '
-git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads/ \
-  | while read branch remote; do
-      if [[ ! " ${REMOTES[@]} " =~ " ${remote} " ]]; then
-        if [[ "${branch}" != "master" ]]; then
-          git branch -D $branch
-        fi
+git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads/ |
+  while read -r branch remote; do
+    if [[ ! " ${REMOTES[*]} " =~ " ${remote} " ]]; then
+      if [[ "${branch}" != "$DEFAULT_BRANCH" ]]; then
+        git branch -D "$branch"
       fi
-    done
+    fi
+  done

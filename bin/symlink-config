@@ -25,20 +25,14 @@ for program in $HOME/dotfiles/bin/*; do
   ln -sf $program $HOME/bin/$(basename $program)
 done
 
-## AWS credentials
-if [[ -f /keybase/private/fairhead/aws-config ]]; then
-  mkdir -p $HOME/.aws
-  chmod 700 $HOME/.aws
-  ln -sf /keybase/private/fairhead/aws-config $HOME/.aws/config
-  head -n 3 $HOME/.aws/config | tee $HOME/.aws/credentials &>/dev/null
-  chmod 600 $HOME/.aws/credentials
-fi
-
 ## GPG
 mkdir -p .gnupg
 chmod 700 .gnupg
 ln -sf $HOME/dotfiles/gpg/gpg.conf .gnupg/gpg.conf
 ln -sf $HOME/dotfiles/gpg/gpg-agent.conf .gnupg/gpg-agent.conf
+
+## Psql
+ln -sf $HOME/dotfiles/psqlrc $HOME/.psqlrc
 
 ## Micro
 mkdir -p .config/micro
@@ -57,10 +51,6 @@ ln -snf $HOME/dotfiles/bat $HOME/.config/bat
 mkdir -p .config/alacritty
 ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 echo -e "font:\n  size: 10.0" >"$HOME/.alacritty_local.yml"
-
-## VS Code
-#mkdir -p ${HOME}/.config/Code/User
-#ln -sf $HOME/dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
 
 ## Yay
 mkdir -p .config/yay

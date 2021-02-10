@@ -26,6 +26,8 @@
 
   patch = !git --no-pager diff --no-color
 
+  br-age = for-each-ref --sort='authordate:iso8601' --format=' %(color:magenta)%(authordate:relative)%09%(color:blue)%(refname:short)' refs/heads
+
 [user]
   name = Robert Fairhead
   email = bob@fairhead.dev
