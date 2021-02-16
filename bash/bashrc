@@ -41,8 +41,14 @@ fi
 source "$HOME/dotfiles/bash/path"
 # shellcheck source=aliases
 source "$HOME/dotfiles/bash/aliases"
-# shellcheck source=prompt
-source "$HOME/dotfiles/bash/prompt"
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init bash)"
+else
+  # shellcheck source=prompt
+  source "$HOME/dotfiles/bash/prompt"
+fi
+
 # shellcheck source=env
 source "$HOME/dotfiles/bash/env"
 

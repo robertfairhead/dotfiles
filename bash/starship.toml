@@ -1,0 +1,42 @@
+format = """
+$hostname$username$directory$ruby$git_branch$git_status $git_state $env_var\
+$line_break\
+$status$character"""
+
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+[hostname]
+ssh_only = false
+style = "cyan"
+
+[ruby]
+format = "[$symbol($version )]($style)"
+symbol = ""
+
+[directory]
+style = "blue"
+truncation_length = 2
+truncation_symbol = "…/"
+
+[git_branch]
+format = "on [$branch]($style)"
+truncation_length = 128
+truncation_symbol = "…"
+style = "purple"
+
+[git_status]
+format = '([$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'
+style = "yellow"
+modified = "?"
+staged = "!"
+untracked = "+"
+
+[character]
+success_symbol = "[>](blue)"
+error_symbol = "[➜](bold red) "
+
+[env_var]
+variable = "APTIBLE_STACK"
+format = "[$env_value]($style)"
+style = "bold red"

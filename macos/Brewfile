@@ -5,6 +5,8 @@ tap "hashicorp/tap"
 cask_args appdir: "/Applications"
 
 cask "font-source-code-pro"
+cask "font-sauce-code-pro-nerd-font"
+
 cask "alacritty"
 cask "amethyst"
 cask "pock"
@@ -29,6 +31,7 @@ brew "unzip"
 
 brew "bash"
 brew "tmux"
+brew "starship"
 
 brew "nano"
 brew "vim"
@@ -60,6 +63,10 @@ cask "docker"
 cask "multipass"
 brew "go"
 brew "node"
+
+brew "redis"
+brew "mysql"
+brew "postgresql"
 
 cask "aptible"
 brew "awscli"
