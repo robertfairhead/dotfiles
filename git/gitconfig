@@ -12,21 +12,23 @@
 
   br = branch -vva
 
-  d = diff -w
-
   staged = diff --cached
+
+  diff = diff -w
 
   amend = commit --amend --no-edit
 
   conflicts = diff --name-only --diff-filter=U
 
-  rebase-on-main = rebase -Xtheirs $(git default-branch)
+  rebase-on-main = rebase -i $(git default-branch)
 
   prdiff = diff refs/remotes/origin/HEAD
 
   patch = !git --no-pager diff --no-color
 
   br-age = for-each-ref --sort='authordate:iso8601' --format=' %(color:magenta)%(authordate:relative)%09%(color:blue)%(refname:short)' refs/heads
+
+  whoops =!git add . && git commit --amend --no-edit && git push --force-with-lease
 
 [user]
   name = Robert Fairhead
@@ -115,7 +117,9 @@
 
 [include]
   path = ~/.gitconfig_local
+
 [pull]
 	ff = only
+
 [init]
 	defaultBranch = main

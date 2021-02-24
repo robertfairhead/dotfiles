@@ -1,5 +1,5 @@
 format = """
-$hostname$username$directory$ruby$git_branch$git_status $git_state $env_var\
+${custom.system_icons}$directory$ruby$git_branch${custom.origin}$git_status$git_state$env_var\
 $line_break\
 $status$character"""
 
@@ -40,3 +40,19 @@ error_symbol = "[➜](bold red) "
 variable = "APTIBLE_STACK"
 format = "[$env_value]($style)"
 style = "bold red"
+
+[custom.origin]
+description = "current branch does not have a tracking branch on the origin remote"
+command = "[[ -z $(git rev-list --count --right-only @{u}.. 2> /dev/null) ]] && echo -e '∅'"
+when = "[[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]]"
+shell = ["bash", "--noprofile", "--norc"]
+style = "bold red"
+format = "[$output]($style)"
+
+[custom.system_icons]
+description = "Show system icons"
+command     = '([ $(uname -s) == "Darwin" ] && echo -e ) || ([ $(uname -s) == "Linux" ] && echo -e )'
+format      = "[$output]($style) in "
+style       = "bold"
+shell       = ["bash", "--noprofile", "--norc"]
+when        = "true"
