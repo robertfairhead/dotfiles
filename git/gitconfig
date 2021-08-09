@@ -20,7 +20,9 @@
 
   conflicts = diff --name-only --diff-filter=U
 
-  rebase-on-main =!git rebase -i --autosquash $(git default-branch)
+  rebase-on-main = !git rebase -i --autosquash $(git default-branch)
+
+  fixup = !git commit --fixup "$(git log | fzf | cut -d ' ' -f 1)"
 
   prdiff = diff refs/remotes/origin/HEAD
 
