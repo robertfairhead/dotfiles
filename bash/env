@@ -6,7 +6,7 @@ export GO111MODULE=on
 
 export MICRO_TRUECOLOR=1
 
-export BAT_THEME="ayu-dark"
+export DELTA_PAGER="bat"
 
 export WINIT_HIDPI_FACTOR=1.0
 
@@ -15,3 +15,5 @@ export AWS_SDK_LOAD_CONFIG=1
 export AWS_DEFAULT_REGION=us-east-1
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export CDPATH=.:~/repo

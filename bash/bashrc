@@ -57,6 +57,12 @@ fi
 # shellcheck source=env
 source "$HOME/dotfiles/bash/env"
 
+# Use system-wide bash completions if available
+if [[ -f /usr/local/etc/bash_completion ]]; then
+  source /usr/local/etc/bash_completion
+fi
+
+# Use my local ones as well
 for bashcmp in "$HOME"/dotfiles/completions/*.bash-completion; do
   # shellcheck source=/dev/null
   source "$bashcmp"

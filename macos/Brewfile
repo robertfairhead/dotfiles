@@ -4,6 +4,8 @@ tap "hashicorp/tap"
 
 cask_args appdir: "/Applications"
 
+brew "mas"
+brew "svn"
 cask "font-source-code-pro"
 cask "font-sauce-code-pro-nerd-font"
 
@@ -30,6 +32,7 @@ brew "gnu-tar"
 brew "unzip"
 
 brew "bash"
+brew "bash-completion"
 brew "tmux"
 brew "starship"
 
@@ -53,6 +56,7 @@ brew "ripgrep"
 brew "fd"
 brew "htop"
 brew "procs"
+brew "fzf"
 
 brew "bats"
 brew "shellcheck"
@@ -83,7 +87,7 @@ brew "pipx"
 
 cask "little-snitch"
 cask "slack"
-cask "zoomus"
+cask "zoom"
 cask "encryptme"
 
 # mas can only reinstall once added to account

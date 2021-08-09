@@ -20,7 +20,7 @@
 
   conflicts = diff --name-only --diff-filter=U
 
-  rebase-on-main = rebase -i $(git default-branch)
+  rebase-on-main =!git rebase -i --autosquash $(git default-branch)
 
   prdiff = diff refs/remotes/origin/HEAD
 
@@ -74,8 +74,27 @@
   mergeoptions = --no-edit
 
   # get word level highlights in diffs
-  # pager = diff-so-fancy | less
-  pager = delta --dark --plus-color="#002222" --plus-emph-color="#069306" --minus-color="#260D0D" --minus-emph-color="#930606" --hunk-style plain --file-style box --theme 'Sublime Snazzy'
+  pager = delta --dark
+
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[delta]
+  features = side-by-side navigate
+  dark = true
+  plus-style = "syntax #002222"
+  minus-style = "syntax #260D0D"
+  syntax-theme = Sublime Snazzy
+  plus-emph-color = "#069306"
+  minus-emph-color = "#930606"
+  hunk-header-style = omit
+  file-style = box
+
+[interactive]
+  diffFilter = delta --color-only
 
 [merge]
   tool = vim-fugitive
@@ -85,10 +104,6 @@
   cmd = vim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [mergetool "vim-fugitive"]
   cmd = vim -f -c \"Gvdiffsplit\" \"$MERGED\"
-[difftool]
-  prompt = false
-[diff]
-  tool = vimdiff
 
 [fetch]
     prune = true

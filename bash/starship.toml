@@ -11,7 +11,7 @@ ssh_only = false
 style = "cyan"
 
 [ruby]
-format = "[$symbol($version )]($style)"
+format = "[$symbol($version) ]($style)"
 symbol = ""
 
 [directory]
@@ -26,7 +26,7 @@ truncation_symbol = "…"
 style = "purple"
 
 [git_status]
-format = '([$deleted$renamed$modified$staged$untracked$ahead_behind]($style) )'
+format = '([$deleted$renamed$modified$staged$untracked$ahead_behind ]($style))'
 style = "yellow"
 modified = "?"
 staged = "!"
@@ -47,7 +47,7 @@ command = "[[ -z $(git rev-list --count --right-only @{u}.. 2> /dev/null) ]] && 
 when = "[[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]]"
 shell = ["bash", "--noprofile", "--norc"]
 style = "bold red"
-format = "[$output]($style)"
+format = "[$output ]($style)"
 
 [custom.system_icons]
 description = "Show system icons"

@@ -15,7 +15,7 @@ else
 fi
 
 if [[ $(command -v bat) ]]; then
-  alias l='bat --style="numbers,changes"'
+  alias l='bat --style="changes"'
 elif [[ $(command -v less) ]]; then
   alias l="less"
 else
