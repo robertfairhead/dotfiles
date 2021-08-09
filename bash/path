@@ -10,4 +10,4 @@ else
   BREWPATH=""
 fi
 
-export PATH="${RBENV}${BREWPATH}${PATH}:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin"
+export PATH="${RBENV}${BREWPATH}${PATH}:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin"
