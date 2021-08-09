@@ -18,8 +18,9 @@ Plug 'w0rp/ale'
 " General vim improvements
 Plug 'airblade/vim-rooter'
 Plug 'arp242/undofile_warn.vim'
-Plug 'kana/vim-textobj-user'
+Plug 'junegunn/fzf'
 Plug 'junegunn/vim-peekaboo'
+Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
@@ -44,7 +45,6 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 
 " Text editing
-Plug 'tpope/vim-markdown'
 Plug 'marshallward/vim-restructuredtext'
 Plug 'mustache/vim-mustache-handlebars'
 
