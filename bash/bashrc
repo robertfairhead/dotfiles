@@ -68,6 +68,9 @@ for bashcmp in "$HOME"/dotfiles/completions/*.bash-completion; do
   source "$bashcmp"
 done
 
+# shellcheck source=fzf_history
+source "$HOME/dotfiles/bash/fzf_history"
+
 # If we have local settings, pull those in
 if [[ -f "$HOME/.bash_local" ]]; then
   # shellcheck source=/dev/null

@@ -32,6 +32,8 @@
 
   whoops =!git add . && git commit --amend --no-edit && git push --force-with-lease
 
+  switch = !git-switch
+
 [user]
   name = Robert Fairhead
   email = bob@fairhead.dev
@@ -131,6 +133,7 @@
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com"
+	insteadOf = "https://github.com"
 
 [include]
   path = ~/.gitconfig_local

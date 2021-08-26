@@ -46,7 +46,7 @@ set convert-meta off
 
 # Filtered history search
 #Up Arrow
-"\e[A": history-search-backward
+# "\e[A": history-search-backward
 # Down Arrow
 "\e[B": history-search-forward
 
