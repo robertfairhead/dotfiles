@@ -32,7 +32,7 @@
 
   whoops =!git add . && git commit --amend --no-edit && git push --force-with-lease
 
-  switch = !git-switch
+  s = !git-switch-picker
 
 [user]
   name = Robert Fairhead
