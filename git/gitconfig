@@ -14,7 +14,9 @@
 
   staged = diff --cached
 
-  diff = diff -w
+  branch-commits = !git log "$(git default-branch)..HEAD"
+
+  l = branch-commits --reverse
 
   amend = commit --amend --no-edit
 
@@ -22,7 +24,7 @@
 
   rebase-on-main = !git rebase -i --autosquash $(git default-branch)
 
-  fixup = !git commit --fixup "$(git log | fzf | cut -d ' ' -f 1)"
+  fixup = !git commit --fixup "$(git branch-commits | fzf | cut -d ' ' -f 1)"
 
   prdiff = diff refs/remotes/origin/HEAD
 
