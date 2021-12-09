@@ -31,16 +31,6 @@ fi
 
 alias rmd="rm -rf"
 
-if [[ $(command -v vim) ]]; then
-  alias edit="vim"
-elif [[ $(command -v code) ]]; then
-  alias edit="code"
-elif [[ $(command -v micro) ]]; then
-  alias edit="micro"
-else
-  alias edit="nano"
-fi
-
 alias hex="hexdump -Cv"
 alias hexstruct="xxd -i"
 
@@ -52,7 +42,7 @@ alias tfpr='terraform refresh && terraform plan -refresh=false -no-color | head 
 
 alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 
-alias bx='bundle exec'
+alias k='kubectl'
 
 main() {
   local default_branch
@@ -71,10 +61,6 @@ main() {
     git push origin "$default_branch"
     git push --tags
   fi
-}
-
-compress_img() {
-  convert "$1" -filter Triangle -define filter:support=2 -thumbnail 400 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -quality 82 -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB -strip "$1"
 }
 
 docker-here() {

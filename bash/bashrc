@@ -68,6 +68,12 @@ for bashcmp in "$HOME"/dotfiles/completions/*.bash-completion; do
   source "$bashcmp"
 done
 
+# Setup kubernets completion
+if command -v kubectl >/dev/null 2>&1; then
+  source <(kubectl completion bash)
+  complete -F __start_kubectl k
+fi
+
 # shellcheck source=fzf_history
 source "$HOME/dotfiles/bash/fzf_history"
 

@@ -1,5 +1,5 @@
 format = """
-${custom.system_icons}$directory$ruby$git_branch${custom.origin}$git_status$git_state$env_var\
+$hostname${custom.system_icons}$kubernetes$directory$git_branch${custom.origin}$git_status$git_state\
 $line_break\
 $status$character"""
 
@@ -7,17 +7,22 @@ $status$character"""
 add_newline = false
 
 [hostname]
-ssh_only = false
-style = "cyan"
-
-[ruby]
-format = "[$symbol($version) ]($style)"
-symbol = ""
+format = "歷($style)"
+ssh_only = true
+style = "bold"
 
 [directory]
+format = "in [$path]($style)[$read_only]($read_only_style) "
 style = "blue"
 truncation_length = 2
 truncation_symbol = "…/"
+
+[kubernetes]
+disabled = false
+format = '[\[$context|$namespace\]]($style) '
+style = "cyan"
+[kubernetes.context_aliases]
+"gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
 
 [git_branch]
 format = "on [$branch]($style)"
@@ -36,11 +41,6 @@ untracked = "+"
 success_symbol = "[>](blue)"
 error_symbol = "[➜](bold red) "
 
-[env_var]
-variable = "APTIBLE_STACK"
-format = "[$env_value]($style)"
-style = "bold red"
-
 [custom.origin]
 description = "current branch does not have a tracking branch on the origin remote"
 command = "[[ -z $(git rev-list --count --right-only @{u}.. 2> /dev/null) ]] && echo -e '∅'"
@@ -52,7 +52,7 @@ format = "[$output ]($style)"
 [custom.system_icons]
 description = "Show system icons"
 command     = '([ $(uname -s) == "Darwin" ] && echo -e ) || ([ $(uname -s) == "Linux" ] && echo -e )'
-format      = "[$output]($style) in "
+format      = "[$output]($style) "
 style       = "bold"
 shell       = ["bash", "--noprofile", "--norc"]
 when        = "true"

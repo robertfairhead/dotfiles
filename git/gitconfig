@@ -91,9 +91,9 @@
 [delta]
   features = side-by-side navigate
   dark = true
-  plus-style = "syntax #002222"
-  minus-style = "syntax #260D0D"
-  syntax-theme = Sublime Snazzy
+  plus-style = "syntax #1c4105"
+  minus-style = "syntax #400101"
+  syntax-theme = ayu-dark
   plus-emph-color = "#069306"
   minus-emph-color = "#930606"
   hunk-header-style = omit
@@ -135,7 +135,6 @@
 [url "git@github.com:"]
   insteadOf = "gh:"
   insteadOf = "git://github.com"
-	insteadOf = "https://github.com"
 
 [include]
   path = ~/.gitconfig_local
@@ -145,3 +144,5 @@
 
 [init]
 	defaultBranch = main
+[url "ssh://git@github.robot.car/"]
+	insteadOf = https://github.robot.car/

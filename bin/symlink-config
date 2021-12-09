@@ -44,9 +44,12 @@ ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
 ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
 
 ## Vim
+mkdir -p $HOME/.vim/{after,swap,undo,backup,tmp}
 ln -sf $HOME/dotfiles/vim/vimrc $HOME/.vimrc
 ln -snf $HOME/dotfiles/vim/after $HOME/.vim/after
-mkdir -p $HOME/.vim/{swap,undo,backup,tmp}
+
+## golangci-lint
+ln -sf $HOME/dotfiles/golangci-lint/golangci-lint.yml $HOME/.golangci-lint.yml
 
 ## Bat
 ln -snf $HOME/dotfiles/bat $HOME/.config/bat

@@ -1,0 +1,46 @@
+# For details see:
+# - https://golangci-lint.run/usage/linters/
+# - https://golangci-lint.run/usage/configuration/
+run:
+  modules-download-mode: readonly
+output:
+  sort-results: true
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  forbidigo:
+    forbid:
+      - ^print.*$
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+  goimports:
+    local-prefixes: github.robot.car
+  tagliatelle:
+    case:
+      rules:
+        json: snake
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - goerr113
+    - golint
+    - gomnd
+    - interfacer
+    - maligned
+    - nlreturn
+    - paralleltest
+    - scopelint
+    - varnamelen
+    - wsl
+issues:
+  exclude-rules:
+    - linters:
+        - lll
+      source: "^//go:generate "
+  fix: false
