@@ -138,6 +138,9 @@
   insteadOf = "gh:"
   insteadOf = "git://github.com"
 
+[url "ssh://git@git.fairhead.us:2020/bob/"]
+  insteadOf = "fairhead:"
+
 [include]
   path = ~/.gitconfig_local
 
