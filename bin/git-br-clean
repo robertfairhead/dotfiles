@@ -5,13 +5,12 @@ DEFAULT_BRANCH="$(git default-branch)"
 git checkout "$DEFAULT_BRANCH"
 git fetch --prune
 
-IFS=$'\n'
-read -ra REMOTES <<<"$(git for-each-ref --format="%(refname:short)" refs/remotes)"
+mapfile -t REMOTES < <(git for-each-ref --format='%(refname:short)' refs/remotes)
 
 IFS=$' '
 git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads/ |
   while read -r branch remote; do
-    if [[ ! " ${REMOTES[*]} " =~ " ${remote} " ]]; then
+    if [[ ! " ${REMOTES[*]} " =~ ${remote} ]]; then
       if [[ "${branch}" != "$DEFAULT_BRANCH" ]]; then
         git branch -D "$branch"
       fi
