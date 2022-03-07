@@ -36,6 +36,8 @@
 
   s = !git-switch-picker
 
+  c = switch -c
+
 [user]
   name = Robert Fairhead
   email = bob@fairhead.dev
