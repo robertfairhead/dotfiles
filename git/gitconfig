@@ -149,5 +149,10 @@
 
 [init]
 	defaultBranch = main
-[url "ssh://git@github.robot.car/"]
-	insteadOf = https://github.robot.car/
+
+# [commit]
+# 	gpgsign = true
+# [gpg]
+# 	format = ssh
+# [gpg "ssh"]
+#	defaultKeyCommand = ssh-add -L

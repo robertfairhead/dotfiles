@@ -4,5 +4,5 @@ set -euo pipefail
 if [ $# -eq 1 ]; then
   git switch "$1"
 else
-  git switch "$(git branch --list --no-color --all | fzf | sed -r -e 's;remotes/(origin|upstream)/;;g' | tr -d '[:space:]')"
+  git switch "$(git branch -vv --list --no-color --all | fzf | sed -r -e 's;remotes/(origin|upstream)/;;g' | awk '{ print $1 }' | tr -d '[:space:]')"
 fi

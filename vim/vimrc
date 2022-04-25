@@ -13,7 +13,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'benmills/vimux'
 Plug 'benmills/vimux-golang'
 Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " General vim improvements
 Plug 'airblade/vim-rooter'
