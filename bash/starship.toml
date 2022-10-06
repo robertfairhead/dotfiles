@@ -1,10 +1,18 @@
 format = """
-$hostname${custom.system_icons}$kubernetes$directory$git_branch${custom.origin}$git_status$git_state\
+$hostname${custom.system_icons}${custom.vault_context}$directory$git_branch${custom.origin}$git_status$git_state\
 $line_break\
 $status$character"""
 
 # Don't print a new line at the start of the prompt
 add_newline = false
+
+[custom.vault_context]
+description = "check if we are on a non-default vault context"
+command = "echo $AUTHCLI_VAULT_CONTEXT"
+when = "[[ -v AUTHCLI_VAULT_CONTEXT ]]"
+shell = ["bash", "--noprofile", "--norc"]
+style = "bold red"
+format = "[ $output ]($style)"
 
 [hostname]
 format = "歷($style)"
@@ -16,13 +24,6 @@ format = "in [$path]($style)[$read_only]($read_only_style) "
 style = "blue"
 truncation_length = 2
 truncation_symbol = "…/"
-
-[kubernetes]
-disabled = false
-format = '[\[$context|$namespace\]]($style) '
-style = "cyan"
-[kubernetes.context_aliases]
-"gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
 
 [git_branch]
 format = "on [$branch]($style)"
