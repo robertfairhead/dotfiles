@@ -14,11 +14,12 @@ ensure_yay() (
   fi
 )
 
-base() {
+install_base() {
   local depends=(
+    'acpi'
     'bat'
     'bind-tools'
-    'exa-git'
+    'exa'
     'fd'
     'fzf'
     'git'
@@ -40,7 +41,7 @@ base() {
   install depends
 }
 
-db() {
+install_db() {
   local depends=(
     'pspg'
     'postgresql'
@@ -50,7 +51,7 @@ db() {
   install depends
 }
 
-docker() {
+install_docker() {
   local depends=(
     'dive'
     'docker'
@@ -63,7 +64,7 @@ docker() {
   usermod -aG docker bob
 }
 
-editor() {
+install_editor() {
   local depends=(
     'prettier'
     'shellcheck-bin'
@@ -74,7 +75,7 @@ editor() {
   install depends
 }
 
-embedded() {
+install_embedded() {
   local depends=(
     'picocom'
     'rustup'
@@ -83,7 +84,7 @@ embedded() {
   install depends
 }
 
-fonts() {
+install_fonts() {
   local depends=(
     'adobe-source-code-pro-fonts'
     'nerd-fonts-complete-starship'
@@ -92,12 +93,11 @@ fonts() {
   install depends
 }
 
-gui() {
+install_gui() {
   local depends=(
     '1password'
     'alacritty'
     'etcher-bin'
-    'feh'
     'firefox'
     'google-chrome'
   )
@@ -105,32 +105,7 @@ gui() {
   install depends
 }
 
-i3() {
-  local depends=(
-    'arc-gtk-theme'
-    'autorandr'
-    'dunst'
-    'i3-gaps'
-    'i3lock'
-    'lxrandr-gtk3'
-    'papirus-icon-theme'
-    'polybar'
-    'redshift'
-    'rofi'
-    'rofi-dmenu'
-    'xautolock'
-    'xorg-server'
-    'xorg-xhost'
-    'xorg-xinit'
-    'xorg-xprop'
-    'xorg-xrandr'
-    'xorg-xsetroot'
-  )
-
-  install depends
-}
-
-k8s() {
+install_k8s() {
   local depends=(
     'kubectl'
     'kubectx'
@@ -139,7 +114,7 @@ k8s() {
   install depends
 }
 
-printer() {
+install_printer() {
   local depends=(
     'brother-hll2360d'
     'cups'
@@ -149,11 +124,13 @@ printer() {
   install depends
 }
 
-sound() {
+install_sound() {
   local depends=(
     'bluez'
     'bluez-utils'
     'pipewire'
+    'pipewire-alsa'
+    'pipewire-pulse'
     'wireplumber'
   )
 
@@ -162,29 +139,37 @@ sound() {
   systemctl enable --now bluetooth.service
 }
 
-sway() {
+install_sway() {
   local depends=(
     'sway'
     'swaylock'
     'swayidle'
     'waybar'
-    'dmenu'
-    'light'
+    'rofi-lbonn-wayland-git'
+    'mako'
     'grim'
     'slurp'
-    'pavucontrol'
+    'wf-recorder'
+    'wl-clipboard'
+    'xdg-desktop-portal'
+    'xdg-desktop-portal-wlr'
+    'libnotify'
   )
 
   install depends
 }
 
+install_hooks() {
+  cp $HOME/dotfiles/app_install/hooks/*.hook /usr/share/libalpm/hooks
+  find "$HOME/dotfiles/app_install/hooks" -type f ! -name "*.*" -exec cp {} /usr/share/libalpm/scripts \;
+  chmod +x /usr/share/libalpm/scripts/*
+}
+
 install() {
   local -n packages=$1
-  for PKG in "${packages[@]}"; do
-    echo "Installing ${PKG}"
-    # yay "${PKG}"
-  done
+  echo Installing "${packages[@]}"
+  yay -S "${packages[@]}"
 }
 
 ensure_yay
-programming
+install_sound

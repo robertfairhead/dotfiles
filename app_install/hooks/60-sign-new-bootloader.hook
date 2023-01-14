@@ -1,0 +1,11 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Signing systemd-boot loader...
+When = PostTransaction
+Exec = /usr/bin/sbctl sign-all -g
+Depends = sbctl

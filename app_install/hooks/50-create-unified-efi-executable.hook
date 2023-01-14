@@ -1,0 +1,28 @@
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/pkgbase
+Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/dracut/*
+Target = usr/lib/systemd/systemd
+Target = usr/lib/systemd/boot/efi/linuxx64.efi.stub
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = intel-ucode
+Target = amd-ucode
+
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = systemd
+
+[Action]
+Description = Updating Linux UEFI executable...
+When = PostTransaction
+Exec = /usr/share/libalpm/scripts/create-unified-efi-executable
+NeedsTargets

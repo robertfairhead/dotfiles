@@ -87,6 +87,14 @@ ln -sf $HOME/dotfiles/i3/dunstrc $HOME/.config/dunst/dunstrc
 mkdir -p .config/rofi
 ln -sf $HOME/dotfiles/i3/config.rasi $HOME/.config/rofi/config.rasi
 
+## Sway
+mkdir -p .config/sway
+ln -sf $HOME/dotfiles/sway/sway.config $HOME/.config/sway/config
+
+## Waybar - Info bar on top
+mkdir -p .config/waybar
+ln -sf $HOME/dotfiles/sway/waybar.config $HOME/.config/waybar/config
+
 ## GTK
 mkdir -p .config/gtk-3.0
 ln -sf $HOME/dotfiles/gtk/settings.ini $HOME/.config/gtk-3.0/settings.ini

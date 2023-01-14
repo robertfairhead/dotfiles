@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+echo "Removing old UEFI executable"
+for img in /boot/EFI/Linux/*; do rm "${img}"; done
+echo "Create new UEFI executable"
+for kver in /lib/modules/*; do dracut -f --uefi --kver "${kver##*/}"; done
