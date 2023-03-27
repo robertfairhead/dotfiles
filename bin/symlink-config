@@ -90,10 +90,17 @@ ln -sf $HOME/dotfiles/i3/config.rasi $HOME/.config/rofi/config.rasi
 ## Sway
 mkdir -p .config/sway
 ln -sf $HOME/dotfiles/sway/sway.config $HOME/.config/sway/config
+mkdir -p .config/swaylock
+ln -sf $HOME/dotfiles/sway/swaylock.config $HOME/.config/swaylock/config
 
 ## Waybar - Info bar on top
 mkdir -p .config/waybar
 ln -sf $HOME/dotfiles/sway/waybar.config $HOME/.config/waybar/config
+ln -sf $HOME/dotfiles/sway/style.css $HOME/.config/waybar/style.css
+
+## Mako - Notifications daemon
+mkdir -p .config/mako
+ln -sf $HOME/dotfiles/sway/mako.config $HOME/.config/mako/config
 
 ## GTK
 mkdir -p .config/gtk-3.0

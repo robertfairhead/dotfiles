@@ -5,7 +5,7 @@ set -euo pipefail
 ensure_yay() (
   if ! command -v yay &>/dev/null; then
     echo "Installing yay"
-    pacman -S --needed git base-devel
+    sudo pacman -S --needed git base-devel
     mkdir -p /tmp/yay
     cd /tmp/yay || exit 1
     git clone https://aur.archlinux.org/yay.git
@@ -34,7 +34,7 @@ install_base() {
     'starship'
     'tmux'
     'unzip'
-    'vim'
+    'gvim'
     'zip'
   )
 
@@ -78,10 +78,18 @@ install_editor() {
 install_embedded() {
   local depends=(
     'picocom'
-    'rustup'
+    'cmake'
+  )
+
+  local pico=(
+    'arm-none-eabi-binutils'
+    'arm-none-eabi-gcc'
+    'arm-none-eabi-newlib'
+    'arm-none-eabi-gdb'
   )
 
   install depends
+  install pico
 }
 
 install_fonts() {
@@ -97,7 +105,6 @@ install_gui() {
   local depends=(
     '1password'
     'alacritty'
-    'etcher-bin'
     'firefox'
     'google-chrome'
   )
@@ -160,6 +167,7 @@ install_sway() {
 }
 
 install_hooks() {
+  yay -S dracut-hook-uefi
   cp $HOME/dotfiles/app_install/hooks/*.hook /usr/share/libalpm/hooks
   find "$HOME/dotfiles/app_install/hooks" -type f ! -name "*.*" -exec cp {} /usr/share/libalpm/scripts \;
   chmod +x /usr/share/libalpm/scripts/*
@@ -172,4 +180,4 @@ install() {
 }
 
 ensure_yay
-install_sound
+install_embedded
