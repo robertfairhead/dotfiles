@@ -36,24 +36,9 @@ Plug 'cespare/vim-toml'
 Plug 'elzr/vim-json'
 Plug 'stephpy/vim-yaml'
 
-" Ruby/Rails
-Plug 'vim-ruby/vim-ruby'
-Plug 'pgr0ss/vimux-ruby-test'
-Plug 'rhysd/vim-textobj-ruby'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-rails'
-
-" Text editing
-Plug 'marshallward/vim-restructuredtext'
-Plug 'mustache/vim-mustache-handlebars'
-
 " Devops related-language
-Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'hashivim/vim-terraform'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'modille/groovy.vim'
 Plug 'wgwoods/vim-systemd-syntax'
 
 " Front-end stuff
@@ -88,8 +73,7 @@ let g:ale_linters = {
             \   'Dockerfile': ['hadolint'],
             \   'javascript': ['prettier'],
             \   'typescript': ['prettier'],
-            \   'ruby': ['ruby', 'rubocop'],
-            \   'sh': ['shellcheck']
+            \   'sh': ['shellcheck'],
             \ }
 
 let g:ale_fixers = {
@@ -97,12 +81,12 @@ let g:ale_fixers = {
             \   'go': ['goimports'],
             \   'markdown': ['prettier'],
             \   'javascript': ['prettier'],
+            \   'json': ['jq'],
             \   'typescript': ['prettier'],
             \   'python': ['black'],
-            \   'ruby': ['rubocop'],
             \   'sh': ['shfmt'],
+            \   'yaml': ['prettier'],
             \ }
-            " \   'json': ['prettier'],
 let g:ale_fix_on_save = 1
 command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 
@@ -115,10 +99,12 @@ set omnifunc=ale#completion#OmniFunc
 nnoremap [a <Plug>(ale_previous_wrap)
 nnoremap ]a <Plug>(ale_next_wrap)
 
+" Disable the pseudo-comments after errors
+let g:ale_virtualtext_cursor = 'disabled'
+
 " Statusline
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
 " let g:airline_section_a = ''
 let g:airline_section_b = '%{FugitiveHead()}'
 let g:airline_section_c = '%m%r'

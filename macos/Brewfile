@@ -51,7 +51,7 @@ cask "lepton"
 
 brew "jq"
 brew "bat"
-brew "exa"
+brew "eza"
 brew "ripgrep"
 brew "fd"
 brew "htop"

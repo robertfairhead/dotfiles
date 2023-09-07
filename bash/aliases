@@ -1,32 +1,32 @@
 #!/usr/bin/env bash
 
 if [[ $OSTYPE == 'linux-gnu' ]]; then
-  export OS="linux"
+	export OS="linux"
 
-  alias ls='ls -F --color=auto'
+	alias ls='ls -F --color=auto'
 
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 else
-  export OS="osx"
+	export OS="osx"
 
-  alias ls="ls -GF"
+	alias ls="ls -GF"
 fi
 
 if [[ $(command -v bat) ]]; then
-  alias l='bat --style="changes"'
+	alias l='bat --style="changes"'
 elif [[ $(command -v less) ]]; then
-  alias l="less"
+	alias l="less"
 else
-  alias l="more"
+	alias l="more"
 fi
 
-if [[ $(command -v exa) ]]; then
-  alias ls="exa -F --group-directories-first --color=auto"
-  alias lsl="exa -alFgh@ --group-directories-first --git --color=auto"
+if [[ $(command -v eza) ]]; then
+	alias ls="eza -F --group-directories-first --color=auto"
+	alias lsl="eza -alFgh@ --group-directories-first --git --color=auto"
 else
-  alias lsl="ls -ahl"
+	alias lsl="ls -ahl"
 fi
 
 alias rmd="rm -rf"
@@ -45,24 +45,24 @@ alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 alias k='kubectl'
 
 main() {
-  local default_branch
-  default_branch=$(git default-branch)
-  git checkout "$default_branch"
-  git pull
+	local default_branch
+	default_branch=$(git default-branch)
+	git checkout "$default_branch"
+	git pull
 
-  # If we're a fork, pull down upstream as well
-  if git ls-remote --heads upstream "$default_branch" 2>/dev/null; then
-    git fetch upstream
-    git pull --rebase upstream "$default_branch"
-  fi
+	# If we're a fork, pull down upstream as well
+	if git ls-remote --heads upstream "$default_branch" 2>/dev/null; then
+		git fetch upstream
+		git pull --rebase upstream "$default_branch"
+	fi
 
-  # If we have new commits from upstream push to update our GitHub default branch
-  if git rev-list --count --right-only '@{u}..' 2>/dev/null; then
-    git push origin "$default_branch"
-    git push --tags
-  fi
+	# If we have new commits from upstream push to update our GitHub default branch
+	if git rev-list --count --right-only '@{u}..' 2>/dev/null; then
+		git push origin "$default_branch"
+		git push --tags
+	fi
 }
 
 docker-here() {
-  docker run -it --rm -v "$(pwd):/src" -w "/src" -u "$(id -u):$(id -g)" --entrypoint "" "$1" bash
+	docker run -it --rm -v "$(pwd):/src" -w "/src" -u "$(id -u):$(id -g)" --entrypoint "" "$1" bash
 }

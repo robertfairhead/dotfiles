@@ -15,7 +15,6 @@ linters-settings:
 linters:
   enable:
     - bodyclose
-    - depguard
     - durationcheck
     - errcheck
     - exportloopref
