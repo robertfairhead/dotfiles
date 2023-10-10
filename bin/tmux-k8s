@@ -2,18 +2,18 @@
 set -euo pipefail
 
 get_context() {
-  local ctx
-  local ns
+	local ctx
+	local ns
 
-  ctx="$(kubectx --current 2>/dev/null)"
-  ns="$(kubens --current 2>/dev/null)"
+	ctx="$(kubectx --current 2>/dev/null)"
+	ns="$(kubens --current 2>/dev/null)"
 
-  if [ -z "$ctx" ] && [ -z "$ns" ]; then
-    echo ""
-    exit 0
-  fi   
+	if [ -z "$ctx" ] && [ -z "$ns" ]; then
+		echo ""
+		exit 0
+	fi
 
-  echo "[☸  $ctx |  $ns ]"
+	echo "[☸ $ctx | $ns ] "
 }
 
 get_context
