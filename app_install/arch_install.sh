@@ -19,6 +19,7 @@ install_base() {
 		'acpi'
 		'bat'
 		'bind-tools'
+		'dracut-hook-uefi'
 		'eza'
 		'fd'
 		'fzf'
@@ -39,6 +40,7 @@ install_base() {
 	)
 
 	install depends
+	sudo cp "$HOME"/dotfiles/app_install/hooks/*.hook /usr/share/libalpm/hooks
 }
 
 install_db() {
@@ -69,7 +71,6 @@ install_editor() {
 		'prettier'
 		'shellcheck-bin'
 		'shfmt'
-		'vim'
 	)
 
 	install depends
@@ -95,7 +96,7 @@ install_embedded() {
 install_fonts() {
 	local depends=(
 		'adobe-source-code-pro-fonts'
-		'nerd-fonts-complete-starship'
+		'nerd-fonts'
 	)
 
 	install depends
@@ -103,7 +104,6 @@ install_fonts() {
 
 install_gui() {
 	local depends=(
-		'1password'
 		'alacritty'
 		'firefox'
 		'google-chrome'
@@ -143,12 +143,13 @@ install_sound() {
 
 	install depends
 
-	systemctl enable --now bluetooth.service
+	sudo systemctl enable --now bluetooth.service
 }
 
 install_sway() {
 	local depends=(
 		'sway'
+		'swaybg'
 		'swaylock'
 		'swayidle'
 		'waybar'
@@ -166,18 +167,16 @@ install_sway() {
 	install depends
 }
 
-install_hooks() {
-	yay -S dracut-hook-uefi
-	cp $HOME/dotfiles/app_install/hooks/*.hook /usr/share/libalpm/hooks
-	find "$HOME/dotfiles/app_install/hooks" -type f ! -name "*.*" -exec cp {} /usr/share/libalpm/scripts \;
-	chmod +x /usr/share/libalpm/scripts/*
-}
-
 install() {
 	local -n packages=$1
 	echo Installing "${packages[@]}"
-	yay -S "${packages[@]}"
+	yay -S --needed "${packages[@]}"
 }
 
 ensure_yay
-install_embedded
+install_base
+install_editor
+install_fonts
+install_sound
+install_sway
+install_gui
