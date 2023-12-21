@@ -74,6 +74,7 @@ let g:ale_linters = {
             \   'javascript': ['prettier'],
             \   'typescript': ['prettier'],
             \   'sh': ['shellcheck'],
+            \   'python': ['ruff'],
             \ }
 
 let g:ale_fixers = {
@@ -83,7 +84,7 @@ let g:ale_fixers = {
             \   'javascript': ['prettier'],
             \   'json': ['jq'],
             \   'typescript': ['prettier'],
-            \   'python': ['black'],
+            \   'python': ['ruff_format'],
             \   'sh': ['shfmt'],
             \   'yaml': ['prettier'],
             \ }
