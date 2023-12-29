@@ -17,6 +17,7 @@ ensure_yay() (
 install_base() {
 	local depends=(
 		'acpi'
+    'bash-completion'
 		'bat'
 		'bind-tools'
 		'dracut-hook-uefi'
@@ -25,17 +26,18 @@ install_base() {
 		'fzf'
 		'git'
 		'git-delta'
+		'gvim'
 		'htop'
 		'jq'
 		'man-db'
-		'nmap'
 		'openssh'
+		'openbsd-netcat'
 		'pacman-contrib'
+		'python-pipx'
 		'ripgrep'
 		'starship'
 		'tmux'
 		'unzip'
-		'gvim'
 		'zip'
 	)
 
@@ -71,6 +73,7 @@ install_editor() {
 		'prettier'
 		'shellcheck-bin'
 		'shfmt'
+		'ruff'
 	)
 
 	install depends

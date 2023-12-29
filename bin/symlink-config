@@ -26,7 +26,7 @@ ln -sf $HOME/dotfiles/bash/starship.toml .config/starship.toml
 mkdir -p bin
 chmod 700 bin
 for program in $HOME/dotfiles/bin/*; do
-  ln -sf $program $HOME/bin/$(basename $program)
+	ln -sf $program $HOME/bin/$(basename $program)
 done
 
 ## GPG
@@ -56,8 +56,8 @@ ln -snf $HOME/dotfiles/bat $HOME/.config/bat
 
 ## Alacritty
 mkdir -p .config/alacritty
-ln -sf $HOME/dotfiles/alacritty.yml $HOME/.config/alacritty/alacritty.yml
-echo -e "font:\n  size: 10.0" >"$HOME/.alacritty_local.yml"
+ln -sf $HOME/dotfiles/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+echo -e "font:\n  size: 10.0" >"$HOME/.alacritty_local.toml"
 
 ## Yay
 mkdir -p .config/yay
