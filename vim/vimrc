@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make vim slightly more IDEish
 Plug 'ayu-theme/ayu-vim'
-Plug 'benmills/vimux'
+Plug 'preservim/vimux'
 Plug 'benmills/vimux-golang'
 Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'

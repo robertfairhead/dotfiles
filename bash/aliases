@@ -24,7 +24,7 @@ fi
 
 if [[ $(command -v eza) ]]; then
 	alias ls="eza -F --group-directories-first --color=auto"
-	alias lsl="eza -alFgh@ --group-directories-first --git --color=auto"
+	alias lsl="eza -F -algh@ --group-directories-first --git --color=auto"
 	alias changed="eza --long --no-permissions --no-user --no-time --no-filesize --git --git-ignore --tree --color=always | rg -v -- '--' \$argv"
 else
 	alias lsl="ls -ahl"
