@@ -39,7 +39,7 @@ hashicorp_install() {
     pushd ${tmp} >/dev/null
 
     # Check if we already have Hashicorp signing key
-    if [[ ! $(gpg -k "91A6 E7F8 5D05 C656 30BE F189 5185 2D87 348F FC4C") ]]; then
+    if [[ ! $(gpg -k "C874 011F 0AB4 0511 0D02 1055 3436 5D94 72D7 468F") ]]; then
         echo "INFO: Getting Hashicorp key from Keybase"
         curl -sSfLO https://keybase.io/hashicorp/key.asc
         gpg --import key.asc
@@ -70,7 +70,7 @@ hashicorp_install() {
     curl -sfLO "${dl_base}${sig}"
 
     gpg --verify "${sig}" "${checksums}" 2> hashicorp_verify
-    grep -q "91A6 E7F8 5D05 C656 30BE  F189 5185 2D87 348F FC4C" hashicorp_verify
+    grep -q "C874 011F 0AB4 0511 0D02 1055 3436 5D94 72D7 468F" hashicorp_verify
 
     # Get the compressed executable
     local binary_filter="${filter_base} | .builds | map(select(.os==\"${os}\" and .arch==\"amd64\")) | .[0].url"
