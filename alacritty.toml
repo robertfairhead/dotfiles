@@ -1,4 +1,4 @@
-import = ["/home/bob/.alacritty_local.toml"]
+general.import = ["/home/bob/.alacritty_local.toml"]
 live_config_reload = true
 
 [bell]
