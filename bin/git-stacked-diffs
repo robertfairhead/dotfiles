@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+prior="$(git default-branch)"
+# Start with all the latest origin changes
+git fetch origin "${prior}:${prior}"
+
+branches="$(git for-each-ref --format="%(refname:short)" refs/heads/)"
+
+for branch in "$@"; do
+	if ! grep -q "${branch}" <<<"${branches}"; then
+		echo "${branch} no found"
+		exit 1
+	fi
+
+	git switch "${branch}"
+
+	# Move this branch onto the prior in the stack
+	git rebase "${prior}"
+
+	prior="${branch}"
+	echo "Updated ${prior}"
+done

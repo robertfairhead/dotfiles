@@ -15,7 +15,7 @@ style = "bold red"
 format = "[ $output ]($style)"
 
 [hostname]
-format = "歷($style)"
+format = "($style)"
 ssh_only = true
 style = "bold"
 
