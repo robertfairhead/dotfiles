@@ -1,18 +1,13 @@
-tap "homebrew/cask"
-tap "caskroom/fonts"
-tap "hashicorp/tap"
-
 cask_args appdir: "/Applications"
 
 brew "mas"
-brew "svn"
 cask "font-source-code-pro"
 cask "font-sauce-code-pro-nerd-font"
 
-cask "alacritty"
+cask "ghostty"
 cask "amethyst"
-cask "pock"
-cask "meetingbar"
+cask "1password"
+cask "google-chrome"
 
 brew "coreutils"
 brew "diffutils"
@@ -37,17 +32,10 @@ brew "tmux"
 brew "starship"
 
 brew "nano"
-brew "vim"
-brew "lnav"
 
 brew "git"
 brew "git-delta"
 brew "gh"
-brew "gpg2"
-
-cask "balenaetcher"
-cask "kap"
-cask "lepton"
 
 brew "jq"
 brew "bat"
@@ -61,36 +49,8 @@ brew "fzf"
 brew "bats"
 brew "shellcheck"
 brew "shfmt"
-brew "hadolint"
 
-cask "docker"
-cask "multipass"
 brew "go"
 brew "node"
 
-brew "redis"
-brew "mysql"
-brew "postgresql"
-
-cask "aptible"
-brew "awscli"
-cask "aws-vault"
-brew "hashicorp/tap/terraform"
-brew "hashicorp/tap/packer"
-brew "travis"
-brew "chamber"
-
-brew "chruby"
-brew "ruby-install"
-brew "nvm"
-brew "pipx"
-
-cask "little-snitch"
-cask "slack"
-cask "zoom"
-cask "encryptme"
-
-# mas can only reinstall once added to account
-mas "1Password", id: 1333542190
-mas "Hidden Bar", id: 1452453066
-mas "Microsoft Remote Desktop", id: 1295203466
+cask "secretive"

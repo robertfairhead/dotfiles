@@ -1,13 +1,7 @@
-if [[ -d $HOME/.rbenv/bin ]]; then
-  RBENV="$HOME/.rbenv/bin:"
-else
-  RBENV=""
-fi
-
-if [[ -d $HOME/homebrew ]]; then
-  BREWPATH="$HOME/homebrew/bin:"
+if [[ -d /opt/homebrew ]]; then
+  BREWPATH="/opt/homebrew/bin:"
 else
   BREWPATH=""
 fi
 
-export PATH="${RBENV}${BREWPATH}$HOME/.local/bin:${PATH}:$HOME/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin"
+export PATH="${BREWPATH}$HOME/.local/bin:${PATH}:$HOME/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin"
