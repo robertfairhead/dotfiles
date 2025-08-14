@@ -38,11 +38,6 @@ ln -sf $HOME/dotfiles/gpg/gpg-agent.conf .gnupg/gpg-agent.conf
 ## Psql
 ln -sf $HOME/dotfiles/psqlrc $HOME/.psqlrc
 
-## Micro
-mkdir -p .config/micro
-ln -sf $HOME/dotfiles/micro/settings.json $HOME/.config/micro/settings.json
-ln -snf $HOME/dotfiles/micro/colorschemes $HOME/.config/micro/colorschemes
-
 ## Vim
 mkdir -p $HOME/.vim/{after,swap,undo,backup,tmp}
 ln -sf $HOME/dotfiles/vim/vimrc $HOME/.vimrc
@@ -106,3 +101,7 @@ ln -sf $HOME/dotfiles/sway/mako.config $HOME/.config/mako/config
 mkdir -p .config/gtk-3.0
 ln -sf $HOME/dotfiles/gtk/settings.ini $HOME/.config/gtk-3.0/settings.ini
 ln -sf $HOME/dotfiles/gtk/gtkrc-2.0 $HOME/.gtkrc-2.0
+
+## Zed
+mkdir -p .config/zed
+ln -sf $HOME/dotfiles/zed/settings.json $HOME/.config/zed/settings.json

@@ -149,10 +149,3 @@
 
 [init]
 	defaultBranch = main
-
-# [commit]
-# 	gpgsign = true
-# [gpg]
-# 	format = ssh
-# [gpg "ssh"]
-#	defaultKeyCommand = ssh-add -L

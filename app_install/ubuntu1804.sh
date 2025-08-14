@@ -164,15 +164,6 @@ sudo apt install -fy
 # sudo cp dive /usr/local/bin
 
 #***************
-# Micro
-#***************
-
-curl -sfLo m.tar.gz $(curl -s https://api.github.com/repos/zyedidia/micro/releases/latest | grep browser_download_url | grep linux64 | cut -f 4 -d '"')
-tar xvzf m.tar.gz > /dev/null
-cd micro*
-sudo cp micro /usr/local/bin
-
-#***************
 # USQL universal sql client
 #***************
 
