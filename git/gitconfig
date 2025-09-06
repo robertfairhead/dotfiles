@@ -8,8 +8,6 @@
   unadd = reset HEAD                # remove files from index (tracking)
   uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
 
-  ghbranch = push -u origin HEAD
-
   br = branch -vva
 
   staged = diff --cached
@@ -104,20 +102,15 @@
 [interactive]
   diffFilter = delta --color-only
 
-[merge]
-  tool = vim-fugitive
-[mergetool]
-  prompt = false
-[mergetool "vimdiff"]
-  cmd = vim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[mergetool "vim-fugitive"]
-  cmd = vim -f -c \"Gvdiffsplit\" \"$MERGED\"
-
 [fetch]
     prune = true
+    pruneTags = true
+    all = true
 
 [push]
-  default = simple
+	default = simple
+	autoSetupRemote = true
+	followTags = true
 
 [status]
   showUntrackedFiles = all
@@ -149,3 +142,19 @@
 
 [init]
 	defaultBranch = main
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[branch]
+	sort = committerdate
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
