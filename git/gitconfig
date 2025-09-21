@@ -131,7 +131,7 @@
   insteadOf = "gh:"
   insteadOf = "git://github.com"
 
-[url "ssh://git@git.fairhead.us:2020/bob/"]
+[url "ssh://git@git.fairhead.us:2020/"]
   insteadOf = "fairhead:"
 
 [include]

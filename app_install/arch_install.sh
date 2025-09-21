@@ -17,7 +17,7 @@ ensure_yay() (
 install_base() {
 	local depends=(
 		'acpi'
-    'bash-completion'
+		'bash-completion'
 		'bat'
 		'bind-tools'
 		'dracut-hook-uefi'
@@ -81,7 +81,7 @@ install_editor() {
 
 install_embedded() {
 	local depends=(
-		'picocom'
+		'tio'
 		'cmake'
 	)
 

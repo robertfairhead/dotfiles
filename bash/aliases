@@ -45,6 +45,9 @@ alias pinprompt='gpg-connect-agent updatestartuptty /bye'
 
 alias k='kubectl'
 
+alias http='xh'
+alias https='xhs'
+
 main() {
 	local default_branch
 	default_branch=$(git default-branch)
