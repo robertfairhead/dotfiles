@@ -1,44 +1,45 @@
+version: "2"
 run:
-  go: "1.21"
-
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-
-  gosec:
-    severity: "low"
-    confidence: "low"
-
-  goimports:
-    local-prefixes: github.robot.car
-
+  tests: false
 linters:
   enable:
     - bodyclose
-    - durationcheck
-    - errcheck
-    - exportloopref
+    - exhaustive
     - goconst
-    - gofmt
-    - goimports
+    - godot
+    - gomoddirectives
+    - goprintffuncname
     - gosec
-    - gosimple
-    - govet
-    - ineffassign
     - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - noctx
     - nolintlint
-    - predeclared
+    - prealloc
     - revive
-    - typecheck
-    - unconvert
-    - unused
-  disable:
+    - rowserrcheck
     - staticcheck
+    - sqlclosecheck
+    - tparallel
+    - unconvert
     - unparam
-
+    - whitespace
+    - wrapcheck
+  exclusions:
+    rules:
+      - text: '(slog|log)\.\w+'
+        linters:
+          - noctx
+    generated: lax
+    presets:
+      - common-false-positives
 issues:
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - bodyclose
-        - gosec
+  max-issues-per-linter: 0
+  max-same-issues: 0
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax

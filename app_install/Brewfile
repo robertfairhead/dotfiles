@@ -1,0 +1,66 @@
+cask_args appdir: "/Applications"
+
+brew "mas"
+cask "font-source-code-pro"
+cask "font-sauce-code-pro-nerd-font"
+
+cask "ghostty"
+cask "amethyst"
+cask "1password"
+cask "google-chrome"
+cask "docker"
+
+brew "coreutils"
+brew "diffutils"
+brew "findutils"
+brew "ed"
+brew "gawk"
+brew "gnu-sed"
+brew "gnu-which"
+brew "grep"
+brew "less"
+brew "m4"
+brew "make"
+brew "pstree"
+
+brew "gzip"
+brew "gnu-tar"
+brew "unzip"
+
+brew "bash"
+brew "bash-completion"
+brew "tmux"
+brew "starship"
+
+brew "nano"
+
+brew "git"
+brew "git-delta"
+brew "gh"
+
+brew "jq"
+brew "bat"
+brew "eza"
+brew "ripgrep"
+brew "fd"
+brew "htop"
+brew "procs"
+brew "fzf"
+brew "xh"
+
+brew "bats"
+brew "shellcheck"
+brew "shfmt"
+
+brew "go"
+brew "golangci-lint"
+brew "node"
+
+brew "uv"
+brew "ruff"
+
+cask "secretive"
+
+cask "zed"
+brew "codex"
+brew "huggingface-cli"

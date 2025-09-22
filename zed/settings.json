@@ -12,11 +12,11 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-3.7-sonnet"
-    },
+    }
   },
   "languages": {
     "Python": {
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": ["ty", "ruff"],
       "format_on_save": "on",
       "formatter": [
         {
