@@ -36,10 +36,3 @@ if [[ "$SHELL" != "/usr/local/bin/bash" ]]; then
 	# Change to the new shell, prompts for password
 	chsh -s /usr/local/bin/bash
 fi
-
-# Install alacritty terminfo entries
-if ! infocmp alacritty &>/dev/null; then
-	curl -sSfo /tmp/alacritty.info https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
-	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
-	rm -f /tmp/alacritty.info
-fi
