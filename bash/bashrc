@@ -6,10 +6,10 @@
 case $- in
 *i*) ;;
 *)
-  # shellcheck source=path
-  source "$HOME/dotfiles/bash/path"
-  return
-  ;;
+	# shellcheck source=path
+	source "$HOME/dotfiles/bash/path"
+	return
+	;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -39,7 +39,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 if command -v dircolors >/dev/null 2>&1; then
-  eval "$(dircolors -b "$HOME/dotfiles/bash/dir_colors")"
+	eval "$(dircolors -b "$HOME/dotfiles/bash/dir_colors")"
 fi
 
 # shellcheck source=path
@@ -48,10 +48,10 @@ source "$HOME/dotfiles/bash/path"
 source "$HOME/dotfiles/bash/aliases"
 
 if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init bash)"
+	eval "$(starship init bash)"
 else
-  # shellcheck source=prompt
-  source "$HOME/dotfiles/bash/prompt"
+	# shellcheck source=prompt
+	source "$HOME/dotfiles/bash/prompt"
 fi
 
 # shellcheck source=env
@@ -59,19 +59,22 @@ source "$HOME/dotfiles/bash/env"
 
 # Use system-wide bash completions if available
 if [[ -f /usr/local/etc/bash_completion ]]; then
-  source /usr/local/etc/bash_completion
+	source /usr/local/etc/bash_completion
+fi
+if [[ -f /opt/homebrew/etc/bash_completion ]]; then
+	source /opt/homebrew/etc/bash_completion
 fi
 
 # Use my local ones as well
 for bashcmp in "$HOME"/dotfiles/completions/*.bash-completion; do
-  # shellcheck source=/dev/null
-  source "$bashcmp"
+	# shellcheck source=/dev/null
+	source "$bashcmp"
 done
 
 # Setup kubernets completion
 if command -v kubectl >/dev/null 2>&1; then
-  source <(kubectl completion bash)
-  complete -F __start_kubectl k
+	source <(kubectl completion bash)
+	complete -F __start_kubectl k
 fi
 
 # shellcheck source=fzf_history
@@ -79,10 +82,10 @@ source "$HOME/dotfiles/bash/fzf_history"
 
 # If we have local settings, pull those in
 if [[ -f "$HOME/.bash_local" ]]; then
-  # shellcheck source=/dev/null
-  source "$HOME/.bash_local"
+	# shellcheck source=/dev/null
+	source "$HOME/.bash_local"
 fi
 
 if [[ ! -f "$HOME/.alacritty_local.yml" ]]; then
-  echo -e "font:\n  size: 10" >.alacritty_local.yml
+	echo -e "font:\n  size: 10" >.alacritty_local.yml
 fi

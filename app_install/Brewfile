@@ -55,7 +55,11 @@ brew "shfmt"
 brew "go"
 brew "golangci-lint"
 brew "gofumpt"
+
 brew "node"
+brew "prettier"
+
+brew "terraform"
 
 brew "uv"
 brew "ruff"
@@ -63,5 +67,4 @@ brew "ruff"
 cask "secretive"
 
 cask "zed"
-brew "codex"
 brew "huggingface-cli"
