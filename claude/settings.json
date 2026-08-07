@@ -3,6 +3,6 @@
   "theme": "dark",
   "tui": "fullscreen",
   "permissions": {
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   }
 }
