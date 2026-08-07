@@ -65,6 +65,3 @@ brew "uv"
 brew "ruff"
 
 cask "secretive"
-
-cask "zed"
-brew "huggingface-cli"
