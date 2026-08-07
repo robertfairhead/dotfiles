@@ -105,11 +105,6 @@ ln -sf $HOME/dotfiles/gtk/gtkrc-2.0 $HOME/.gtkrc-2.0
 ## Brewfile
 ln -sf $HOME/dotfiles/app_install/BREWFILE $HOME/Brewfile
 
-## Zed
-mkdir -p .config/zed
-ln -sf $HOME/dotfiles/zed/settings.json $HOME/.config/zed/settings.json
-ln -sf $HOME/dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
-
 ## Ghostty
 mkdir -p .config/ghostty
 ln -sf $HOME/dotfiles/ghostty.config $HOME/.config/ghostty/config
