@@ -113,3 +113,7 @@ ln -sf $HOME/dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
 ## Ghostty
 mkdir -p .config/ghostty
 ln -sf $HOME/dotfiles/ghostty.config $HOME/.config/ghostty/config
+
+## Claude Code
+mkdir -p .claude
+ln -sf $HOME/dotfiles/claude/settings.json $HOME/.claude/settings.json

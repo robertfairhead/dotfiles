@@ -1,0 +1,8 @@
+{
+  "model": "claude-fable-5[1m]",
+  "theme": "dark",
+  "tui": "fullscreen",
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  }
+}
