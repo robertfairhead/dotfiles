@@ -1,8 +1,11 @@
 {
-  "model": "claude-fable-5[1m]",
-  "theme": "dark",
-  "tui": "fullscreen",
   "permissions": {
     "defaultMode": "auto"
+  },
+  "model": "opus",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "env": {
+    "CLAUDE_CODE_COORDINATOR_MODE": "1"
   }
 }
