@@ -32,8 +32,6 @@ brew "bash-completion"
 brew "tmux"
 brew "starship"
 
-brew "nano"
-
 brew "git"
 brew "git-delta"
 brew "gh"
@@ -59,7 +57,7 @@ brew "gofumpt"
 brew "node"
 brew "prettier"
 
-brew "terraform"
+cask "gcloud-cli"
 
 brew "uv"
 brew "ruff"
